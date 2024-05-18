@@ -1,4 +1,4 @@
-package src.InterfaceAccess;
+package InterfaceAccess;
 
 import Exception.*;
 import Model.Customer;

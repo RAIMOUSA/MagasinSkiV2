@@ -1,4 +1,4 @@
-package src.Exception;
+package Exception;
 
 public abstract class RangeOperationException {
     public abstract String getDescription();

@@ -1,19 +1,22 @@
-package src.Business;
+package Business;
 
+import DataAccess.ProductDataBaseAccess;
 import InterfaceAccess.ProductDataAccess;
+import java.util.ArrayList;
 import Model.Product;
 
-import java.util.ArrayList;
-
 public class ProductManager {
-    private ProductDataAccess productAcces;
+    private ProductDataAccess productAccess;
 
-
-    public ArrayList<Product> readAllProducts() {
-        return productAcces.readAllProducts();
+    public ProductManager() {
+        setProductAccess(new ProductDataBaseAccess());
     }
 
-    public Product getProductByName(String name) {
-        return productAcces.getProductByName(name);
+    public void setProductAccess(ProductDataAccess productAccess) {
+        this.productAccess = productAccess;
+    }
+
+    public ArrayList<Product> readAllProducts() throws Exception {
+        return productAccess.readAllProducts();
     }
 }

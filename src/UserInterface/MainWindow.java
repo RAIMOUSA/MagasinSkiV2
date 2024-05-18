@@ -1,4 +1,4 @@
-package src.UserInterface;
+package UserInterface;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -96,7 +96,7 @@ public class MainWindow extends JFrame implements ActionListener {
                 return new ListingSalePanel();
             }
             case "Ajouter des promotions" -> {
-                return new PromotionPanel(null);
+                return new PromotionPanel();
             }
             case "Animation promos" -> {
                 return new PromotionScrollPanel();

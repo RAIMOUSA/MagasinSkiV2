@@ -1,4 +1,4 @@
-package src.Business;
+package Business;
 
 import DataAccess.LocalityDataBaseAccess;
 import Model.Locality;

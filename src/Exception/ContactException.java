@@ -1,4 +1,4 @@
-package src.Exception;
+package Exception;
 
 public class ContactException extends TypeException{
     public ContactException(String errorMessage, RangeOperationException rangeOperation, OperationException operation) {

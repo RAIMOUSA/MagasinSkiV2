@@ -1,5 +1,3 @@
-package src;
-
 import UserInterface.MainWindow;
 
 import javax.swing.*;

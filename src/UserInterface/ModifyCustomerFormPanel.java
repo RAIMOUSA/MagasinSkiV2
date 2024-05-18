@@ -1,4 +1,4 @@
-package src.UserInterface;
+package UserInterface;
 
 import Controller.ContactController;
 import Controller.CustomerController;

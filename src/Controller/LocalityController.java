@@ -1,4 +1,4 @@
-package src.Controller;
+package Controller;
 
 import Business.LocalityManager;
 import Model.Locality;

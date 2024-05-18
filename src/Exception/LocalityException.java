@@ -1,4 +1,4 @@
-package src.Exception;
+package Exception;
 
 public class LocalityException extends TypeException{
     public LocalityException(String errorMessage, RangeOperationException rangeOperation, OperationException operation) {

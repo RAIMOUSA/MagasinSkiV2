@@ -1,4 +1,4 @@
-package src.DataAccess;
+package DataAccess;
 
 import InterfaceAccess.ContactDataAccess;
 import Model.Contact;

@@ -1,28 +1,27 @@
-package src.Controller;
+package Controller;
 
 import Business.ProductManager;
-import Model.Product;
-
+import InterfaceAccess.ProductDataAccess;
 import java.util.ArrayList;
-
+import Model.Product;
 import Exception.*;
 
 public class ProductController {
-    private ProductManager manager;
+    private ProductManager productManager;
 
     public ProductController() {
-        setManager(new ProductManager());
-    }
-
-    public void setManager(ProductManager manager) {
-        this.manager = manager;
+        setProductManager(new ProductManager());
     }
 
     public ArrayList<Product> readAllProducts() throws ProductException {
-        return this.manager.readAllProducts();
+        try {
+            return productManager.readAllProducts();
+        } catch (Exception e) {
+            throw new ProductException("Error reading products");
+        }
     }
 
-    public Product getProductByName(String name) throws ProductException {
-        return this.manager.getProductByName(name);
+    public void setProductManager(ProductManager productManager) {
+        this.productManager = productManager;
     }
 }

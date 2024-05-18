@@ -1,4 +1,4 @@
-package src.UserInterface;
+package UserInterface;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import Controller.ProductController;
 import Model.Product;
-import Exception.*;
+import Exception.ProductException;
 
 public class ListingProductsModel extends AbstractTableModel {
     private String[] columnNames = {"Type", "Name", "Price", "Code", "StockQuantity"};

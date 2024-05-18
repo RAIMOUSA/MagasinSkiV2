@@ -1,11 +1,11 @@
-package src.UserInterface;
+package UserInterface;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Exception.*;
 import Controller.ProductController;
+import Exception.ProductException;
 import Model.Product;
 
 public class PromotionPanel extends JPanel {
@@ -15,10 +15,13 @@ public class PromotionPanel extends JPanel {
     private JButton applyPromotionButton;
     private JButton viewActivePromotionsButton;
 
-    public PromotionPanel(ProductController productController) throws ProductException {
-        setLayout(new BorderLayout());
+    private ProductController productController;
 
-        // Initialiser le modèle de produit
+    public PromotionPanel() throws ProductException {
+        setLayout(new BorderLayout());
+        productController = new ProductController();
+
+        // Initialiser le modèle de produit avec le contrôleur
         productModel = new ListingProductsModel(productController);
 
         // Panel pour le champ de recherche

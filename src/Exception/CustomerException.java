@@ -1,4 +1,4 @@
-package src.Exception;
+package Exception;
 
 public class CustomerException extends TypeException{
     public CustomerException(String errorMessage, RangeOperationException rangeOperation, OperationException operation) {

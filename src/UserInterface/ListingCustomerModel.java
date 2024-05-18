@@ -1,4 +1,4 @@
-package src.UserInterface;
+package UserInterface;
 
 import Controller.ContactController;
 import Controller.CustomerController;
@@ -41,7 +41,6 @@ public class ListingCustomerModel extends AbstractTableModel {
         try {
             this.customers = customerController.readAllCustomers();
         } catch (CustomerException exception) {
-            // Gérer l'exception, par exemple afficher un message d'erreur
             System.err.println("Erreur lors de la lecture des clients: " + exception.getMessage());
         }
     }
