@@ -107,8 +107,12 @@ public class ContactDataBaseAccess implements ContactDataAccess {
             ArrayList<Contact> contacts = new ArrayList<Contact>();
             while (resultSet.next()) {
                 String mail = resultSet.getString("mail");
+                Contact contact = new Contact(mail);
                 String phoneNumber = resultSet.getString("phoneNumber");
-                contacts.add(new Contact(mail, phoneNumber));
+                if (phoneNumber != null) {
+                    contact.setPhoneNumber(phoneNumber);
+                }
+                contacts.add(contact);
             }
             return contacts;
         } catch (Exception exception) {
@@ -130,8 +134,12 @@ public class ContactDataBaseAccess implements ContactDataAccess {
             ArrayList<Contact> contacts = new ArrayList<Contact>();
             while (resultSet.next()) {
                 String mail = resultSet.getString("mail");
+                Contact contact = new Contact(mail);
                 String phoneNumber = resultSet.getString("phoneNumber");
-                contacts.add(new Contact(mail, phoneNumber));
+                if (phoneNumber != null) {
+                    contact.setPhoneNumber(phoneNumber);
+                }
+                contacts.add(contact);
             }
             return contacts;
         } catch (Exception exception) {
