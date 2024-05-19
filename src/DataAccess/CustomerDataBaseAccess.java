@@ -2,6 +2,7 @@ package DataAccess;
 
 import InterfaceAccess.CustomerDataAccess;
 import Model.Customer;
+import java.sql.*;
 import Exception.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,21 @@ import java.util.List;
 public class CustomerDataBaseAccess implements CustomerDataAccess {
     public void createCustomer(Customer customer) throws CustomerException {
         // code to create a customer
+        try {
+            // code to create a customer
+            Connection connection = SingletonConnexion.getInstance();
+            String query = "INSERT INTO customer VALUES (?,?,?,?);";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setInt(1, customer.getUserID());
+            statement.setString(2, customer.getFirstName());
+            statement.setString(3, customer.getLastName());
+            statement.setBoolean(5, customer.isProfessional());
+
+            statement.executeUpdate();
+        } catch (Exception exception) {
+            throw new CustomerException(exception.getMessage(), new OneException(), new CreateException());
+        }
     }
 
     @Override

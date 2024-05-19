@@ -5,62 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Exception/NumberProductException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataAccess/SingletonConnexion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exception/AllException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exception/CreateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exception/DeleteException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exception/OneException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exception/ReadException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exception/UpdateException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/ContactManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/ContactManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/CustomerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/CustomerManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/LocalityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/LocalityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/ProductManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ContactController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LocalityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LocalityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/CustomerDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/CustomerDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/LocalityDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/LocalityDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/ContactException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/ContactException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/CustomerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/CustomerException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/LocalityException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/LocalityException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/NextCodeCustomerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/NextCodeCustomerException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/NumberCustomerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/NumberCustomerException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/OperationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/OperationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/ProductException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/ProductException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/RangeOperationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/RangeOperationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exception/TypeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exception/TypeException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/ContactDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/ContactDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/CustomerDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/CustomerDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/LocalityDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/LocalityDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/ProductDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/ProductDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Contact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Locality.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Locality.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Sale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Sale.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/SaleDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/SaleDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/AddCustomerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/AddCustomerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/BackgroundImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/BackgroundImagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/DeleteCustomerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/DeleteCustomerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingCustomerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingCustomerModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingCustomerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingCustomerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingProductsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingProductsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerListPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/PromotionDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/PromotionDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/PromotionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/PromotionPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/PromotionScrollPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/PromotionScrollPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/WelcomePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/WelcomePanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,23 +32,25 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "RAIMOUSA"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;RAIMOUSA&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/RAIMOUSA/MagasinSkiV2.git",
-    "accountId": "d5036208-2666-4930-80e0-4bee157b263c"
+    "accountId": "cdea1321-77d0-4300-95f5-d0bd7921bd80"
   }
 }]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2gekmWCEnwfHRTU68lS4WJu2NKr" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -112,7 +69,15 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/IntelliJ projects/MagasinSkiV2/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora_aws"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -151,6 +116,7 @@
       <option name="presentableId" value="Default" />
       <updated>1716065590198</updated>
       <workItem from="1716065591181" duration="7825000" />
+      <workItem from="1716124517376" duration="8164000" />
     </task>
     <servers />
   </component>
