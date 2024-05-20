@@ -251,9 +251,9 @@ public class AddCustomerPanel extends JPanel {
 
         // Appeler la méthode du contrôleur pour ajouter le client
         try {
-            customerController.createCustomer(customer);
             contactController.createContact(contact);
             localityController.createLocality(locality1);
+            customerController.createCustomer(customer);
 
             // Afficher un message de réussite
             JOptionPane.showMessageDialog(this, "Le client a été ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);

@@ -6,10 +6,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class LocalityDataBaseAccess {
-    //J'ai pas fait le constructeur, il faut pas locality en argument ? ou juste on appelle createLocality
-    public LocalityDataBaseAccess() {
-
-    }
 
     public ArrayList<Locality> readAllLocality() throws LocalityException {
         try {

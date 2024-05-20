@@ -1,6 +1,7 @@
 package DataAccess;
 
 import InterfaceAccess.CustomerDataAccess;
+import Model.Contact;
 import Model.Customer;
 
 import java.sql.*;
@@ -13,30 +14,28 @@ import java.time.LocalDate;
 public class CustomerDataBaseAccess implements CustomerDataAccess {
     public void createCustomer(Customer customer) throws CustomerException {
         try {
-            // code to create a customer
             Connection connection = SingletonConnexion.getInstance();
-            String query = "INSERT INTO customer VALUES (?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO customer VALUES (?,?,?,?,?,?,?);";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setInt(1, customer.getUserID());
-            statement.setString(2, customer.getFirstName());
-            statement.setString(3, customer.getLastName());
-            statement.setBoolean(5, customer.isProfessional());
-            statement.setInt(7, customer.getLocalityID());
-            statement.setString(8, customer.getMail());
+            statement.setString(1, customer.getFirstName());
+            statement.setString(2, customer.getLastName());
+            statement.setBoolean(4, customer.isProfessional());
+            statement.setInt(6, customer.getLocalityID());
+            statement.setString(7, customer.getMail());
 
-            if (customer.getDateOfBirth() != null) {
-                statement.setDate(4, Date.valueOf(customer.getDateOfBirth()));
+            LocalDate dateOfBirth = customer.getDateOfBirth();
+            if (dateOfBirth != null) {
+                statement.setDate(3, Date.valueOf(dateOfBirth));
             } else {
-                statement.setNull(4, Types.NULL);
+                statement.setNull(3, Types.NULL);
             }
-
-            if (customer.getGender() != null) { // ca ou null ??, on testera
-                statement.setString(6, String.valueOf(customer.getGender()));
+            String gender = customer.getGender();
+            if (gender != null) { // ca ou null ??, on testera
+                statement.setString(5, gender);
             } else {
-                statement.setNull(6, Types.NULL);
+                statement.setNull(5, Types.NULL);
             }
-
             statement.executeUpdate();
         } catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new OneException(), new CreateException());
