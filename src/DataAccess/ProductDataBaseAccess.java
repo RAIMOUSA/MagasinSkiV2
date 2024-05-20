@@ -2,7 +2,10 @@ package DataAccess;
 
 import InterfaceAccess.ProductDataAccess;
 import Model.Product;
+
+import java.sql.*;
 import java.util.ArrayList;
+import Exception.*;
 
 public class ProductDataBaseAccess implements ProductDataAccess {
     @Override
@@ -11,8 +14,16 @@ public class ProductDataBaseAccess implements ProductDataAccess {
     }
 
     @Override
-    public void createProduct(Product product) {
-
+    public void createProduct(Product product) throws ProductException {
+        try {
+            // Code to create a product in the database
+            Connection connection = SingletonConnexion.getInstance();
+            String query = "INSERT INTO product VALUES (?,?,?,?,?,?,?);";
+            PreparedStatement statement = connection.prepareStatement(query);
+            
+        } catch (Exception exception) {
+            throw new ProductException(exception.getMessage(), new OneException(), new CreateException());
+        }
     }
 
     @Override

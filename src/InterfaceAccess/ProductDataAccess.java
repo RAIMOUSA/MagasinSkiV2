@@ -2,11 +2,12 @@ package InterfaceAccess;
 
 import java.util.ArrayList;
 import Model.Product;
+import Exception.*;
 
 public interface ProductDataAccess {
     int getNumberProduct();
 
-    void createProduct(Product product);
+    void createProduct(Product product) throws ProductException;
 
     Product getProductById(int productId);
 

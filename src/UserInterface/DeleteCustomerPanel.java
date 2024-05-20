@@ -32,7 +32,7 @@ public class DeleteCustomerPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = clientTable.getSelectedRow();
                 if (selectedRow != -1) {
-                    int customerId = (Integer) clientTable.getValueAt(selectedRow, 0); // Conversion correcte
+                    int customerId = (int) clientTable.getValueAt(selectedRow, 0); // Conversion correcte
                     int confirmation = JOptionPane.showConfirmDialog(
                             null,
                             "Voulez-vous vraiment supprimer ce client ?",

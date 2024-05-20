@@ -12,7 +12,6 @@ import java.time.LocalDate;
 
 public class CustomerDataBaseAccess implements CustomerDataAccess {
     public void createCustomer(Customer customer) throws CustomerException {
-        // code to create a customer
         try {
             // code to create a customer
             Connection connection = SingletonConnexion.getInstance();
@@ -112,7 +111,7 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
             String query = "DELETE FROM customer WHERE userID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, codeCustomer);
-            statement.executeUpdate();
+            int resultSet = statement.executeUpdate();
         } catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new OneException(), new DeleteException());
         }
@@ -121,7 +120,6 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
     @Override
     public ArrayList<Customer> readAllCustomers() throws CustomerException {
         try {
-
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM customer;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -135,21 +133,20 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
                 boolean isProfessional = resultSet.getBoolean("isProfessional");
                 int localityID = resultSet.getInt("localityID");
                 String mail = resultSet.getString("mail");
-
                 Customer customer = new Customer(userID, firstName, lastName, isProfessional, localityID, mail);
-                LocalDate dateOfBirth = resultSet.getDate("dateOfBirth").toLocalDate();
+
+                Date result = resultSet.getDate("dateOfBirth");
                 if (!resultSet.wasNull()) {
-                    customer.setDateOfBirth(dateOfBirth);
+                    customer.setDateOfBirth(result.toLocalDate());
                 }
 
-                //il faut ptet mettre string, et du coup modifier customer
                 String gender = resultSet.getString("gender");
                 if (!resultSet.wasNull()) {
                     customer.setGender(gender);
                 }
+
                 customers.add(customer);
             }
-
             return customers;
             } catch (Exception exception) {
                 throw new CustomerException(exception.getMessage(), new AllException(), new ReadException());
