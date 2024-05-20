@@ -34,7 +34,7 @@ public class LocalityManager {
     }
 
 
-    public Locality getLocalityByCode(int code) {
+    public Locality getLocalityByCode(int code) throws LocalityException {
         return this.dataAccess.getLocalityByCode(code);
     }
 }

@@ -32,7 +32,7 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
                 statement.setNull(4, Types.NULL);
             }
 
-            if (customer.getGender() != '\u0000') { // ca ou null ??, on testera
+            if (customer.getGender() != null) { // ca ou null ??, on testera
                 statement.setString(6, String.valueOf(customer.getGender()));
             } else {
                 statement.setNull(6, Types.NULL);
@@ -92,7 +92,7 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
                 } else {
                     statement.setNull(3, Types.NULL);
                 }
-                if (customer.getGender() != '\u0000') {
+                if (customer.getGender() != null) {
                     statement.setString(5, String.valueOf(customer.getGender()));
                 } else {
                     statement.setNull(5, Types.NULL);
@@ -143,9 +143,9 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
                 }
 
                 //il faut ptet mettre string, et du coup modifier customer
-                //char gender = resultSet.getCharacterStream("gender");
+                String gender = resultSet.getString("gender");
                 if (!resultSet.wasNull()) {
-                    //customer.setGender(gender);
+                    customer.setGender(gender);
                 }
                 customers.add(customer);
             }
@@ -160,11 +160,9 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
     public ArrayList<Customer> searchCustomers(String keyword) throws CustomerException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM customer WHERE firstName LIKE ? OR lastName LIKE ? OR mail LIKE ?;";
+            String query = "SELECT * FROM customer WHERE userID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, "%" + keyword + "%");
-            statement.setString(2, "%" + keyword + "%");
-            statement.setString(3, "%" + keyword + "%");
+            //statement.setInt(1, code);
             ResultSet resultSet = statement.executeQuery();
 
             ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -174,16 +172,24 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
                 String lastName = resultSet.getString("lastName");
                 boolean isProfessional = resultSet.getBoolean("isProfessional");
                 int localityID = resultSet.getInt("localityID");
+                String mail = resultSet.getString("mail");
+                Customer customer = new Customer(userID, firstName, lastName, isProfessional, localityID, mail);
+
+                LocalDate dateOfBirth = resultSet.getDate("dateOfBirth").toLocalDate();
+                if (!resultSet.wasNull()) {
+                    customer.setDateOfBirth(dateOfBirth);
+                }
+                String gender = resultSet.getString("gender");
+                if (!resultSet.wasNull()) {
+                    customer.setGender(gender);
+                }
+                customers.add(customer);
 
             }
+            return customers;
         }catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new AllException(), new ReadException());
         }
-        return null;
-    }
-    //elle est déjà plus haute, why ?
-    public ArrayList<Customer> readAllCustomer() throws CustomerException {
-        return null;
     }
 
     public int getNumberCustomer() throws NumberCustomerException {

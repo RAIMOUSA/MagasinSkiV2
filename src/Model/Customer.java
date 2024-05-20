@@ -10,11 +10,11 @@ public class Customer {
     private String lastName;
     private LocalDate dateOfBirth;
     private boolean isProfessional;
-    private char gender;
+    private String gender;
     private int localityID;
     private String mail;
 
-    public Customer(int userID, String firstName, String lastName, LocalDate dateOfBirth, boolean isProfessional, char gender, int localityID, String mail) {
+    public Customer(int userID, String firstName, String lastName, LocalDate dateOfBirth, boolean isProfessional, String gender, int localityID, String mail) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,7 +44,7 @@ public class Customer {
         this.mail = mail;
     }
 
-    public Customer(int userID, String firstName, String lastName, boolean isProfessional, char gender, int localityID, String mail) {
+    public Customer(int userID, String firstName, String lastName, boolean isProfessional, String gender, int localityID, String mail) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -94,11 +94,11 @@ public class Customer {
         isProfessional = professional;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

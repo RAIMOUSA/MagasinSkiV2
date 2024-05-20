@@ -244,7 +244,7 @@ public class AddCustomerPanel extends JPanel {
         String letterBox = letterBoxField.getText().trim();
 
         // Créer un objet Customer avec les données saisies
-        Customer customer = new Customer(0,firstName,lastName,dob,isProfessional,gender.charAt(0),0,email);
+        Customer customer = new Customer(0,firstName,lastName,dob,isProfessional,gender,0,email);
         Contact contact = new Contact(phoneNumber,email);
         Locality locality1 = new Locality(0,locality,Integer.parseInt(postalCode),street,Integer.parseInt(houseNumber),letterBox);
 
