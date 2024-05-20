@@ -9,7 +9,6 @@ public class SingletonConnexion {
     public static Connection getInstance() throws SQLException {
         if (connection == null) {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ski", "justin", "justin");
-            System.out.println("Connection established");
         }
         return connection;
     }
