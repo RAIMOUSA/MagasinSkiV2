@@ -35,7 +35,7 @@ public class PromotionDialog extends JDialog {
         JButton okButton = new JButton("OK");
         okButton.addActionListener(e -> {
 
-            double discount = Double.parseDouble(discountField.getText());
+            int discount = Integer.parseInt(discountField.getText());
             try {
                 productController.applyDiscount(product, discount);
             } catch (Exception ex) {

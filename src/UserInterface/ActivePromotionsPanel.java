@@ -1,20 +1,18 @@
 package UserInterface;
 
+import Controller.ProductController;
+import Model.Product;
+import Exception.*;
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ActivePromotionsPanel extends JPanel {
     private ActivePromotionsModel promotionsModel;
     private JTable promotionsTable;
-    private JLabel lastUpdatedLabel;
+    private ProductController productController;
 
     public ActivePromotionsPanel() {
         setLayout(new BorderLayout());
-
         promotionsModel = new ActivePromotionsModel();
         promotionsTable = new JTable(promotionsModel);
 
@@ -22,36 +20,32 @@ public class ActivePromotionsPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JButton refreshButton = new JButton("Mettre à jour");
-        refreshButton.addActionListener(e -> updatePromotions());
-        buttonPanel.add(refreshButton);
-
-        lastUpdatedLabel = new JLabel("Dernière mise à jour : " + getInitialDate());
-        buttonPanel.add(lastUpdatedLabel);
+        JButton deletePromotion = new JButton("Supprimer la promotion");
+        deletePromotion.addActionListener(e -> deleteSelectedPromotion());
+        buttonPanel.add(deletePromotion);
 
         add(buttonPanel, BorderLayout.SOUTH);
+
+        productController = new ProductController(); // Initialize the productController here
     }
 
-    private void updatePromotions() {
-        // Ici vous pouvez mettre à jour les données des promotions actives
-        List<Object[]> promotionsData = new ArrayList<>();
+    private void deleteSelectedPromotion() throws ProductException {
+        int selectedRow = promotionsTable.getSelectedRow();
 
-        promotionsModel.setData(promotionsData);
-
-        updateLastUpdatedLabel(); // Met à jour la date après la mise à jour des données
+        if (selectedRow != -1) {
+            int productId = (int) promotionsModel.getValueAt(selectedRow, 0);
+            productController.removePromotion(productId);
+            promotionsModel.removeRow(selectedRow);
+        } else {
+            JOptionPane.showMessageDialog(this, "Veuillez sélectionner une promotion à supprimer.");
+        }
     }
 
-    private void updateLastUpdatedLabel() {
-        LocalDateTime currentTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        String formattedDateTime = currentTime.format(formatter);
-        lastUpdatedLabel.setText("Dernière mise à jour : " + formattedDateTime);
-    }
-
-    private String getInitialDate() {
-        // Retourne une date antérieure à afficher initialement
-        LocalDateTime initialTime = LocalDateTime.of(2022, 1, 1, 0, 0);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        return initialTime.format(formatter);
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Active Promotions");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.add(new ActivePromotionsPanel());
+        frame.setVisible(true);
     }
 }

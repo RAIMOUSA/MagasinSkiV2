@@ -55,7 +55,7 @@ public class MainWindow extends JFrame implements ActionListener {
         jobTask.add(fidelity);
 
         JMenu vegetableThread = new JMenu("Thread");
-        JMenuItem vegetableMoving = new JMenuItem("Animation promos");
+        JMenuItem vegetableMoving = new JMenuItem("Carrousel produits");
 
         vegetableThread.addActionListener(this);
         vegetableMoving.addActionListener(this);
@@ -98,8 +98,8 @@ public class MainWindow extends JFrame implements ActionListener {
             case "Ajouter des promotions" -> {
                 return new PromotionPanel();
             }
-            case "Animation promos" -> {
-                return new PromotionScrollPanel();
+            case "Carrousel produits" -> {
+                return new ProductsScrollPanel();
             }
         }
         return null;

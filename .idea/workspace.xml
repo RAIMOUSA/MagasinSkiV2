@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="bcp de boulot">
+    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="produit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/ProductManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/ProductDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/ProductDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/BackgroundImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/BackgroundImagePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/PromotionDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/PromotionDialog.java" afterDir="false" />
     </list>
     <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +122,7 @@
       <workItem from="1716187680158" duration="143000" />
       <workItem from="1716187869508" duration="13334000" />
       <workItem from="1716208046398" duration="17728000" />
-      <workItem from="1716273731176" duration="25910000" />
+      <workItem from="1716273731176" duration="28702000" />
     </task>
     <task id="LOCAL-00001" summary="contact et debut customer">
       <option name="closed" value="true" />
@@ -198,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716300807347</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="produit">
+      <option name="closed" value="true" />
+      <created>1716303054123</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1716303054123</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +240,7 @@
     <MESSAGE value="nvx fichiers" />
     <MESSAGE value="ADD CUSTOMER WORK !!!" />
     <MESSAGE value="bcp de boulot" />
-    <option name="LAST_COMMIT_MESSAGE" value="bcp de boulot" />
+    <MESSAGE value="produit" />
+    <option name="LAST_COMMIT_MESSAGE" value="produit" />
   </component>
 </project>

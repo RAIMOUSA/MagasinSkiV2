@@ -9,6 +9,7 @@ import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
+import Exception.*;
 
 public class MonthlySaleStatsPanel extends JPanel {
     private JPanel contentPanel;
@@ -54,7 +55,11 @@ public class MonthlySaleStatsPanel extends JPanel {
 
                 String type = (String) typeComboBox.getSelectedItem();
 
-                statsModel.filterByTypeAndMonth(type, selectMonth, selectYear);
+                try {
+                    statsModel.filterByTypeAndMonth(type, selectMonth, selectYear);
+                } catch (ProductException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
 
         });

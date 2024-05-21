@@ -169,4 +169,17 @@ try {
             throw new ProductException("Erreur produit par saleDetail.", new OneException(), new ReadException());
         }
     }
+
+    @Override
+    public void removePromotion(int productId) throws ProductException {
+        try {
+            Connection connection = SingletonConnexion.getInstance();
+            String query = "UPDATE products SET promoIsEnable = 0, percentPromo = NULL WHERE productCode = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, productId);
+            statement.executeUpdate();
+        } catch (Exception exception) {
+            throw new ProductException("Erreur dans la suppression de la promotion.", new OneException(), new UpdateException());
+        }
+    }
 }

@@ -19,4 +19,6 @@ public interface ProductDataAccess {
     Product getProductByCode(int productCode) throws ProductException;
 
     Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException;
+
+    void removePromotion(int productId) throws ProductException;
 }

@@ -3,12 +3,16 @@ package UserInterface;
 import javax.swing.*;
 import java.awt.*;
 
-public class BackgroundImagePanel extends JPanel {
+class BackgroundImagePanel extends JPanel {
     private Image backgroundImage;
 
-    public BackgroundImagePanel(Image image) {
-        // Chargez l'image depuis les ressources
-       backgroundImage = new ImageIcon(getClass().getResource("moutain.jpg")).getImage();
+    public BackgroundImagePanel() {
+        this.backgroundImage = new ImageIcon(getClass().getResource("product1.png")).getImage();
+    }
+
+    public void setBackgroundImage(Image backgroundImage) {
+        this.backgroundImage = backgroundImage;
+        repaint();
     }
 
     @Override

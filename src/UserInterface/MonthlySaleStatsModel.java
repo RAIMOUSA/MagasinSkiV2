@@ -7,6 +7,8 @@ import Model.Product;
 import Model.Sale;
 import Model.SaleDetail;
 
+import Exception.*;
+
 import javax.swing.table.AbstractTableModel;
 import java.time.Month;
 import java.time.Year;
@@ -63,7 +65,12 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         SaleDetail saleDetail = sales.get(rowIndex);
         Sale sale = this.saleController.getSaleBySaleDetail(saleDetail);
-        Product product = this.productController.getProductByCode(saleDetail.getProductCode());
+        Product product = null;
+        try {
+            product = this.productController.getProductByCode(saleDetail.getProductCode());
+        } catch (ProductException e) {
+            throw new RuntimeException(e);
+        }
 
         switch (columnIndex) {
             case 0:
@@ -84,7 +91,7 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    public void filterByTypeAndMonth(String type, Month month, int year) {
+    public void filterByTypeAndMonth(String type, Month month, int year) throws ProductException {
         sales.clear();
         for (SaleDetail saleDetail : originalSales) {
             Sale sale = saleController.getSaleBySaleDetail(saleDetail);

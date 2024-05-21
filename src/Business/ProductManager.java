@@ -42,4 +42,8 @@ public class ProductManager {
     public Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException{
         return productAccess.getProductBySaleDetail(saleDetail);
     }
+
+    public void removePromotion(int productId) throws ProductException{
+        productAccess.removePromotion(productId);
+    }
 }

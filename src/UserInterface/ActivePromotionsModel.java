@@ -6,42 +6,47 @@ import Model.Product;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import Exception.*;
 
-public class ActivePromotionsModel extends AbstractTableModel {
+
+class ActivePromotionsModel extends AbstractTableModel {
+    private ArrayList<Product> productsWithPromotions;
     private String[] columnNames;
-    private ArrayList<Object[]> data = new ArrayList<>();
     private ProductController productController;
-    private Product productInPromotion;
-
 
     public ActivePromotionsModel() {
-        this.columnNames = new String[] {"Produit", "Ancien prix (€)", "Promotion (%)", "Nouveau prix (€)"};
-        this.productController = new ProductController();
-        try {
-            this.productInPromotion = productController.getProductInPromotion();
-        } catch (Exception.ProductException e) {
-            throw new RuntimeException(e);
-        } catch (Exception.ProductException e) {
-            throw new RuntimeException(e);
+        columnNames = new String[] {
+                "ProduitID",
+                "Nom",
+                "Ancien prix",
+                "Promotion",
+                "Nouveau prix",
+        };
+        productController = new ProductController();
+        try{
+            productsWithPromotions = productController.getProductInPromotion();
+        }catch(ProductException e){
+            e.printStackTrace();
+            productsWithPromotions = new ArrayList<>();
         }
-        loadData();
+
     }
 
-    public void loadData(){
-        data.clear();
-        if(productInPromotion != null){
-            Object[] productData = new Object[5];
-            productData[0] = productInPromotion.getName();
-            productData[1] = productInPromotion.getPrice();
-            productData[2] = productInPromotion.getPercentPromo();
-            productData[3] = productInPromotion.getPrice() - (productInPromotion.getPrice() * productInPromotion.getPercentPromo() / 100);
-            data.add(productData);
-        }
+    public void setData(List<Object[]> data) {
+        this.productsWithPromotions = productsWithPromotions;
+        fireTableDataChanged();
+    }
+
+    public void removeRow(int rowIndex) {
+        this.productsWithPromotions.remove(rowIndex);
+        fireTableRowsDeleted(rowIndex, rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return data.size();
+        if(this.productsWithPromotions == null)
+            return 0;
+        return productsWithPromotions.size();
     }
 
     @Override
@@ -51,17 +56,19 @@ public class ActivePromotionsModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return data.get(rowIndex)[columnIndex];
+        Product product = productsWithPromotions.get(rowIndex);
+        return switch (columnIndex) {
+            case 0 -> product.getCode();
+            case 1 -> product.getName();
+            case 2 -> product.getPrice();
+            case 3 -> product.getPercentPromo();
+            case 4 -> product.getPrice() - (product.getPrice() * product.getPercentPromo() / 100);
+            default -> "";
+        };
     }
 
     @Override
     public String getColumnName(int column) {
         return columnNames[column];
-    }
-
-    public void setData(List<Object[]> promotionsData) {
-        data.clear();
-        data.addAll(promotionsData);
-        fireTableDataChanged();
     }
 }
