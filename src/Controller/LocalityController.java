@@ -36,4 +36,8 @@ public class LocalityController {
     public void createLocality(Locality locality) throws LocalityException {
         this.manager.createLocality(locality);
     }
+
+    public int getLocalityID(Locality locality) throws LocalityException {
+        return this.manager.getLocalityID(locality);
+    }
 }

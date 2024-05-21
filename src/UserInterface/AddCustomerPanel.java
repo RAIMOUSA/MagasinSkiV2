@@ -271,6 +271,7 @@ public class AddCustomerPanel extends JPanel {
         try {
             contactController.createContact(contact);
             localityController.createLocality(locality1);
+            customer.setLocalityID(localityController.getLocalityID(locality1));
             customerController.createCustomer(customer);
 
             // Afficher un message de réussite

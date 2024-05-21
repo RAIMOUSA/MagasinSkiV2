@@ -1,11 +1,12 @@
 package DataAccess;
 
+import InterfaceAccess.LocalityDataAccess;
 import Model.Locality;
 import Exception.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class LocalityDataBaseAccess {
+public class LocalityDataBaseAccess implements LocalityDataAccess {
 
     public ArrayList<Locality> readAllLocality() throws LocalityException {
         try {
@@ -108,6 +109,7 @@ public class LocalityDataBaseAccess {
             statement.setInt(4, locality.getHouseNumber());
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
+            System.out.println(resultSet.getInt("localityID"));
             return resultSet.getInt("localityID");
 
         } catch (Exception exception) {

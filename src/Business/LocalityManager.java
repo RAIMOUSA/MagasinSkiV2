@@ -33,6 +33,9 @@ public class LocalityManager {
         this.dataAccess.createLocality(locality);
     }
 
+    public int getLocalityID(Locality locality) throws LocalityException {
+        return this.dataAccess.getLocalityID(locality);
+    }
 
     public Locality getLocalityByCode(int code) throws LocalityException {
         return this.dataAccess.getLocalityByCode(code);
