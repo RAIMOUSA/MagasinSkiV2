@@ -10,8 +10,8 @@ import Exception.ProductException;
 
 public class ListingProductsModel extends AbstractTableModel {
     private String[] columnNames = {"Type", "Name", "Price", "Code", "StockQuantity"};
-    private List<Product> data = new ArrayList<>();
-    private List<Product> originalData = new ArrayList<>();
+    private ArrayList<Product> data = new ArrayList<>();
+    private ArrayList<Product> originalData = new ArrayList<>();
     private ProductController productController;
 
     public ListingProductsModel(ProductController productController) throws ProductException {

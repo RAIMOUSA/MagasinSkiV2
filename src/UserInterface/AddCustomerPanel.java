@@ -33,6 +33,8 @@ public class AddCustomerPanel extends JPanel {
     private JTextField letterBoxField;
     private JSpinner dobSpinner;
     private JComboBox<String> genderComboBox;
+    private JCheckBox dobCheckBox;
+    private JCheckBox genderCheckBox;
 
     private CustomerController customerController = new CustomerController();
     private ContactController contactController = new ContactController();
@@ -58,7 +60,6 @@ public class AddCustomerPanel extends JPanel {
         addButton.setEnabled(false); // Le bouton est désactivé par défaut
         add(addButton, BorderLayout.SOUTH);
 
-
         // Ajout d'un écouteur de changement pour chaque champ de texte
         DocumentListener documentListener = new DocumentListener() {
             @Override
@@ -79,7 +80,7 @@ public class AddCustomerPanel extends JPanel {
 
         firstNameField.getDocument().addDocumentListener(documentListener);
         lastNameField.getDocument().addDocumentListener(documentListener);
-        phoneField.getDocument().addDocumentListener(documentListener);
+        emailField.getDocument().addDocumentListener(documentListener);
         streetField.getDocument().addDocumentListener(documentListener);
         houseNumberField.getDocument().addDocumentListener(documentListener);
         descriptionField.getDocument().addDocumentListener(documentListener);
@@ -116,14 +117,23 @@ public class AddCustomerPanel extends JPanel {
         lastNameField.setBorder(BorderFactory.createEmptyBorder());
         panel.add(lastNameField, gbc);
 
+        // Checkbox pour date de naissance
         gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Date de naissance: "), gbc);
+        dobCheckBox = new JCheckBox("Voulez-vous remplir la date de naissance?");
+        dobCheckBox.setSelected(false);
+        dobCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dobSpinner.setEnabled(dobCheckBox.isSelected());
+            }
+        });
+        panel.add(dobCheckBox, gbc);
         gbc.gridx++;
         dobSpinner = new JSpinner(new SpinnerDateModel());
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dobSpinner, "yyyy-MM-dd");
         dobSpinner.setEditor(dateEditor);
-        dobSpinner.setValue(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        dobSpinner.setEnabled(false);
         panel.add(dobSpinner, gbc);
 
         gbc.gridx = 0;
@@ -133,11 +143,21 @@ public class AddCustomerPanel extends JPanel {
         professionalCheckBox = new JCheckBox();
         panel.add(professionalCheckBox, gbc);
 
+        // Checkbox pour genre
         gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Genre: "), gbc);
+        genderCheckBox = new JCheckBox("Voulez-vous remplir le genre?");
+        genderCheckBox.setSelected(false);
+        genderCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                genderComboBox.setEnabled(genderCheckBox.isSelected());
+            }
+        });
+        panel.add(genderCheckBox, gbc);
         gbc.gridx++;
         genderComboBox = new JComboBox<>(new String[]{"Masculin", "Féminin", "Autre"});
+        genderComboBox.setEnabled(false);
         panel.add(genderComboBox, gbc);
 
         gbc.gridx = 0;
@@ -204,7 +224,6 @@ public class AddCustomerPanel extends JPanel {
     private void validateForm() {
         boolean firstNameValid = !firstNameField.getText().trim().isEmpty();
         boolean lastNameValid = !lastNameField.getText().trim().isEmpty();
-        // boolean phoneNumberValid = phoneField.getText().matches("\\+\\d{2} \\d{3} \\d{6}"); // en faite il est en facultatif mais je garde la méthode de vérification
         boolean emailValid = !emailField.getText().trim().isEmpty();
         boolean postalCodeValid = !postalCodeField.getText().trim().isEmpty();
         boolean streetValid = !streetField.getText().trim().isEmpty();
@@ -232,9 +251,9 @@ public class AddCustomerPanel extends JPanel {
         // Récupérer les valeurs des champs de saisie
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
-        LocalDate dob = getSelectedDate();
+        LocalDate dob = dobCheckBox.isSelected() ? getSelectedDate() : null;
         boolean isProfessional = professionalCheckBox.isSelected();
-        String gender = (String) genderComboBox.getSelectedItem();
+        String gender = genderCheckBox.isSelected() ? (String) genderComboBox.getSelectedItem() : null;
         String email = emailField.getText().trim();
         String phoneNumber = phoneField.getText().trim();
         String locality = descriptionField.getText().trim();
@@ -244,10 +263,9 @@ public class AddCustomerPanel extends JPanel {
         String letterBox = letterBoxField.getText().trim();
 
         // Créer un objet Customer avec les données saisies
-        Customer customer = new Customer(0,firstName,lastName,dob,isProfessional,gender,0,email);
-        Contact contact = new Contact(phoneNumber,email);
-        Locality locality1 = new Locality(0,locality,Integer.parseInt(postalCode),street,Integer.parseInt(houseNumber),letterBox);
-
+        Customer customer = new Customer(0, firstName, lastName, dob, isProfessional, gender, 0, email);
+        Contact contact = new Contact(email, phoneNumber);
+        Locality locality1 = new Locality(0, locality, Integer.parseInt(postalCode), street, Integer.parseInt(houseNumber), letterBox);
 
         // Appeler la méthode du contrôleur pour ajouter le client
         try {
@@ -278,11 +296,14 @@ public class AddCustomerPanel extends JPanel {
         streetField.setText("");
         houseNumberField.setText("");
         letterBoxField.setText("");
+        dobCheckBox.setSelected(false);
+        dobSpinner.setEnabled(false);
+        genderCheckBox.setSelected(false);
+        genderComboBox.setEnabled(false);
     }
 
     private LocalDate getSelectedDate() {
         Date selectedDate = (Date) dobSpinner.getValue();
         return selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
-
 }

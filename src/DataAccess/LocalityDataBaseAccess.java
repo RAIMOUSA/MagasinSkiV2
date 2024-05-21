@@ -75,25 +75,44 @@ public class LocalityDataBaseAccess {
     public void createLocality(Locality locality) throws LocalityException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "INSERT INTO locality VALUES (?, ?, ?, ?, ?, ?);";
+            String query = "INSERT INTO locality (localityName, postalCode, street, houseNumber, letterBox) VALUES (?, ?, ?, ?, ?);";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, locality.getLocalityID());
-            statement.setString(2, locality.getLocalityName());
-            statement.setInt(3, locality.getPostalCode());
-            statement.setString(4, locality.getStreet());
-            statement.setInt(5, locality.getHouseNumber());
+
+            statement.setString(1, locality.getLocalityName());
+            statement.setInt(2, locality.getPostalCode());
+            statement.setString(3, locality.getStreet());
+            statement.setInt(4, locality.getHouseNumber());
 
             if (locality.getLetterBox() != null) {
-                statement.setString(6, locality.getLetterBox());
+                statement.setString(5, locality.getLetterBox());
             } else {
-                statement.setNull(6, Types.NULL);
+                statement.setNull(5, Types.NULL);
             }
 
             statement.executeUpdate();
+
         } catch (Exception exception) {
             throw new LocalityException(exception.getMessage(), new OneException(), new CreateException());
         }
 
+    }
+
+    public int getLocalityID(Locality locality) throws LocalityException {
+        try {
+            Connection connection = SingletonConnexion.getInstance();
+            String query = "SELECT localityID FROM locality WHERE localityName = ? AND postalCode = ? AND street = ? AND houseNumber = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, locality.getLocalityName());
+            statement.setInt(2, locality.getPostalCode());
+            statement.setString(3, locality.getStreet());
+            statement.setInt(4, locality.getHouseNumber());
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("localityID");
+
+        } catch (Exception exception) {
+            throw new LocalityException(exception.getMessage(), new OneException(), new ReadException());
+        }
     }
 
     public Locality getLocalityByCode(int code) throws LocalityException {

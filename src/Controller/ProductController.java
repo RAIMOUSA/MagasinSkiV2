@@ -1,10 +1,11 @@
 package Controller;
 
 import Business.ProductManager;
-import InterfaceAccess.ProductDataAccess;
-import java.util.ArrayList;
+import Exception.ProductException;
 import Model.Product;
-import Exception.*;
+import Model.SaleDetail;
+
+import java.util.ArrayList;
 
 public class ProductController {
     private ProductManager productManager;
@@ -23,5 +24,25 @@ public class ProductController {
 
     public void setProductManager(ProductManager productManager) {
         this.productManager = productManager;
+    }
+
+    public void applyDiscount(Product product, double discount) throws ProductException {
+        try {
+            productManager.applyDiscount(product, discount);
+        } catch (Exception e) {
+            throw new ProductException("Error applying discount");
+        }
+    }
+
+    public Product getProductInPromotion() {
+        return productManager.getProductInPromotion();
+    }
+
+    public Product getProductByCode(int productCode) {
+        return productManager.getProductByCode(productCode);
+    }
+
+    public Product getProductBySaleDetail(SaleDetail saleDetail) {
+        return productManager.getProductBySaleDetail(saleDetail);
     }
 }

@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="sout">
+    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="apparemment t'as bosser un ptit peu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/CustomerDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/CustomerDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/LocalityDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/LocalityDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserInterface/AddCustomerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/AddCustomerPanel.java" afterDir="false" />
-    </list>
-    <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="">
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" afterDir="false" />
     </list>
+    <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +116,8 @@
       <workItem from="1716124517376" duration="20768000" />
       <workItem from="1716187680158" duration="143000" />
       <workItem from="1716187869508" duration="13334000" />
-      <workItem from="1716208046398" duration="9592000" />
+      <workItem from="1716208046398" duration="17728000" />
+      <workItem from="1716273731176" duration="3486000" />
     </task>
     <task id="LOCAL-00001" summary="contact et debut customer">
       <option name="closed" value="true" />
@@ -165,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716201838328</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="apparemment t'as bosser un ptit peu">
+      <option name="closed" value="true" />
+      <created>1716229620890</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1716229620890</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +199,7 @@
     <MESSAGE value="customer again" />
     <MESSAGE value="customer working" />
     <MESSAGE value="sout" />
-    <option name="LAST_COMMIT_MESSAGE" value="sout" />
+    <MESSAGE value="apparemment t'as bosser un ptit peu" />
+    <option name="LAST_COMMIT_MESSAGE" value="apparemment t'as bosser un ptit peu" />
   </component>
 </project>

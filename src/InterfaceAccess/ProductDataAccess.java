@@ -1,23 +1,20 @@
 package InterfaceAccess;
 
-import java.util.ArrayList;
+import Exception.ProductException;
 import Model.Product;
-import Exception.*;
+import Model.SaleDetail;
+
+import java.util.ArrayList;
 
 public interface ProductDataAccess {
-    int getNumberProduct();
-
-    void createProduct(Product product) throws ProductException;
-
-    Product getProductById(int productId);
-
-    void updateProduct(Product product);
-
-    void deleteProduct(int productId);
 
     ArrayList<Product> readAllProducts() throws Exception;
 
-    ArrayList<Product> searchProducts(String keyword);
+    void applyDiscount(Product product, double discount) throws ProductException;
 
-    Product getProductByName(String name);
+    Product getProductInPromotion();
+
+    Product getProductByCode(int productCode);
+
+    Product getProductBySaleDetail(SaleDetail saleDetail);
 }

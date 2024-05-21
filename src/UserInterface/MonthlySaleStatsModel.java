@@ -1,29 +1,57 @@
 package UserInterface;
 
+import Controller.ProductController;
+import Controller.SaleController;
+import Controller.SaleDetailController;
+import Model.Product;
+import Model.Sale;
+import Model.SaleDetail;
+
 import javax.swing.table.AbstractTableModel;
-import java.util.*;
+import java.time.Month;
+import java.time.Year;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MonthlySaleStatsModel extends AbstractTableModel {
-    private String[] columnNames = {"Date", "TypeProduit", "Quantité", "Revenu"};
-    private List<Object[]> data = new ArrayList<>();
-    private List<Object[]> originalData = new ArrayList<>(); // To store original data
-    private Set<String> productTypes = new HashSet<>(); // To store unique product types
+    private String[] columnNames;
+    private ArrayList<SaleDetail> sales;
+    private ArrayList<SaleDetail> originalSales;
+    private Set<String> productTypes;
+    private ProductController productController;
+    private SaleController saleController;
+    private SaleDetailController saleDetailController;
 
     public MonthlySaleStatsModel() {
-        // Initialize with sample data or load from a database
-        // This is just a placeholder. Replace with actual data fetching logic.
-        addSaleData(new Object[]{"2024-05", "Ski", 10, 1000.0});
-        addSaleData(new Object[]{"2024-05", "Casque", 5, 500.0});
+        this.columnNames = new String[]{"Date", "TypeProduit", "Quantité", "Revenu"};
+        this.productTypes = new HashSet<>();
+        this.productController = new ProductController();
+        this.saleController = new SaleController();
+        this.saleDetailController = new SaleDetailController();
+        loadSales();
     }
 
-    private void addSaleData(Object[] saleData) {
-        originalData.add(saleData);
-        productTypes.add((String) saleData[1]); // Add the product type to the set
+    private void loadSales() {
+        try {
+            this.originalSales = saleDetailController.readAllSaleDetails();
+            for (SaleDetail saleDetail : originalSales) {
+                Product product = this.productController.getProductByCode(saleDetail.getProductCode());
+                productTypes.add(product.getType());
+            }
+            this.sales = new ArrayList<>(originalSales);
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.sales = new ArrayList<>();
+        }
     }
 
     @Override
     public int getRowCount() {
-        return data.size();
+        if (sales == null) {
+            return 0;
+        }
+        return sales.size();
     }
 
     @Override
@@ -33,7 +61,22 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return data.get(rowIndex)[columnIndex];
+        SaleDetail saleDetail = sales.get(rowIndex);
+        Sale sale = this.saleController.getSaleBySaleDetail(saleDetail);
+        Product product = this.productController.getProductByCode(saleDetail.getProductCode());
+
+        switch (columnIndex) {
+            case 0:
+                return sale.getDate();
+            case 1:
+                return product.getType();
+            case 2:
+                return saleDetail.getQuantity();
+            case 3:
+                return saleDetail.getQuantity() * product.getPrice();
+            default:
+                return null;
+        }
     }
 
     @Override
@@ -41,11 +84,13 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    public void filterByTypeAndMonth(String type, String monthYear) {
-        data.clear();
-        for (Object[] row : originalData) {
-            if (row[0].equals(monthYear) && row[1].equals(type)) { // Check if monthYear and type match
-                data.add(row);
+    public void filterByTypeAndMonth(String type, Month month, int year) {
+        sales.clear();
+        for (SaleDetail saleDetail : originalSales) {
+            Sale sale = saleController.getSaleBySaleDetail(saleDetail);
+            Product product = productController.getProductByCode(saleDetail.getProductCode());
+            if (product.getType().equals(type) && sale.getDate().getMonth().equals(month) && sale.getDate().getYear() == (year)){
+                sales.add(saleDetail);
             }
         }
         fireTableDataChanged();

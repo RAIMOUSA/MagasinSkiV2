@@ -85,4 +85,5 @@ public class Product {
     public void setPercentPromo(int percentPromo) {
         this.percentPromo = percentPromo;
     }
+
 }

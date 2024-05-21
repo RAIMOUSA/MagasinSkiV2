@@ -12,12 +12,9 @@ import java.util.List;
 public class ContactDataBaseAccess implements ContactDataAccess {
     @Override
     public void createContact(Contact contact) throws ContactException {
-        // code to create a contact
         try {
-            // code to create a contact
             Connection connection = SingletonConnexion.getInstance();
             String query = "INSERT INTO contact VALUES (?, ?);";
-
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, contact.getMail());
 
@@ -25,7 +22,7 @@ public class ContactDataBaseAccess implements ContactDataAccess {
             if (phoneNumber != null) {
                 statement.setString(2, phoneNumber);
             }else {
-                statement.setNull(2, Types.NULL);
+                statement.setNull(2, Types.VARCHAR);
             }
 
             statement.executeUpdate();

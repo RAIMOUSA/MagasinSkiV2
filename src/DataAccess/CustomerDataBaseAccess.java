@@ -15,28 +15,35 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
     public void createCustomer(Customer customer) throws CustomerException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "INSERT INTO customer VALUES (?,?,?,?,?,?,?);";
+            String query = "INSERT INTO customer VALUES (?,?,?,?,?,?,?, ?);";
             PreparedStatement statement = connection.prepareStatement(query);
-
-            statement.setString(1, customer.getFirstName());
-            statement.setString(2, customer.getLastName());
-            statement.setBoolean(4, customer.isProfessional());
-            statement.setInt(6, customer.getLocalityID());
-            statement.setString(7, customer.getMail());
+            statement.setInt(1, customer.getUserID());
+            statement.setString(2, customer.getFirstName());
+            statement.setString(3, customer.getLastName());
 
             LocalDate dateOfBirth = customer.getDateOfBirth();
             if (dateOfBirth != null) {
-                statement.setDate(3, Date.valueOf(dateOfBirth));
+                statement.setDate(4, Date.valueOf(dateOfBirth));
             } else {
-                statement.setNull(3, Types.NULL);
+                statement.setNull(4, Types.DATE);
             }
+
+            statement.setBoolean(5, customer.isProfessional());
+
             String gender = customer.getGender();
             if (gender != null) { // ca ou null ??, on testera
-                statement.setString(5, gender);
+                statement.setString(6, gender);
             } else {
-                statement.setNull(5, Types.NULL);
+                statement.setNull(6, Types.VARCHAR);
             }
-            statement.executeUpdate();
+
+            statement.setInt(7, customer.getLocalityID());
+            System.out.println(customer.getLocalityID());
+            statement.setString(8, customer.getMail());
+
+            int test = statement.executeUpdate();
+            System.out.println(test);
+            System.out.println("push");
         } catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new OneException(), new CreateException());
         }

@@ -35,8 +35,7 @@ public class ActivePromotionsPanel extends JPanel {
     private void updatePromotions() {
         // Ici vous pouvez mettre à jour les données des promotions actives
         List<Object[]> promotionsData = new ArrayList<>();
-        // Par exemple, vous pouvez récupérer les données depuis la base de données
-        // puis les définir dans le modèle
+
         promotionsModel.setData(promotionsData);
 
         updateLastUpdatedLabel(); // Met à jour la date après la mise à jour des données

@@ -1,29 +1,45 @@
 package UserInterface;
 
+import Controller.ProductController;
+import Controller.SaleController;
+import Controller.SaleDetailController;
+import Model.Product;
+import Model.Sale;
+import Model.SaleDetail;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListingSaleModel extends AbstractTableModel {
 
-    private String[] columnNames = {"Code", "Type", "Name", "Price", "Quantity", "UserID", "Date"};
-    private List<Object[]> data = new ArrayList<>();
-    private List<Object[]> originalData = new ArrayList<>(); // For storing original data
+    private String[] columnNames = {"Date", "Code", "Type", "Name", "Price", "Quantity", "UserID"};
+    private List<SaleDetail> saleDetails;
+    private SaleDetailController saleDetailController;
+    private SaleController saleController;
+    private ProductController productController;
 
     public ListingSaleModel() {
-        // Ajoutez ici des données de vente par défaut ou de test
-        data.add(new Object[]{"001", "Electronics", "Laptop", 1200.99, 5, "user123", "2024-05-15"});
-        data.add(new Object[]{"002", "Furniture", "Chair", 45.50, 10, "user456", "2024-05-15"});
-        data.add(new Object[]{"003", "Clothing", "T-Shirt", 19.99, 20, "user789", "2024-05-16"});
-        // Ajoutez d'autres ventes ici
+        this.saleDetailController = new SaleDetailController();
+        this.saleController = new SaleController();
+        this.productController = new ProductController();
+        loadSaleDetails();
+    }
 
-        // Clone the initial data to originalData
-        originalData.addAll(data);
+    private void loadSaleDetails() {
+        try {
+            saleDetails = saleDetailController.readAllSaleDetails();
+        } catch (Exception e) {
+            e.printStackTrace();
+            saleDetails = new ArrayList<>();
+        }
     }
 
     @Override
     public int getRowCount() {
-        return data.size();
+        if (saleDetails == null)
+            return 0;
+        return saleDetails.size();
     }
 
     @Override
@@ -33,7 +49,20 @@ public class ListingSaleModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return data.get(rowIndex)[columnIndex];
+        SaleDetail saleDetail = saleDetails.get(rowIndex);
+        Sale sale = saleController.getSaleBySaleDetail(saleDetail);
+        Product product = productController.getProductBySaleDetail(saleDetail);
+
+        switch (columnIndex) {
+            case 0: return sale.getDate();
+            case 1: return product.getCode();
+            case 2: return product.getType();
+            case 3: return product.getName();
+            case 4: return product.getPrice();
+            case 5: return saleDetail.getQuantity();
+            case 6: return sale.getUserID();
+            default: return null;
+        }
     }
 
     @Override
@@ -41,42 +70,15 @@ public class ListingSaleModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        if (columnIndex == 3 || columnIndex == 4) {
-            return Number.class; // Price and Quantity are numbers
-        }
-        return String.class; // Other fields are strings
-    }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false; // All cells are not editable
-    }
-
-    // Ajoutez des méthodes pour manipuler les données (ajouter, supprimer, modifier)
-    public void addSale(Object[] sale) {
-        data.add(sale);
-        originalData.add(sale);
-        fireTableRowsInserted(data.size() - 1, data.size() - 1);
-    }
-
-    public void removeSale(int rowIndex) {
-        data.remove(rowIndex);
-        fireTableRowsDeleted(rowIndex, rowIndex);
-    }
-
-    public Object[] getSale(int rowIndex) {
-        return data.get(rowIndex);
-    }
-
     public void filterByDate(String date) {
-        data.clear();
-        for (Object[] sale : originalData) {
-            if (sale[6].equals(date)) {
-                data.add(sale);
+        List<SaleDetail> filteredSaleDetails = new ArrayList<>();
+        for (SaleDetail saleDetail : saleDetails) {
+            Sale sale = saleController.getSaleBySaleDetail(saleDetail);
+            if (sale.getDate().equals(date)) {
+                filteredSaleDetails.add(saleDetail);
             }
         }
+        saleDetails = filteredSaleDetails;
         fireTableDataChanged();
     }
 }

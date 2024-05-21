@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
@@ -45,10 +46,17 @@ public class MonthlySaleStatsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-                String selectedMonthYear = sdf.format((Date) monthSpinner.getValue());
+                Date selectedDate = (Date) monthSpinner.getValue();
+
+                int selectYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(selectedDate));
+                int selectMonthValue = Integer.parseInt(new SimpleDateFormat("MM").format(selectedDate));
+                Month selectMonth = Month.of(selectMonthValue);
+
                 String type = (String) typeComboBox.getSelectedItem();
-                statsModel.filterByTypeAndMonth(type, selectedMonthYear);
+
+                statsModel.filterByTypeAndMonth(type, selectMonth, selectYear);
             }
+
         });
 
         // Panel for filter controls

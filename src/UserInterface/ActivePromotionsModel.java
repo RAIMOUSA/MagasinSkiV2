@@ -1,35 +1,36 @@
 package UserInterface;
 
+import Controller.ProductController;
+import Model.Product;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ActivePromotionsModel extends AbstractTableModel {
-    private String[] columnNames = {"Produit", "Ancien prix (€)", "Promotion (%)", "Nouveau prix (€)", "Date de fin"};
-    private List<Object[]> data = new ArrayList<>();
+    private String[] columnNames;
+    private ArrayList<Object[]> data = new ArrayList<>();
+    private ProductController productController;
+    private Product productInPromotion;
 
 
     public ActivePromotionsModel() {
-        Object[] row1 = new Object[]{"WARM300", 10.0, 10, 9.0, "2024-05-31"};
-        Object[] row2 = new Object[]{"PROTEC2000", 20.0, 15, 17.0, "2024-05-31"};
-        Object[] row3 = new Object[]{"VISIO200", 25.0, 20, 20.0, "2024-05-31"};
-        Object[] row4 = new Object[]{"FAST600", 40.0, 25, 30.0, "2024-05-31"};
-        Object[] row5 = new Object[]{"PROTECT1000", 50.0, 40, 30.0, "2024-05-31"};
-        Object[] row6 = new Object[]{"ULTRA300", 10.0, 50, 5.0, "2024-05-31"};
-
-
-        data.add(row1);
-        data.add(row2);
-        data.add(row3);
-        data.add(row4);
-        data.add(row5);
-        data.add(row6);
+        this.columnNames = new String[] {"Produit", "Ancien prix (€)", "Promotion (%)", "Nouveau prix (€)"};
+        this.productController = new ProductController();
+        this.productInPromotion = productController.getProductInPromotion();
+        loadData();
     }
 
-    public void setData(List<Object[]> newData) {
+    public void loadData(){
         data.clear();
-        data.addAll(newData);
-        fireTableDataChanged();
+        if(productInPromotion != null){
+            Object[] productData = new Object[5];
+            productData[0] = productInPromotion.getName();
+            productData[1] = productInPromotion.getPrice();
+            productData[2] = productInPromotion.getPercentPromo();
+            productData[3] = productInPromotion.getPrice() - (productInPromotion.getPrice() * productInPromotion.getPercentPromo() / 100);
+            data.add(productData);
+        }
     }
 
     @Override
@@ -50,5 +51,11 @@ public class ActivePromotionsModel extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         return columnNames[column];
+    }
+
+    public void setData(List<Object[]> promotionsData) {
+        data.clear();
+        data.addAll(promotionsData);
+        fireTableDataChanged();
     }
 }

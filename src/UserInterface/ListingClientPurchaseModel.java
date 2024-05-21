@@ -1,33 +1,43 @@
 package UserInterface;
 
-import Controller.CustomerController;
+
 import Controller.ProductController;
+import Controller.SaleController;
+import Controller.SaleDetailController;
 import Model.Product;
+import Model.Sale;
+import Model.SaleDetail;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListingClientPurchaseModel extends AbstractTableModel {
-    private String[] columnNames = {"Date", "CodeProduit", "TypeProduit", "NomProduit", "Prix", "Quantité", "CodeSale", "UserID"};
-    private ArrayList<Object[]> data = new ArrayList<>();
+    private String[] columnNames;
+    private ArrayList<Product> purchases;
     private ProductController productController;
-    private CustomerController customerController;
-    private
+    private SaleDetailController saleDetailController;
+    private SaleController saleController;
 
     public ListingClientPurchaseModel() {
         this.columnNames = new String[] {"Date", "CodeProduit", "TypeProduit", "NomProduit", "Prix", "Quantité", "CodeSale", "UserID"};
         this.productController = new ProductController();
-        this.customerController = new CustomerController();
+        loadPurchases();
+    }
 
-
-
-
+    private void loadPurchases() {
+        try {
+            this.purchases = productController.readAllProducts();
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.purchases = new ArrayList<>();
+        }
     }
 
     @Override
     public int getRowCount() {
-        return data.size();
+        if(purchases == null)
+            return 0;
+        return purchases.size();
     }
 
     @Override
@@ -37,7 +47,21 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return data.get(rowIndex)[columnIndex];
+        Product product = purchases.get(rowIndex);
+        SaleDetail saleDetail = saleDetailController.getSaleDetailByProduct(product);
+        Sale sale = saleController.getSaleBySaleDetail(saleDetail);
+
+        switch (columnIndex) {
+            case 0: return sale.getDate();
+            case 1: return product.getCode();
+            case 2: return product.getType();
+            case 3: return product.getName();
+            case 4: return product.getPrice();
+            case 5: return saleDetail.getQuantity();
+            case 6: return sale.getCode();
+            case 7: return sale.getUserID();
+            default: return null;
+        }
     }
 
     @Override
@@ -46,12 +70,15 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
     }
 
     public void filterByUserID(String userID) {
-        data.clear();
-        for (Object[] row : originalData) {
-            if (row[7].equals(userID)) { // Check if userID matches
-                data.add(row);
+        ArrayList<Product> filteredPurchases = new ArrayList<>();
+        for (Product product : purchases) {
+            SaleDetail saleDetail = saleDetailController.getSaleDetailByProduct(product);
+            Sale sale = saleController.getSaleBySaleDetail(saleDetail);
+            if (String.valueOf(sale.getUserID()).equals(userID)) {
+                filteredPurchases.add(product);
             }
         }
+        this.purchases = filteredPurchases;
         fireTableDataChanged();
     }
 }

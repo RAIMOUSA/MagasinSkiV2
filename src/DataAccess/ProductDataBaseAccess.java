@@ -1,58 +1,39 @@
 package DataAccess;
 
+import Exception.ProductException;
 import InterfaceAccess.ProductDataAccess;
 import Model.Product;
+import Model.SaleDetail;
 
-import java.sql.*;
 import java.util.ArrayList;
-import Exception.*;
 
 public class ProductDataBaseAccess implements ProductDataAccess {
-    @Override
-    public int getNumberProduct() {
-        return 0;
-    }
 
     @Override
-    public void createProduct(Product product) throws ProductException {
-        try {
-            // Code to create a product in the database
-            Connection connection = SingletonConnexion.getInstance();
-            String query = "INSERT INTO product VALUES (?,?,?,?,?,?,?);";
-            PreparedStatement statement = connection.prepareStatement(query);
-            
-        } catch (Exception exception) {
-            throw new ProductException(exception.getMessage(), new OneException(), new CreateException());
-        }
-    }
-
-    @Override
-    public Product getProductById(int productId) {
+    public ArrayList<Product> readAllProducts() throws Exception {
         return null;
     }
 
     @Override
-    public void updateProduct(Product product) {
-
-    }
-
-    @Override
-    public void deleteProduct(int productId) {
-
-    }
-
-    @Override
-    public ArrayList<Product> readAllProducts() {
+    public Product getProductInPromotion() {
         return null;
     }
 
     @Override
-    public ArrayList<Product> searchProducts(String keyword) {
-        return null;
+    public void applyDiscount(Product product, double discount) throws ProductException {
+        // fait esclave Félix
     }
 
     @Override
-    public Product getProductByName(String name) {
+    public Product getProductByCode(int productCode) {
         return null;
+        // fait esclave Félix
     }
+
+    @Override
+    public Product getProductBySaleDetail(SaleDetail saleDetail) {
+        return null;
+        // fait esclave Félix
+    }
+
 }
