@@ -57,11 +57,10 @@ public class MonthlySaleStatsPanel extends JPanel {
 
                 try {
                     statsModel.filterByTypeAndMonth(type, selectMonth, selectYear);
-                } catch (ProductException ex) {
+                } catch (ProductException | SaleException ex) {
                     throw new RuntimeException(ex);
                 }
             }
-
         });
 
         // Panel for filter controls

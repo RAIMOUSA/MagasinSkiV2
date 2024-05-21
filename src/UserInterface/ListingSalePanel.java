@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import Exception.*;
 
 public class ListingSalePanel extends JPanel {
     private JPanel contentPanel;
@@ -34,7 +35,11 @@ public class ListingSalePanel extends JPanel {
         filterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                filterSalesByDate((Date) dateSpinner.getValue());
+                try {
+                    filterSalesByDate((Date) dateSpinner.getValue());
+                } catch (SaleException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -58,7 +63,7 @@ public class ListingSalePanel extends JPanel {
         contentPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void filterSalesByDate(Date date) {
+    private void filterSalesByDate(Date date) throws SaleException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String selectedDate = sdf.format(date);
         saleModel.filterByDate(selectedDate);

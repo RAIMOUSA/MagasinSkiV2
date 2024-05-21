@@ -64,7 +64,12 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         SaleDetail saleDetail = sales.get(rowIndex);
-        Sale sale = this.saleController.getSaleBySaleDetail(saleDetail);
+        Sale sale = null;
+        try {
+            sale = this.saleController.getSaleBySaleDetail(saleDetail);
+        } catch (SaleException e) {
+            throw new RuntimeException(e);
+        }
         Product product = null;
         try {
             product = this.productController.getProductByCode(saleDetail.getProductCode());
@@ -91,7 +96,7 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    public void filterByTypeAndMonth(String type, Month month, int year) throws ProductException {
+    public void filterByTypeAndMonth(String type, Month month, int year) throws ProductException, SaleException {
         sales.clear();
         for (SaleDetail saleDetail : originalSales) {
             Sale sale = saleController.getSaleBySaleDetail(saleDetail);

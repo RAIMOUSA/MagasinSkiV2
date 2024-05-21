@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Exception.*;
 
 public class ClientPurchasePanel extends JPanel {
     private JPanel contentPanel;
@@ -31,7 +32,11 @@ public class ClientPurchasePanel extends JPanel {
         filterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                filterPurchasesByUserID(userIDField.getText().trim());
+                try {
+                    filterPurchasesByUserID(userIDField.getText().trim());
+                } catch (SaleException | SaleDetailException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -55,7 +60,7 @@ public class ClientPurchasePanel extends JPanel {
         contentPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void filterPurchasesByUserID(String userID) {
+    private void filterPurchasesByUserID(String userID) throws SaleException, SaleDetailException {
         purchaseModel.filterByUserID(userID);
     }
 

@@ -21,7 +21,13 @@ public class ActivePromotionsPanel extends JPanel {
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton deletePromotion = new JButton("Supprimer la promotion");
-        deletePromotion.addActionListener(e -> deleteSelectedPromotion());
+        deletePromotion.addActionListener(e -> {
+            try {
+                deleteSelectedPromotion();
+            } catch (ProductException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         buttonPanel.add(deletePromotion);
 
         add(buttonPanel, BorderLayout.SOUTH);

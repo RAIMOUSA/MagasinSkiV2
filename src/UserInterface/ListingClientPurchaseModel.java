@@ -7,7 +7,7 @@ import Controller.SaleDetailController;
 import Model.Product;
 import Model.Sale;
 import Model.SaleDetail;
-
+import Exception.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
@@ -48,8 +48,14 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Product product = purchases.get(rowIndex);
-        SaleDetail saleDetail = saleDetailController.getSaleDetailByProduct(product);
-        Sale sale = saleController.getSaleBySaleDetail(saleDetail);
+        SaleDetail saleDetail = null;
+        Sale sale = null;
+        try {
+            saleDetail = saleDetailController.getSaleDetailByProduct(product);
+            sale = saleController.getSaleBySaleDetail(saleDetail);
+        } catch (SaleDetailException | SaleException e) {
+            throw new RuntimeException(e);
+        }
 
         switch (columnIndex) {
             case 0: return sale.getDate();
@@ -69,7 +75,7 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    public void filterByUserID(String userID) {
+    public void filterByUserID(String userID) throws SaleDetailException, SaleException {
         ArrayList<Product> filteredPurchases = new ArrayList<>();
         for (Product product : purchases) {
             SaleDetail saleDetail = saleDetailController.getSaleDetailByProduct(product);

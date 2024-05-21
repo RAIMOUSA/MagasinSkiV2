@@ -3,7 +3,7 @@ package Controller;
 import Business.SaleManager;
 import Model.Sale;
 import Model.SaleDetail;
-
+import Exception.*;
 import java.util.ArrayList;
 
 public class SaleController {
@@ -17,11 +17,11 @@ public class SaleController {
         this.manager = manager;
     }
 
-    public ArrayList<Sale> readAllSales() {
+    public ArrayList<Sale> readAllSales() throws SaleException{
         return this.manager.readAllSales();
     }
 
-    public Sale getSaleBySaleDetail(SaleDetail saleDetail) {
+    public Sale getSaleBySaleDetail(SaleDetail saleDetail) throws SaleException {
         return this.manager.getSaleBySaleDetail(saleDetail);
     }
 }

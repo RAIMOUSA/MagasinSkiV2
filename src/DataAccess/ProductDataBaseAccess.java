@@ -61,12 +61,14 @@ try {
                     product.setPercentPromo(percentPromo);
                 }
                 products.add(product);
-
+            }
+            if (products.isEmpty()){
+                return null;
             }
             return products;
 
         } catch (Exception exception) {
-            throw new ProductException("Erreur pour trouver les produits avec promotion.", new AllException(), new ReadException());
+            throw new ProductException(exception.getMessage(), new AllException(), new ReadException());
         }
     }
 
