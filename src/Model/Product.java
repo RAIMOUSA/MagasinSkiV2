@@ -38,6 +38,14 @@ public class Product {
         this.promoIsEnable = promoIsEnable;
     }
 
+    public Product(int code, String type, String name, double price, int stockQuantity) {
+        this.code = code;
+        this.type = type;
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
+
     public int getCode() {
         return code;
     }

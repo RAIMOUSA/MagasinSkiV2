@@ -18,5 +18,5 @@ public interface ProductDataAccess {
 
     Product getProductByCode(int productCode) throws ProductException;
 
-    Product getProductBySaleDetail(SaleDetail saleDetail);
+    Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException;
 }

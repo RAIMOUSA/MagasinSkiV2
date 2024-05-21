@@ -39,7 +39,7 @@ public class ProductManager {
         return productAccess.getProductByCode(productCode);
     }
 
-    public Product getProductBySaleDetail(SaleDetail saleDetail) {
+    public Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException{
         return productAccess.getProductBySaleDetail(saleDetail);
     }
 }

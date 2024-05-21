@@ -42,7 +42,7 @@ public class ProductController {
         return productManager.getProductByCode(productCode);
     }
 
-    public Product getProductBySaleDetail(SaleDetail saleDetail) {
+    public Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException{
         return productManager.getProductBySaleDetail(saleDetail);
     }
 }
