@@ -17,7 +17,13 @@ public class ActivePromotionsModel extends AbstractTableModel {
     public ActivePromotionsModel() {
         this.columnNames = new String[] {"Produit", "Ancien prix (€)", "Promotion (%)", "Nouveau prix (€)"};
         this.productController = new ProductController();
-        this.productInPromotion = productController.getProductInPromotion();
+        try {
+            this.productInPromotion = productController.getProductInPromotion();
+        } catch (Exception.ProductException e) {
+            throw new RuntimeException(e);
+        } catch (Exception.ProductException e) {
+            throw new RuntimeException(e);
+        }
         loadData();
     }
 

@@ -19,19 +19,23 @@ public class ProductManager {
         this.productAccess = productAccess;
     }
 
-    public ArrayList<Product> readAllProducts() throws Exception {
+    public ArrayList<Product> readAllProducts() throws ProductException {
         return productAccess.readAllProducts();
     }
 
-    public void applyDiscount(Product product, double discount) throws ProductException {
+    public void applyDiscount(Product product, int discount) throws ProductException {
         this.productAccess.applyDiscount(product, discount);
     }
 
-    public Product getProductInPromotion() {
+    public ArrayList<Product> getProductInPromotion() throws ProductException{
         return productAccess.getProductInPromotion();
     }
 
-    public Product getProductByCode(int productCode) {
+    public ArrayList<Product> getProductsWhithoutPromotion() throws ProductException {
+        return productAccess.getProductsWhithoutPromotion();
+    }
+
+    public Product getProductByCode(int productCode) throws ProductException {
         return productAccess.getProductByCode(productCode);
     }
 

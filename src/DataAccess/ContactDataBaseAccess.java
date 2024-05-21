@@ -55,22 +55,29 @@ public class ContactDataBaseAccess implements ContactDataAccess {
     public void updateContact(Contact contact) throws ContactException {
         // code to update a contact
         try {
+            System.out.println("tttttt");
             if (getContactByMail(contact.getMail()) == null) {
+                System.out.println("ddddd");
                 throw new ContactException("Contact not found", new OneException(), new UpdateException());
             }else {
+                System.out.println("debut contact");
                 //Pas sur ici, enfin de mon string query quoi
                 Connection connection = SingletonConnexion.getInstance();
                 String query = "UPDATE contact SET phoneNumber = ? WHERE mail = ?;";
                 PreparedStatement statement = connection.prepareStatement(query);
 
                 String phoneNumber = contact.getPhoneNumber();
-                statement.setString(1, contact.getMail());
+                statement.setString(2, contact.getMail());
                 if (phoneNumber != null) {
-                    statement.setString(2, phoneNumber);
+                    statement.setString(1, phoneNumber);
                 } else {
-                    statement.setNull(2, Types.NULL);
+                    statement.setNull(1, Types.NULL);
                 }
+
+                System.out.println(contact.getMail());
+                System.out.println(contact.getPhoneNumber());
                 statement.executeUpdate();
+                System.out.println("fin contact");
             }
         } catch (Exception exception) {
             throw new ContactException(exception.getMessage(), new OneException(), new UpdateException());

@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="nvx fichiers">
+    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="ADD CUSTOMER WORK !!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/LocalityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/LocalityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LocalityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LocalityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/ProductManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccess/CustomerDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/CustomerDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/LocalityDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/LocalityDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/LocalityDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/LocalityDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/AddCustomerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/AddCustomerPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/ProductDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/ProductDataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Locality.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Locality.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" afterDir="false" />
     </list>
     <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +122,7 @@
       <workItem from="1716187680158" duration="143000" />
       <workItem from="1716187869508" duration="13334000" />
       <workItem from="1716208046398" duration="17728000" />
-      <workItem from="1716273731176" duration="5222000" />
+      <workItem from="1716273731176" duration="23568000" />
     </task>
     <task id="LOCAL-00001" summary="contact et debut customer">
       <option name="closed" value="true" />
@@ -182,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716277506062</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="ADD CUSTOMER WORK !!!">
+      <option name="closed" value="true" />
+      <created>1716279085548</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1716279085548</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +222,7 @@
     <MESSAGE value="sout" />
     <MESSAGE value="apparemment t'as bosser un ptit peu" />
     <MESSAGE value="nvx fichiers" />
-    <option name="LAST_COMMIT_MESSAGE" value="nvx fichiers" />
+    <MESSAGE value="ADD CUSTOMER WORK !!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD CUSTOMER WORK !!!" />
   </component>
 </project>

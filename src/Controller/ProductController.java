@@ -26,7 +26,7 @@ public class ProductController {
         this.productManager = productManager;
     }
 
-    public void applyDiscount(Product product, double discount) throws ProductException {
+    public void applyDiscount(Product product, int discount) throws ProductException {
         try {
             productManager.applyDiscount(product, discount);
         } catch (Exception e) {
@@ -34,11 +34,11 @@ public class ProductController {
         }
     }
 
-    public Product getProductInPromotion() {
+    public ArrayList<Product> getProductInPromotion() throws ProductException {
         return productManager.getProductInPromotion();
     }
 
-    public Product getProductByCode(int productCode) {
+    public Product getProductByCode(int productCode) throws ProductException {
         return productManager.getProductByCode(productCode);
     }
 

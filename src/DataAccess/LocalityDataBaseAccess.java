@@ -39,6 +39,7 @@ public class LocalityDataBaseAccess implements LocalityDataAccess {
     public void updateLocality(Locality locality) throws LocalityException {
         try {
             Connection connection = SingletonConnexion.getInstance();
+            System.out.println("debutlocality");
             String query = "UPDATE locality SET localityName = ?, postalCode = ?, street = ?, houseNumber = ?, letterBox = ? WHERE localityID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, locality.getLocalityName());
@@ -49,11 +50,15 @@ public class LocalityDataBaseAccess implements LocalityDataAccess {
             if (locality.getLetterBox() != null) {
                 statement.setString(5, locality.getLetterBox());
             } else {
+                System.out.println("nullletterbox");
                 statement.setNull(5, Types.NULL);
             }
 
             statement.setInt(6, locality.getLocalityID());
+            System.out.println(locality.getLocalityID());
+
             statement.executeUpdate();
+            System.out.println("finlocality");
         } catch (Exception exception) {
             throw new LocalityException(exception.getMessage(), new OneException(),new UpdateException());
         }
@@ -89,9 +94,7 @@ public class LocalityDataBaseAccess implements LocalityDataAccess {
             } else {
                 statement.setNull(5, Types.NULL);
             }
-
             statement.executeUpdate();
-
         } catch (Exception exception) {
             throw new LocalityException(exception.getMessage(), new OneException(), new CreateException());
         }
@@ -103,13 +106,18 @@ public class LocalityDataBaseAccess implements LocalityDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT localityID FROM locality WHERE localityName = ? AND postalCode = ? AND street = ? AND houseNumber = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setString(1, locality.getLocalityName());
             statement.setInt(2, locality.getPostalCode());
             statement.setString(3, locality.getStreet());
             statement.setInt(4, locality.getHouseNumber());
+            System.out.println(locality.getLocalityName());
+            System.out.println(locality.getPostalCode());
+            System.out.println(locality.getStreet());
+            System.out.println(locality.getHouseNumber());
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-            System.out.println(resultSet.getInt("localityID"));
+
             return resultSet.getInt("localityID");
 
         } catch (Exception exception) {

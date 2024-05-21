@@ -30,6 +30,14 @@ public class Product {
         this.promoIsEnable = promoIsEnable;
     }
 
+    public Product(String type, String name, double price, int stockQuantity, Boolean promoIsEnable) {
+        this.type = type;
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+        this.promoIsEnable = promoIsEnable;
+    }
+
     public int getCode() {
         return code;
     }

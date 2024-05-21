@@ -28,6 +28,7 @@ public class ModifyCustomerFormPanel extends JPanel {
     private JTextField letterBoxField;
     private JTextField localityIDField;
     private JTextField localityNameField;
+    private JCheckBox isProfessionalCheckBox;
 
     private CustomerController customerController;
     private ContactController contactController;
@@ -35,6 +36,7 @@ public class ModifyCustomerFormPanel extends JPanel {
     private Customer customer;
     private Locality locality;
     private Contact contact;
+    private Locality localityBeforeChange;
 
     public ModifyCustomerFormPanel(Customer customer, CustomerController customerController,
                                    ContactController contactController, LocalityController localityController) throws ContactException, LocalityException {
@@ -78,6 +80,14 @@ public class ModifyCustomerFormPanel extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy++;
+        formPanel.add(new JLabel("Professionnel: "), gbc);
+        gbc.gridx++;
+        isProfessionalCheckBox = new JCheckBox();
+        isProfessionalCheckBox.setSelected(customer.isProfessional());
+        formPanel.add(isProfessionalCheckBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
         formPanel.add(new JLabel("Email: *"), gbc);
         gbc.gridx++;
         emailField = new JTextField(20);
@@ -98,6 +108,7 @@ public class ModifyCustomerFormPanel extends JPanel {
         gbc.gridx++;
         postalCodeField = new JTextField(10);
         Locality locality = localityController.getLocalityByCode(customer.getLocalityID());
+        localityBeforeChange =  locality;
         postalCodeField.setText(String.valueOf(locality.getPostalCode()));
         formPanel.add(postalCodeField, gbc);
 
@@ -127,19 +138,12 @@ public class ModifyCustomerFormPanel extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy++;
-        formPanel.add(new JLabel("ID Localité: "), gbc);
-        gbc.gridx++;
-        localityIDField = new JTextField(10);
-        localityIDField.setText(String.valueOf(locality.getLocalityID()));  // Assuming getId() method exists in Locality class
-        formPanel.add(localityIDField, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy++;
-        formPanel.add(new JLabel("Nom Localité: "), gbc);
+        formPanel.add(new JLabel("Nom Localité: *"), gbc);
         gbc.gridx++;
         localityNameField = new JTextField(20);
         localityNameField.setText(locality.getLocalityName());  // Assuming getName() method exists in Locality class
         formPanel.add(localityNameField, gbc);
+
 
         add(formPanel, BorderLayout.CENTER);
 
@@ -156,26 +160,25 @@ public class ModifyCustomerFormPanel extends JPanel {
     private void saveCustomer() {
         try {
             // Mettre à jour le modèle avec les nouvelles données
-            customer.setFirstName(firstNameField.getText());
-            customer.setLastName(lastNameField.getText());
-            customer.setDateOfBirth(LocalDate.parse(dobField.getText()));
-            customer.setLocalityID(Integer.parseInt(localityIDField.getText()));
-            customer.setMail(emailField.getText());
-
             Contact contact = new Contact(emailField.getText(), phoneField.getText());
             Locality locality = new Locality(
-                    Integer.parseInt(localityIDField.getText()),
                     localityNameField.getText(),
                     Integer.parseInt(postalCodeField.getText()),
                     streetField.getText(),
                     Integer.parseInt(houseNumberField.getText()),
                     letterBoxField.getText()
             );
+            customer.setFirstName(firstNameField.getText());
+            customer.setLastName(lastNameField.getText());
+            customer.setDateOfBirth(LocalDate.parse(dobField.getText()));
+            customer.setMail(emailField.getText());
+            customer.setProfessional(isProfessionalCheckBox.isSelected());
 
             // Enregistrer les mises à jour dans la base de données
-            customerController.updateCustomer(customer);
             contactController.updateContact(contact);
+            locality.setLocalityID(localityController.getLocalityID(localityBeforeChange));
             localityController.updateLocality(locality);
+            customerController.updateCustomer(customer);
 
             JOptionPane.showMessageDialog(this, "Le client a été mis à jour avec succès.");
         } catch (Exception ex) {

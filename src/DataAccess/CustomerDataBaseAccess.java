@@ -79,32 +79,36 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
     public void updateCustomer(Customer customer) throws CustomerException {
         // code to update a customer
         try {
-            if (getCustomerById(customer.getUserID()) == null) {
-                throw new CustomerException("Customer not found", new OneException(), new UpdateException());
+            Connection connection = SingletonConnexion.getInstance();
+            String query = "UPDATE customer SET firstName = ?, lastName = ?, dateOfBirth = ?, isProfessional = ?," +
+                    "gender = ?, localityID = ?, mail = ? WHERE userID = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            System.out.println(customer.getUserID());
+            statement.setString(1, customer.getFirstName());
+            statement.setString(2, customer.getLastName());
+
+            if (customer.getDateOfBirth() != null) {
+                statement.setDate(3, Date.valueOf(customer.getDateOfBirth()));
             } else {
-                Connection connection = SingletonConnexion.getInstance();
-                String query = "UPDATE customer SET firstName = ?, lastName = ?, dateOfBirth = ?, isProfessional = ?," +
-                        "gender = ?, localityID = ?, mail = ? WHERE userID = ?;";
-                PreparedStatement statement = connection.prepareStatement(query);
-                statement.setString(1, customer.getFirstName());
-                statement.setString(2, customer.getLastName());
-                statement.setBoolean(4, customer.isProfessional());
-                statement.setInt(6, customer.getLocalityID());
-                statement.setString(7, customer.getMail());
-
-                if (customer.getDateOfBirth() != null) {
-                    statement.setDate(3, Date.valueOf(customer.getDateOfBirth()));
-                } else {
-                    statement.setNull(3, Types.NULL);
-                }
-                if (customer.getGender() != null) {
-                    statement.setString(5, String.valueOf(customer.getGender()));
-                } else {
-                    statement.setNull(5, Types.NULL);
-                }
-
-                statement.executeUpdate();
+                statement.setNull(3, Types.NULL);
             }
+
+            statement.setBoolean(4, customer.isProfessional());
+
+            if (customer.getGender() != null) {
+                statement.setString(5, String.valueOf(customer.getGender()));
+            } else {
+                statement.setNull(5, Types.NULL);
+            }
+
+            statement.setInt(6, customer.getLocalityID());
+            statement.setString(7, customer.getMail());
+
+            statement.setInt(8, customer.getUserID());
+            statement.executeUpdate();
+            System.out.println("fincustomer");
+
         } catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new OneException(), new UpdateException());
         }

@@ -8,13 +8,15 @@ import java.util.ArrayList;
 
 public interface ProductDataAccess {
 
-    ArrayList<Product> readAllProducts() throws Exception;
+    ArrayList<Product> readAllProducts() throws ProductException;
 
-    void applyDiscount(Product product, double discount) throws ProductException;
+    void applyDiscount(Product product, int discount) throws ProductException;
 
-    Product getProductInPromotion();
+    ArrayList<Product> getProductInPromotion() throws ProductException;
 
-    Product getProductByCode(int productCode);
+    ArrayList<Product> getProductsWhithoutPromotion() throws ProductException;
+
+    Product getProductByCode(int productCode) throws ProductException;
 
     Product getProductBySaleDetail(SaleDetail saleDetail);
 }

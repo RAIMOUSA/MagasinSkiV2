@@ -25,6 +25,14 @@ public class Locality {
         this.houseNumber = houseNumber;
     }
 
+    public Locality(String localityName, int postalCode, String street, int houseNumber, String letterBox) {
+        this.localityName = localityName;
+        this.postalCode = postalCode;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.letterBox = letterBox;
+    }
+
     public int getLocalityID() {
         return localityID;
     }
