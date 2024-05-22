@@ -53,6 +53,7 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
         Sale sale = null;
         try {
             saleDetail = saleDetailController.getSaleDetailByProduct(product);
+            System.out.println(saleDetail.getSaleCode());
             sale = saleController.getSaleBySaleDetail(saleDetail);
         } catch (SaleDetailException | SaleException e) {
             throw new RuntimeException(e);

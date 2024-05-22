@@ -81,7 +81,7 @@ public class ListingCustomerModel extends AbstractTableModel {
                 case 0 -> customer.getUserID();
                 case 1 -> customer.getFirstName();
                 case 2 -> customer.getLastName();
-                case 3 -> customer.getDateOfBirth().toString();
+                case 3 -> customer.getDateOfBirth() == null ? "" : customer.getDateOfBirth().toString();
                 case 4 -> customer.isProfessional();
                 case 5 -> contact.getMail();
                 case 6 -> contact.getPhoneNumber();

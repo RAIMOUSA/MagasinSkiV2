@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="debugg">
+    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="bon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/ContactManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/ContactManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/LocalityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/LocalityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/SaleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/SaleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ContactController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/ContactDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/ContactDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingCustomerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingCustomerModel.java" afterDir="false" />
     </list>
     <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +114,7 @@
       <workItem from="1716187869508" duration="13334000" />
       <workItem from="1716208046398" duration="17728000" />
       <workItem from="1716273731176" duration="38836000" />
-      <workItem from="1716359013196" duration="4736000" />
+      <workItem from="1716359013196" duration="5798000" />
     </task>
     <task id="LOCAL-00001" summary="contact et debut customer">
       <option name="closed" value="true" />
@@ -243,7 +236,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716361611786</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="bon">
+      <option name="closed" value="true" />
+      <created>1716363852700</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1716363852700</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +277,7 @@
     <MESSAGE value="pushimage" />
     <MESSAGE value="finish coding, debuging now" />
     <MESSAGE value="debugg" />
-    <option name="LAST_COMMIT_MESSAGE" value="debugg" />
+    <MESSAGE value="bon" />
+    <option name="LAST_COMMIT_MESSAGE" value="bon" />
   </component>
 </project>
