@@ -5,7 +5,7 @@ public class SaleDetail {
     private int productCode;
     private int saleCode;
 
-    public SaleDetail(int quantity, int productCode, int saleCode) {
+    public SaleDetail(int saleCode, int productCode, int quantity ) {
         this.quantity = quantity;
         this.productCode = productCode;
         this.saleCode = saleCode;

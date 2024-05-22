@@ -6,19 +6,22 @@ import Controller.SaleDetailController;
 import Model.Product;
 import Model.Sale;
 import Model.SaleDetail;
-import Exception.*;
+import Exception.ProductException;
+import Exception.SaleDetailException;
+import Exception.SaleException;
+
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListingClientPurchaseModel extends AbstractTableModel {
-    private String[] columnNames;
-    private ArrayList<Product> purchases;
+    private String[] columnNames = {"Date", "CodeProduit", "TypeProduit", "NomProduit", "Prix", "Quantité", "CodeSale", "UserID"};
+    private ArrayList<SaleDetail> saleDetails = new ArrayList<>();
     private ProductController productController;
     private SaleDetailController saleDetailController;
     private SaleController saleController;
 
     public ListingClientPurchaseModel() {
-        this.columnNames = new String[] {"Date", "CodeProduit", "TypeProduit", "NomProduit", "Prix", "Quantité", "CodeSale", "UserID"};
         this.productController = new ProductController();
         this.saleDetailController = new SaleDetailController();
         this.saleController = new SaleController();
@@ -27,18 +30,19 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
 
     private void loadPurchases() {
         try {
-            this.purchases = productController.readAllProducts();
-        } catch (Exception e) {
+            ArrayList<Sale> sales = saleController.readAllSales();
+            for (Sale sale : sales) {
+                ArrayList<SaleDetail> details = saleDetailController.getSaleDetailsBySale(sale);
+                saleDetails.addAll(details);
+            }
+        } catch (SaleException | SaleDetailException e) {
             e.printStackTrace();
-            this.purchases = new ArrayList<>();
         }
     }
 
     @Override
     public int getRowCount() {
-        if(purchases == null)
-            return 0;
-        return purchases.size();
+        return saleDetails.size();
     }
 
     @Override
@@ -48,20 +52,24 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Product product = purchases.get(rowIndex);
-        SaleDetail saleDetail = null;
+        SaleDetail saleDetail = saleDetails.get(rowIndex);
         Sale sale = null;
         try {
-            saleDetail = saleDetailController.getSaleDetailByProduct(product);
-            System.out.println(saleDetail.getSaleCode());
-            sale = saleController.getSaleBySaleDetail(saleDetail);
-        } catch (SaleDetailException | SaleException e) {
+            sale = this.saleController.getSaleBySaleDetail(saleDetail);
+        } catch (SaleException e) {
             throw new RuntimeException(e);
+        }
+        Product product = null;
+        try {
+            product = productController.getProductByCode(saleDetail.getProductCode());
+        } catch (ProductException e) {
+            e.printStackTrace();
+            return null;
         }
 
         switch (columnIndex) {
             case 0: return sale.getDate();
-            case 1: return product.getCode();
+            case 1: return saleDetail.getProductCode();
             case 2: return product.getType();
             case 3: return product.getName();
             case 4: return product.getPrice();
@@ -77,16 +85,26 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    public void filterByUserID(String userID) throws SaleDetailException, SaleException {
-        ArrayList<Product> filteredPurchases = new ArrayList<>();
-        for (Product product : purchases) {
-            SaleDetail saleDetail = saleDetailController.getSaleDetailByProduct(product);
-            Sale sale = saleController.getSaleBySaleDetail(saleDetail);
-            if (String.valueOf(sale.getUserID()).equals(userID)) {
-                filteredPurchases.add(product);
+    public void filterByUserID(String userID) {
+        ArrayList<SaleDetail> filteredSaleDetails = new ArrayList<>();
+        for (SaleDetail saleDetail : saleDetails) {
+            Sale sale = null;
+            try {
+                sale = saleController.getSaleBySaleDetail(saleDetail);
+            } catch (SaleException e) {
+                throw new RuntimeException(e);
+            }
+            if (sale.getUserID() == (Integer.parseInt(userID))) {
+                filteredSaleDetails.add(saleDetail);
             }
         }
-        this.purchases = filteredPurchases;
+        saleDetails = filteredSaleDetails;
+        fireTableDataChanged();
+    }
+
+    public void refreshData() {
+        saleDetails.clear();
+        loadPurchases();
         fireTableDataChanged();
     }
 }

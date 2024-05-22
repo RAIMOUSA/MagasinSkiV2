@@ -2,6 +2,7 @@ package Controller;
 
 import Business.SaleDetailManager;
 import Model.Product;
+import Model.Sale;
 import Model.SaleDetail;
 import Exception.*;
 import java.util.ArrayList;
@@ -26,4 +27,7 @@ public class SaleDetailController {
         return saleDetailManager.readAllSaleDetails();
     }
 
+    public ArrayList<SaleDetail> getSaleDetailsBySale(Sale sale) throws SaleDetailException {
+        return saleDetailManager.getSaleDetailsBySale(sale);
+    }
 }
