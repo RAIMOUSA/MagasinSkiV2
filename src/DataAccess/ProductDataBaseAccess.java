@@ -44,18 +44,19 @@ try {
     public ArrayList<Product> getProductInPromotion() throws ProductException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM products WHERE promotion = 1;";
+            String query = "SELECT * FROM products WHERE promoIsEnable = 1;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Product> products = new ArrayList<Product>();
 
             while (resultSet.next()) {
+                int codeID = resultSet.getInt("codeID");
                 String typeProduct = resultSet.getString("typeProduct");
                 String nameProduct = resultSet.getString("nameProduct");
                 double price = resultSet.getDouble("price");
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 boolean promoIsEnable = resultSet.getBoolean("promoIsEnable");
-                Product product = new Product(typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
+                Product product = new Product(codeID, typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
 
                 int percentPromo = resultSet.getInt("percentPromo");
                 if (!resultSet.wasNull()) {
@@ -83,12 +84,13 @@ try {
             ArrayList<Product> products = new ArrayList<Product>();
 
             while (resultSet.next()) {
+                int codeID = resultSet.getInt("codeID");
                 String typeProduct = resultSet.getString("typeProduct");
                 String nameProduct = resultSet.getString("nameProduct");
                 double price = resultSet.getDouble("price");
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 boolean promoIsEnable = resultSet.getBoolean("promoIsEnable");
-                Product product = new Product(typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
+                Product product = new Product(codeID, typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
 
                 int percentPromo = resultSet.getInt("percentPromo");
                 if (!resultSet.wasNull()) {
@@ -180,7 +182,7 @@ try {
     public void removePromotion(int productId) throws ProductException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "UPDATE products SET promoIsEnable = 0, percentPromo = NULL WHERE productCode = ?;";
+            String query = "UPDATE products SET promoIsEnable = 0, percentPromo = NULL WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, productId);
             statement.executeUpdate();

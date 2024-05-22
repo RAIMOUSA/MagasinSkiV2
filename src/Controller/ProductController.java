@@ -38,12 +38,12 @@ public class ProductController {
         return productManager.getProductInPromotion();
     }
 
-    public Product getProductByCode(int productCode) throws ProductException {
-        return productManager.getProductByCode(productCode);
+    public ArrayList<Product> getProductsWhithoutPromotion() throws ProductException {
+        return productManager.getProductsWhithoutPromotion();
     }
 
-    public Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException{
-        return productManager.getProductBySaleDetail(saleDetail);
+    public Product getProductByCode(int productCode) throws ProductException {
+        return productManager.getProductByCode(productCode);
     }
 
     public void removePromotion(int productId) throws ProductException{

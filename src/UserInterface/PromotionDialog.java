@@ -13,6 +13,7 @@ public class PromotionDialog extends JDialog {
     public PromotionDialog(Frame owner, Product product) {
         super(owner, "Appliquer une promotion", true);
         this.product = product;
+        this.productController = new ProductController();
         initComponents();
     }
 
@@ -38,6 +39,7 @@ public class PromotionDialog extends JDialog {
             int discount = Integer.parseInt(discountField.getText());
             try {
                 productController.applyDiscount(product, discount);
+                JOptionPane.showMessageDialog(this, "Promotion appliquée avec succès");
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Erreur lors de l'application de la promotion: " + ex.getMessage());

@@ -23,7 +23,7 @@ public class ListingProductsModel extends AbstractTableModel {
         data.clear();
         originalData.clear();
 
-        ArrayList<Product> products = productController.readAllProducts();
+        ArrayList<Product> products = productController.getProductsWhithoutPromotion();
         if (products != null) {
             data.addAll(products);
             originalData.addAll(products);
