@@ -4,27 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="pushimage">
-      <change afterPath="$PROJECT_DIR$/src/Exception/SaleDetailException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Exception/SaleException.java" afterDir="false" />
+    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="finish coding, debuging now">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Business/SaleDetailManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/SaleDetailManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/SaleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/SaleManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SaleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/SaleDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SaleDetailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/SaleDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/SaleDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/SaleDetailDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/SaleDetailDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/PromotionScrollPanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingCustomerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingCustomerModel.java" afterDir="false" />
     </list>
     <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +118,8 @@
       <workItem from="1716187680158" duration="143000" />
       <workItem from="1716187869508" duration="13334000" />
       <workItem from="1716208046398" duration="17728000" />
-      <workItem from="1716273731176" duration="35662000" />
+      <workItem from="1716273731176" duration="38836000" />
+      <workItem from="1716359013196" duration="2471000" />
     </task>
     <task id="LOCAL-00001" summary="contact et debut customer">
       <option name="closed" value="true" />
@@ -236,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716317708907</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="finish coding, debuging now">
+      <option name="closed" value="true" />
+      <created>1716324789451</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1716324789451</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,6 +264,7 @@
     <MESSAGE value="produit" />
     <MESSAGE value="push" />
     <MESSAGE value="pushimage" />
-    <option name="LAST_COMMIT_MESSAGE" value="pushimage" />
+    <MESSAGE value="finish coding, debuging now" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish coding, debuging now" />
   </component>
 </project>

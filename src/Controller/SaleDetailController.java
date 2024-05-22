@@ -9,6 +9,15 @@ import java.util.List;
 
 public class SaleDetailController {
     private SaleDetailManager saleDetailManager;
+
+    public SaleDetailController() {
+        setSaleDetailManager(new SaleDetailManager());
+    }
+
+    public void setSaleDetailManager(SaleDetailManager saleDetailManager) {
+        this.saleDetailManager = saleDetailManager;
+    }
+
     public SaleDetail getSaleDetailByProduct(Product product) throws SaleDetailException {
         return saleDetailManager.getSaleDetailByProduct(product);
     }

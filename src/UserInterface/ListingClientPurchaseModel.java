@@ -1,6 +1,5 @@
 package UserInterface;
 
-
 import Controller.ProductController;
 import Controller.SaleController;
 import Controller.SaleDetailController;
@@ -21,6 +20,8 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
     public ListingClientPurchaseModel() {
         this.columnNames = new String[] {"Date", "CodeProduit", "TypeProduit", "NomProduit", "Prix", "Quantité", "CodeSale", "UserID"};
         this.productController = new ProductController();
+        this.saleDetailController = new SaleDetailController();
+        this.saleController = new SaleController();
         loadPurchases();
     }
 

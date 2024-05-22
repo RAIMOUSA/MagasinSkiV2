@@ -12,11 +12,11 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class ListingCustomerModel extends AbstractTableModel {
-    private String[] columnNames;
+    private final String[] columnNames;
     private ArrayList<Customer> customers;
-    private CustomerController customerController;
-    private ContactController contactController;
-    private LocalityController localityController;
+    private final CustomerController customerController;
+    private final ContactController contactController;
+    private final LocalityController localityController;
 
     public ListingCustomerModel() {
         this.columnNames = new String[] {
@@ -27,7 +27,7 @@ public class ListingCustomerModel extends AbstractTableModel {
                 "Professionnel",
                 "Email",
                 "Téléphone",
-                "Description",
+                "Localité",
                 "Code postal",
                 "Rue",
                 "Numéro de maison",
@@ -42,15 +42,7 @@ public class ListingCustomerModel extends AbstractTableModel {
             this.customers = customerController.readAllCustomers();
         } catch (CustomerException exception) {
             System.err.println("Erreur lors de la lecture des clients: " + exception.getMessage());
-        }
-    }
-
-    private void loadCustomers() {
-        try {
-            customers = customerController.readAllCustomers();
-        } catch (Exception e) {
-            e.printStackTrace();
-            customers = new ArrayList<>();
+            this.customers = new ArrayList<>(); // Assurez-vous que la liste est initialisée
         }
     }
 
@@ -61,13 +53,8 @@ public class ListingCustomerModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        if (this.customers == null) {
-            return 0;
-        } else {
-            return this.customers.size();
-        }
+        return (customers == null) ? 0 : customers.size();
     }
-
 
     @Override
     public String getColumnName(int col) {
@@ -87,8 +74,8 @@ public class ListingCustomerModel extends AbstractTableModel {
     public Object getValueAt(int row, int col) {
         try {
             Customer customer = customers.get(row);
-            Contact contact = this.contactController.getContactByMail(customer.getMail());
-            Locality locality = this.localityController.getLocalityByCode(customer.getLocalityID());
+            Contact contact = contactController.getContactByMail(customer.getMail());
+            Locality locality = localityController.getLocalityByCode(customer.getLocalityID());
 
             return switch (col) {
                 case 0 -> customer.getUserID();
@@ -111,6 +98,7 @@ public class ListingCustomerModel extends AbstractTableModel {
         }
     }
 
+    @Override
     public boolean isCellEditable(int row, int col) {
         return false;
     }

@@ -19,12 +19,13 @@ try {
             ArrayList<Product> products = new ArrayList<Product>();
 
             while (resultSet.next()) {
+                int codeID = resultSet.getInt("codeID");
                 String typeProduct = resultSet.getString("typeProduct");
                 String nameProduct = resultSet.getString("nameProduct");
                 double price = resultSet.getDouble("price");
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 boolean promoIsEnable = resultSet.getBoolean("promoIsEnable");
-                Product product = new Product(typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
+                Product product = new Product(codeID, typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
 
                 int percentPromo = resultSet.getInt("percentPromo");
                 if (!resultSet.wasNull()) {
@@ -108,12 +109,13 @@ try {
         try {
             //true promoisenable et percentPromo
             Connection connection = SingletonConnexion.getInstance();
-            String query = "UPDATE products SET promoIsEnable = ?, percentPromo = ? WHERE nameProduct = ?;";
+            String query = "UPDATE products SET promoIsEnable = true, percentPromo = ? WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setBoolean(1, true);
-            statement.setInt(2, discount);
-            statement.setString(3, product.getName());
-            statement.executeUpdate();
+
+            statement.setInt(1, discount);
+            statement.setInt(2, product.getCode());
+            int test = statement.executeUpdate();
+            System.out.println(test);
         } catch (Exception exception) {
             throw new ProductException("Erreur dans la mise à jour discount table.", new OneException(), new UpdateException());
         }
@@ -163,7 +165,7 @@ try {
                 double price = resultSet.getDouble("price");
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 Product product = new Product(productCode, typeProduct, nameProduct, price, stockQuantity);
-
+                System.out.println("productbysale");
                 return product;
             }
             return null;
