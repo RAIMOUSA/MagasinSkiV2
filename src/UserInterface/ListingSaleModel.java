@@ -8,13 +8,15 @@ import Model.Sale;
 import Model.SaleDetail;
 import Exception.*;
 import javax.swing.table.AbstractTableModel;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListingSaleModel extends AbstractTableModel {
 
     private String[] columnNames = {"Date", "Code", "Type", "Name", "Price", "Quantity", "UserID"};
-    private List<SaleDetail> saleDetails;
+    private ArrayList<SaleDetail> saleDetails;
+    private ArrayList<SaleDetail> originalSaleDetails; // Liste pour stocker les données originales
     private SaleDetailController saleDetailController;
     private SaleController saleController;
     private ProductController productController;
@@ -29,9 +31,11 @@ public class ListingSaleModel extends AbstractTableModel {
     private void loadSaleDetails() {
         try {
             saleDetails = saleDetailController.readAllSaleDetails();
+            originalSaleDetails = new ArrayList<>(saleDetails); // Initialisation de la liste originale
         } catch (Exception e) {
             e.printStackTrace();
             saleDetails = new ArrayList<>();
+            originalSaleDetails = new ArrayList<>();
         }
     }
 
@@ -54,7 +58,7 @@ public class ListingSaleModel extends AbstractTableModel {
         Product product = null;
         try {
             sale = saleController.getSaleBySaleDetail(saleDetail);
-            product = productController.getProductBySaleDetail(saleDetail);
+            product = productController.getProductByCode(saleDetail.getProductCode());
         } catch (SaleException | ProductException e) {
             throw new RuntimeException(e);
         }
@@ -76,15 +80,28 @@ public class ListingSaleModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    public void filterByDate(String date) throws SaleException {
-        List<SaleDetail> filteredSaleDetails = new ArrayList<>();
-        for (SaleDetail saleDetail : saleDetails) {
-            Sale sale = saleController.getSaleBySaleDetail(saleDetail);
-            if (sale.getDate().equals(date)) {
-                filteredSaleDetails.add(saleDetail);
+    public void filterByDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate filterDate = LocalDate.parse(date, formatter);
+
+        if (date == null || date.isEmpty()) {
+            saleDetails = new ArrayList<>(originalSaleDetails);
+        } else {
+            ArrayList<SaleDetail> filteredSaleDetails = new ArrayList<>();
+            for (SaleDetail saleDetail : originalSaleDetails) { // Utiliser les données originales pour le filtrage
+                Sale sale = null;
+                try {
+                    sale = saleController.getSaleBySaleDetail(saleDetail);
+                } catch (SaleException e) {
+                    e.printStackTrace();
+                    continue;
+                }
+                if (sale.getDate().equals(filterDate)) {
+                    filteredSaleDetails.add(saleDetail);
+                }
             }
+            saleDetails = filteredSaleDetails;
         }
-        saleDetails = filteredSaleDetails;
         fireTableDataChanged();
     }
 }

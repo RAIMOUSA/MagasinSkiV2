@@ -17,6 +17,7 @@ import java.util.List;
 public class ListingClientPurchaseModel extends AbstractTableModel {
     private String[] columnNames = {"Date", "CodeProduit", "TypeProduit", "NomProduit", "Prix", "Quantité", "CodeSale", "UserID"};
     private ArrayList<SaleDetail> saleDetails = new ArrayList<>();
+    private ArrayList<SaleDetail> originalSaleDetails = new ArrayList<>();
     private ProductController productController;
     private SaleDetailController saleDetailController;
     private SaleController saleController;
@@ -34,6 +35,7 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
             for (Sale sale : sales) {
                 ArrayList<SaleDetail> details = saleDetailController.getSaleDetailsBySale(sale);
                 saleDetails.addAll(details);
+                originalSaleDetails.addAll(details);
             }
         } catch (SaleException | SaleDetailException e) {
             e.printStackTrace();
@@ -57,7 +59,8 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
         try {
             sale = this.saleController.getSaleBySaleDetail(saleDetail);
         } catch (SaleException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return null;
         }
         Product product = null;
         try {
@@ -86,24 +89,30 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
     }
 
     public void filterByUserID(String userID) {
-        ArrayList<SaleDetail> filteredSaleDetails = new ArrayList<>();
-        for (SaleDetail saleDetail : saleDetails) {
-            Sale sale = null;
-            try {
-                sale = saleController.getSaleBySaleDetail(saleDetail);
-            } catch (SaleException e) {
-                throw new RuntimeException(e);
+        if (userID == null || userID.isEmpty()) {
+            saleDetails = new ArrayList<>(originalSaleDetails);
+        } else {
+            ArrayList<SaleDetail> filteredSaleDetails = new ArrayList<>();
+            for (SaleDetail saleDetail : originalSaleDetails) {  // Use original data for filtering
+                Sale sale;
+                try {
+                    sale = saleController.getSaleBySaleDetail(saleDetail);
+                } catch (SaleException e) {
+                    e.printStackTrace();
+                    continue;
+                }
+                if (sale.getUserID() == (Integer.parseInt(userID))) {
+                    filteredSaleDetails.add(saleDetail);
+                }
             }
-            if (sale.getUserID() == (Integer.parseInt(userID))) {
-                filteredSaleDetails.add(saleDetail);
-            }
+            saleDetails = filteredSaleDetails;
         }
-        saleDetails = filteredSaleDetails;
         fireTableDataChanged();
     }
 
     public void refreshData() {
         saleDetails.clear();
+        originalSaleDetails.clear();
         loadPurchases();
         fireTableDataChanged();
     }
