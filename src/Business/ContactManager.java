@@ -22,8 +22,8 @@ public class ContactManager {
         return this.dataAccess.readAllContact();
     }
 
-    public void updateContactPhone(Contact contact) throws ContactException {
-        this.dataAccess.updateContactPhone(contact);
+    public void updateContactPhone(String oldMail, Contact contact) throws ContactException {
+        this.dataAccess.updateContactPhone(oldMail, contact);
     }
     
     public void updateContactMail(String oldMail, Contact contact) throws ContactException {

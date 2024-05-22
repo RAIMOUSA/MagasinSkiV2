@@ -49,12 +49,10 @@ public class LocalityDataBaseAccess implements LocalityDataAccess {
             if (locality.getLetterBox() != null) {
                 statement.setString(5, locality.getLetterBox());
             } else {
-                System.out.println("nullletterbox");
                 statement.setNull(5, Types.NULL);
             }
 
             statement.setInt(6, locality.getLocalityID());
-            System.out.println(locality.getLocalityID());
 
             statement.executeUpdate();
         } catch (Exception exception) {

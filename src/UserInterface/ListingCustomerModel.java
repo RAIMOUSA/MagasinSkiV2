@@ -23,6 +23,7 @@ public class ListingCustomerModel extends AbstractTableModel {
                 "ID",
                 "Prénom",
                 "Nom",
+                "Genre",
                 "Date de naissance",
                 "Professionnel",
                 "Email",
@@ -64,9 +65,11 @@ public class ListingCustomerModel extends AbstractTableModel {
     @Override
     public Class<?> getColumnClass(int column) {
         return switch (column) {
-            case 0, 8, 10 -> Integer.class;
-            case 4 -> Boolean.class;
-            default -> String.class;
+            case 0 -> Integer.class;
+            case 1, 2, 3, 4, 6, 7, 8, 10, 11, 12 -> String.class;
+            case 5 -> Boolean.class;
+            case 9 -> Integer.class;
+            default -> Object.class;
         };
     }
 
@@ -81,15 +84,16 @@ public class ListingCustomerModel extends AbstractTableModel {
                 case 0 -> customer.getUserID();
                 case 1 -> customer.getFirstName();
                 case 2 -> customer.getLastName();
-                case 3 -> customer.getDateOfBirth() == null ? "" : customer.getDateOfBirth().toString();
-                case 4 -> customer.isProfessional();
-                case 5 -> contact.getMail();
-                case 6 -> contact.getPhoneNumber();
-                case 7 -> locality.getLocalityName();
-                case 8 -> locality.getPostalCode();
-                case 9 -> locality.getStreet();
-                case 10 -> locality.getHouseNumber();
-                case 11 -> locality.getLetterBox();
+                case 3 -> customer.getGender();
+                case 4 -> customer.getDateOfBirth() == null ? "" : customer.getDateOfBirth().toString();
+                case 5 -> customer.isProfessional();
+                case 6 -> contact.getMail();
+                case 7 -> contact.getPhoneNumber() == null ? "" : contact.getPhoneNumber();
+                case 8 -> locality.getLocalityName();
+                case 9 -> locality.getPostalCode();
+                case 10 -> locality.getStreet();
+                case 11 -> locality.getHouseNumber();
+                case 12 -> locality.getLetterBox() == null ? "" : locality.getLetterBox();
                 default -> null;
             };
         } catch (Exception exception) {

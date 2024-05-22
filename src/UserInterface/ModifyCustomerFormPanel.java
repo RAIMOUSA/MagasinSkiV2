@@ -13,22 +13,26 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class ModifyCustomerFormPanel extends JPanel {
 
     private JButton saveButton;
     private JTextField firstNameField;
     private JTextField lastNameField;
-    private JTextField dobField;
+    private JSpinner dobSpinner;
+    private JCheckBox dobCheckBox;
     private JTextField emailField;
     private JTextField phoneField;
     private JTextField postalCodeField;
     private JTextField streetField;
     private JTextField houseNumberField;
     private JTextField letterBoxField;
-    private JTextField localityIDField;
     private JTextField localityNameField;
     private JCheckBox isProfessionalCheckBox;
+    private JComboBox genderComboBox;
+    private JCheckBox genderCheckBox;
 
     private CustomerController customerController;
     private ContactController contactController;
@@ -38,14 +42,15 @@ public class ModifyCustomerFormPanel extends JPanel {
     private Contact contact;
     private Locality localityBeforeChange;
     private String oldMail;
+    private JTable clientTable;
 
     public ModifyCustomerFormPanel(Customer customer, CustomerController customerController,
-                                   ContactController contactController, LocalityController localityController) throws ContactException, LocalityException {
+                                   ContactController contactController, LocalityController localityController,JTable clientTable) throws ContactException, LocalityException {
         this.customer = customer;
         this.customerController = customerController;
         this.contactController = contactController;
         this.localityController = localityController;
-
+        this.clientTable = clientTable;
         setLayout(new BorderLayout());
 
         JPanel formPanel = new JPanel(new GridBagLayout());
@@ -73,15 +78,23 @@ public class ModifyCustomerFormPanel extends JPanel {
 
         gbc.gridx = 0;
         gbc.gridy++;
+        dobCheckBox = new JCheckBox("Voulez-vous remplir la date de naissance?");
+        dobCheckBox.setSelected(false);
+        dobCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dobSpinner.setEnabled(dobCheckBox.isSelected());
+            }
+        });
+        formPanel.add(dobCheckBox, gbc);
+        gbc.gridy++;
         formPanel.add(new JLabel("Date de naissance: "), gbc);
         gbc.gridx++;
-        dobField = new JTextField(15);
-        if (customer.getDateOfBirth() == null) {
-            dobField.setText("");
-        } else {
-            dobField.setText(customer.getDateOfBirth().toString());
-        }
-        formPanel.add(dobField, gbc);
+        dobSpinner = new JSpinner(new SpinnerDateModel());
+        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dobSpinner, "yyyy-MM-dd");
+        dobSpinner.setEditor(dateEditor);
+        formPanel.add(dobSpinner, gbc);
+        dobSpinner.setEnabled(false);
 
         gbc.gridx = 0;
         gbc.gridy++;
@@ -90,6 +103,22 @@ public class ModifyCustomerFormPanel extends JPanel {
         isProfessionalCheckBox = new JCheckBox();
         isProfessionalCheckBox.setSelected(customer.isProfessional());
         formPanel.add(isProfessionalCheckBox, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy++;
+        genderCheckBox = new JCheckBox("Voulez-vous remplir le genre?");
+        genderCheckBox.setSelected(false);
+        genderCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                genderComboBox.setEnabled(genderCheckBox.isSelected());
+            }
+        });
+        formPanel.add(genderCheckBox, gbc);
+        gbc.gridx++;
+        genderComboBox = new JComboBox<>(new String[]{"Masculin", "Féminin", "Autre"});
+        genderComboBox.setEnabled(false);
+        formPanel.add(genderComboBox, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
@@ -176,20 +205,42 @@ public class ModifyCustomerFormPanel extends JPanel {
             );
             customer.setFirstName(firstNameField.getText());
             customer.setLastName(lastNameField.getText());
-            customer.setDateOfBirth(LocalDate.parse(dobField.getText()));
+            if(genderCheckBox.isSelected())
+                customer.setGender(genderComboBox.getSelectedItem().toString());
+            if(dobCheckBox.isSelected())
+                customer.setDateOfBirth(getSelectedDate());
+            else
+                customer.setDateOfBirth(null);
             customer.setMail(emailField.getText());
             customer.setProfessional(isProfessionalCheckBox.isSelected());
 
             // Enregistrer les mises à jour dans la base de données
-            contactController.updateContactPhone(contact);
+
+            contactController.updateContactPhone(oldMail, contact);
             contactController.updateContactMail(oldMail, contact);
             locality.setLocalityID(localityController.getLocalityID(localityBeforeChange));
             localityController.updateLocality(locality);
             customerController.updateCustomer(customer);
 
             JOptionPane.showMessageDialog(this, "Le client a été mis à jour avec succès.");
+           refresh();
+
+            Window window = SwingUtilities.getWindowAncestor(this);
+            if (window != null) {
+                window.dispose();
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erreur lors de la mise à jour du client: " + ex.getMessage());
         }
+
+    }
+
+    private LocalDate getSelectedDate() {
+        Date selectedDate = (Date) dobSpinner.getValue();
+        return selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public void refresh() {
+        clientTable.setModel(new ListingCustomerModel());
     }
 }

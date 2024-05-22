@@ -52,31 +52,20 @@ public class ContactDataBaseAccess implements ContactDataAccess {
     }
 
     @Override
-    public void updateContactPhone(Contact contact) throws ContactException {
+    public void updateContactPhone(String oldMail, Contact contact) throws ContactException {
         // code to update a contact
         try {
-
-            if (getContactByMail(contact.getMail()) == null) {
-
-                throw new ContactException("Contact not found", new OneException(), new UpdateException());
-            }else {
-                Connection connection = SingletonConnexion.getInstance();
-                String query = "UPDATE contact SET phoneNumber = ? WHERE mail = ?;";
-                PreparedStatement statement = connection.prepareStatement(query);
-
-                String phoneNumber = contact.getPhoneNumber();
-                statement.setString(2, contact.getMail());
-                if (phoneNumber != null) {
-                    statement.setString(1, phoneNumber);
-                } else {
-                    statement.setNull(1, Types.NULL);
-                }
-
-                System.out.println(contact.getMail());
-                System.out.println(contact.getPhoneNumber());
-                statement.executeUpdate();
-                System.out.println("fin contact");
+            Connection connection = SingletonConnexion.getInstance();
+            String query = "UPDATE contact SET phoneNumber = ? WHERE mail = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            String phoneNumber = contact.getPhoneNumber();
+            if (phoneNumber != null) {
+                statement.setString(1, phoneNumber);
+            } else {
+                statement.setNull(1, Types.VARCHAR);
             }
+            statement.setString(2, oldMail);
+            statement.executeUpdate();
         } catch (Exception exception) {
             throw new ContactException(exception.getMessage(), new OneException(), new UpdateException());
         }
@@ -86,13 +75,12 @@ public class ContactDataBaseAccess implements ContactDataAccess {
     @Override
     public void updateContactMail(String oldMail, Contact contact) throws ContactException {
         try {
+
             Connection connection = SingletonConnexion.getInstance();
             String query = "UPDATE contact SET mail = ? WHERE mail = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, contact.getMail());
             statement.setString(2, oldMail);
-            System.out.println(contact.getMail());
-            System.out.println(oldMail);
             statement.executeUpdate();
         } catch (Exception exception) {
             throw new ContactException(exception.getMessage(), new OneException(), new UpdateException());

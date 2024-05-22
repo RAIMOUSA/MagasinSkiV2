@@ -80,28 +80,26 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
             String query = "UPDATE customer SET firstName = ?, lastName = ?, dateOfBirth = ?, isProfessional = ?," +
                     "gender = ?, localityID = ?, mail = ? WHERE userID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
-
             statement.setString(1, customer.getFirstName());
             statement.setString(2, customer.getLastName());
-
             if (customer.getDateOfBirth() != null) {
                 statement.setDate(3, Date.valueOf(customer.getDateOfBirth()));
             } else {
-                statement.setNull(3, Types.NULL);
+                statement.setNull(3, Types.DATE);
             }
 
             statement.setBoolean(4, customer.isProfessional());
 
             if (customer.getGender() != null) {
-                statement.setString(5, String.valueOf(customer.getGender()));
+
+                statement.setString(5, customer.getGender());
             } else {
-                statement.setNull(5, Types.NULL);
+                statement.setNull(5, Types.VARCHAR);
             }
 
             statement.setInt(6, customer.getLocalityID());
             statement.setString(7, customer.getMail());
             statement.setInt(8, customer.getUserID());
-
             statement.executeUpdate();
         } catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new OneException(), new UpdateException());
