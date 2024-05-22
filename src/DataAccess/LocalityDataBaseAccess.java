@@ -39,7 +39,6 @@ public class LocalityDataBaseAccess implements LocalityDataAccess {
     public void updateLocality(Locality locality) throws LocalityException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            System.out.println("debutlocality");
             String query = "UPDATE locality SET localityName = ?, postalCode = ?, street = ?, houseNumber = ?, letterBox = ? WHERE localityID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, locality.getLocalityName());
@@ -58,7 +57,6 @@ public class LocalityDataBaseAccess implements LocalityDataAccess {
             System.out.println(locality.getLocalityID());
 
             statement.executeUpdate();
-            System.out.println("finlocality");
         } catch (Exception exception) {
             throw new LocalityException(exception.getMessage(), new OneException(),new UpdateException());
         }
@@ -111,15 +109,10 @@ public class LocalityDataBaseAccess implements LocalityDataAccess {
             statement.setInt(2, locality.getPostalCode());
             statement.setString(3, locality.getStreet());
             statement.setInt(4, locality.getHouseNumber());
-            System.out.println(locality.getLocalityName());
-            System.out.println(locality.getPostalCode());
-            System.out.println(locality.getStreet());
-            System.out.println(locality.getHouseNumber());
+
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-
             return resultSet.getInt("localityID");
-
         } catch (Exception exception) {
             throw new LocalityException(exception.getMessage(), new OneException(), new ReadException());
         }

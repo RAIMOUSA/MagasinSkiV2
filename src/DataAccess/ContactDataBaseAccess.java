@@ -86,7 +86,6 @@ public class ContactDataBaseAccess implements ContactDataAccess {
     @Override
     public void updateContactMail(String oldMail, Contact contact) throws ContactException {
         try {
-            System.out.println("alloooooo");
             Connection connection = SingletonConnexion.getInstance();
             String query = "UPDATE contact SET mail = ? WHERE mail = ?;";
             PreparedStatement statement = connection.prepareStatement(query);

@@ -23,7 +23,6 @@ public class SaleDetailDataBaseAccess implements SaleDetailDataAccess {
             resultSet.next();
             int quantity = resultSet.getInt("quantity");
             int saleCode = resultSet.getInt("saleCode");
-            System.out.println("saleCode: " + saleCode);
             int productCode = resultSet.getInt("productCode");
 
             return new SaleDetail(saleCode, productCode, quantity);
@@ -47,7 +46,6 @@ public class SaleDetailDataBaseAccess implements SaleDetailDataAccess {
                 SaleDetail saleDetail = new SaleDetail(saleCode, productCode, quantity);
                 saleDetails.add(saleDetail);
             }
-            System.out.println("terminado");
             return saleDetails;
         } catch (Exception exception) {
             throw new SaleDetailException("Erreur dans la lecture de tous les détails de vente.", new AllException(), new ReadException());

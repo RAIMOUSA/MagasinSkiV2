@@ -116,8 +116,7 @@ try {
 
             statement.setInt(1, discount);
             statement.setInt(2, product.getCode());
-            int test = statement.executeUpdate();
-            System.out.println(test);
+            statement.executeUpdate();
         } catch (Exception exception) {
             throw new ProductException("Erreur dans la mise à jour discount table.", new OneException(), new UpdateException());
         }
@@ -140,11 +139,11 @@ try {
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 boolean promoIsEnable = resultSet.getBoolean("promoIsEnable");
                 Product product = new Product(typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
+
                 int percentPromo = resultSet.getInt("percentPromo");
                 if (!resultSet.wasNull()) {
                     product.setPercentPromo(percentPromo);
                 }
-                System.out.println("ca boucle cb de fois");
                 return product;
             }
             return null;
@@ -169,7 +168,6 @@ try {
                 double price = resultSet.getDouble("price");
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 Product product = new Product(productCode, typeProduct, nameProduct, price, stockQuantity);
-                System.out.println("productbysale");
                 return product;
             }
             return null;

@@ -38,12 +38,9 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
             }
 
             statement.setInt(7, customer.getLocalityID());
-            System.out.println(customer.getLocalityID());
             statement.setString(8, customer.getMail());
 
-            int test = statement.executeUpdate();
-            System.out.println(test);
-            System.out.println("push");
+            statement.executeUpdate();
         } catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new OneException(), new CreateException());
         }
@@ -84,7 +81,6 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
                     "gender = ?, localityID = ?, mail = ? WHERE userID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
 
-            System.out.println(customer.getUserID());
             statement.setString(1, customer.getFirstName());
             statement.setString(2, customer.getLastName());
 
@@ -104,24 +100,22 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
 
             statement.setInt(6, customer.getLocalityID());
             statement.setString(7, customer.getMail());
-
             statement.setInt(8, customer.getUserID());
-            statement.executeUpdate();
-            System.out.println("fincustomer");
 
+            statement.executeUpdate();
         } catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new OneException(), new UpdateException());
         }
     }
 
     public void deleteCustomer(int codeCustomer) throws CustomerException {
-        // code to delete a customer
         try {
             Connection connection = SingletonConnexion.getInstance();
             String query = "DELETE FROM customer WHERE userID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setInt(1, codeCustomer);
-            int resultSet = statement.executeUpdate();
+            statement.executeUpdate();
         } catch (Exception exception) {
             throw new CustomerException(exception.getMessage(), new OneException(), new DeleteException());
         }
