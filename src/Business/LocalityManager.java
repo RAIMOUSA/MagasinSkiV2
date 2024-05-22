@@ -1,13 +1,14 @@
 package Business;
 
 import DataAccess.LocalityDataBaseAccess;
+import InterfaceAccess.LocalityDataAccess;
 import Model.Locality;
 import Exception.*;
 
 import java.util.ArrayList;
 
 public class LocalityManager {
-    private LocalityDataBaseAccess dataAccess;
+    private LocalityDataAccess dataAccess;
 
     public LocalityManager() {
         this.setDataAccess(new LocalityDataBaseAccess());

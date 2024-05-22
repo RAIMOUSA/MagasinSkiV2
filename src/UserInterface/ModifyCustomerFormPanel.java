@@ -37,6 +37,7 @@ public class ModifyCustomerFormPanel extends JPanel {
     private Locality locality;
     private Contact contact;
     private Locality localityBeforeChange;
+    private String oldMail;
 
     public ModifyCustomerFormPanel(Customer customer, CustomerController customerController,
                                    ContactController contactController, LocalityController localityController) throws ContactException, LocalityException {
@@ -75,7 +76,11 @@ public class ModifyCustomerFormPanel extends JPanel {
         formPanel.add(new JLabel("Date de naissance: "), gbc);
         gbc.gridx++;
         dobField = new JTextField(15);
-        dobField.setText(customer.getDateOfBirth().toString());
+        if (customer.getDateOfBirth() == null) {
+            dobField.setText("");
+        } else {
+            dobField.setText(customer.getDateOfBirth().toString());
+        }
         formPanel.add(dobField, gbc);
 
         gbc.gridx = 0;
@@ -91,6 +96,7 @@ public class ModifyCustomerFormPanel extends JPanel {
         formPanel.add(new JLabel("Email: *"), gbc);
         gbc.gridx++;
         emailField = new JTextField(20);
+        oldMail = customer.getMail();
         emailField.setText(contactController.getContactByMail(customer.getMail()).getMail());
         formPanel.add(emailField, gbc);
 
@@ -175,7 +181,8 @@ public class ModifyCustomerFormPanel extends JPanel {
             customer.setProfessional(isProfessionalCheckBox.isSelected());
 
             // Enregistrer les mises à jour dans la base de données
-            contactController.updateContact(contact);
+            contactController.updateContactPhone(contact);
+            contactController.updateContactMail(oldMail, contact);
             locality.setLocalityID(localityController.getLocalityID(localityBeforeChange));
             localityController.updateLocality(locality);
             customerController.updateCustomer(customer);

@@ -52,16 +52,14 @@ public class ContactDataBaseAccess implements ContactDataAccess {
     }
 
     @Override
-    public void updateContact(Contact contact) throws ContactException {
+    public void updateContactPhone(Contact contact) throws ContactException {
         // code to update a contact
         try {
-            System.out.println("tttttt");
+
             if (getContactByMail(contact.getMail()) == null) {
-                System.out.println("ddddd");
+
                 throw new ContactException("Contact not found", new OneException(), new UpdateException());
             }else {
-                System.out.println("debut contact");
-                //Pas sur ici, enfin de mon string query quoi
                 Connection connection = SingletonConnexion.getInstance();
                 String query = "UPDATE contact SET phoneNumber = ? WHERE mail = ?;";
                 PreparedStatement statement = connection.prepareStatement(query);
@@ -79,6 +77,24 @@ public class ContactDataBaseAccess implements ContactDataAccess {
                 statement.executeUpdate();
                 System.out.println("fin contact");
             }
+        } catch (Exception exception) {
+            throw new ContactException(exception.getMessage(), new OneException(), new UpdateException());
+        }
+    }
+
+
+    @Override
+    public void updateContactMail(String oldMail, Contact contact) throws ContactException {
+        try {
+            System.out.println("alloooooo");
+            Connection connection = SingletonConnexion.getInstance();
+            String query = "UPDATE contact SET mail = ? WHERE mail = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, contact.getMail());
+            statement.setString(2, oldMail);
+            System.out.println(contact.getMail());
+            System.out.println(oldMail);
+            statement.executeUpdate();
         } catch (Exception exception) {
             throw new ContactException(exception.getMessage(), new OneException(), new UpdateException());
         }

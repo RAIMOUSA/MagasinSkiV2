@@ -124,11 +124,13 @@ try {
     @Override
     public Product getProductByCode(int productCode) throws ProductException {
         try {
+
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM products WHERE productCode = ?;";
+            String query = "SELECT * FROM products WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, productCode);
             ResultSet resultSet = statement.executeQuery();
+
             if (resultSet.next()) {
                 String typeProduct = resultSet.getString("typeProduct");
                 String nameProduct = resultSet.getString("nameProduct");
@@ -136,11 +138,11 @@ try {
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 boolean promoIsEnable = resultSet.getBoolean("promoIsEnable");
                 Product product = new Product(typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
-
                 int percentPromo = resultSet.getInt("percentPromo");
                 if (!resultSet.wasNull()) {
                     product.setPercentPromo(percentPromo);
                 }
+                System.out.println("ca boucle cb de fois");
                 return product;
             }
             return null;

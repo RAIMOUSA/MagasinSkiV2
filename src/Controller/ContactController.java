@@ -25,8 +25,11 @@ public class ContactController {
         return this.manager.readAllContact();
     }
 
-    public void updateContact(Contact contact) throws ContactException {
-        this.manager.updateContact(contact);
+    public void updateContactPhone(Contact contact) throws ContactException {
+        this.manager.updateContactPhone(contact);
+    }
+    public void updateContactMail(String oldMail, Contact contact) throws ContactException {
+        this.manager.updateContactMail(oldMail, contact);
     }
 
     public void deleteContact(int codeContact) throws ContactException {

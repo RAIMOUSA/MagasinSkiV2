@@ -1,5 +1,6 @@
 package Business;
 
+import DataAccess.SaleDataBaseAccess;
 import InterfaceAccess.SaleDataAccess;
 import Model.Sale;
 import Model.SaleDetail;

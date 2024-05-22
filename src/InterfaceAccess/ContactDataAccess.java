@@ -11,7 +11,8 @@ public interface ContactDataAccess {
 
     Contact getContactByMail(String mail) throws ContactException;
 
-    void updateContact(Contact contact) throws ContactException;
+    void updateContactPhone(Contact contact) throws ContactException;
+    void updateContactMail(String oldMail, Contact contact) throws ContactException;
     void deleteContact(int contactId) throws ContactException;
     ArrayList<Contact> readAllContact() throws ContactException;
     ArrayList<Contact> searchContacts(String keyword) throws ContactException;

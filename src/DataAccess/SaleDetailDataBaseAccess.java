@@ -23,8 +23,6 @@ public class SaleDetailDataBaseAccess implements SaleDetailDataAccess {
             int saleCode = resultSet.getInt("saleCode");
             int productCode = resultSet.getInt("productCode");
 
-
-
             return new SaleDetail(saleCode, productCode, quantity);
         } catch (Exception exception) {
             throw new SaleDetailException("Erreur dans la lecture des détails de la vente.", new OneException(), new ReadException());

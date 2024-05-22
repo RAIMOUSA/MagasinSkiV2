@@ -1,12 +1,13 @@
 package Business;
 
 import DataAccess.ContactDataBaseAccess;
+import InterfaceAccess.ContactDataAccess;
 import Model.Contact;
 import Exception.*;
 import java.util.ArrayList;
 
 public class ContactManager {
-    private ContactDataBaseAccess dataAccess;
+    private ContactDataAccess dataAccess;
 
     public ContactManager() {
         this.setDataAccess(new ContactDataBaseAccess());
@@ -21,8 +22,12 @@ public class ContactManager {
         return this.dataAccess.readAllContact();
     }
 
-    public void updateContact(Contact contact) throws ContactException {
-        this.dataAccess.updateContact(contact);
+    public void updateContactPhone(Contact contact) throws ContactException {
+        this.dataAccess.updateContactPhone(contact);
+    }
+    
+    public void updateContactMail(String oldMail, Contact contact) throws ContactException {
+        this.dataAccess.updateContactMail(oldMail, contact);
     }
 
     public void deleteContact(int codeContact) throws ContactException {
