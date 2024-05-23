@@ -4,10 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.time.Month;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Set;
 import Exception.*;
 
@@ -15,7 +12,7 @@ public class MonthlySaleStatsPanel extends JPanel {
     private JPanel contentPanel;
     private JTable statsTable;
     private MonthlySaleStatsModel statsModel;
-    private JSpinner monthSpinner;
+    private JComboBox<String> yearMonthComboBox;
     private JComboBox<String> typeComboBox;
     private JButton filterButton;
 
@@ -30,14 +27,12 @@ public class MonthlySaleStatsPanel extends JPanel {
         label.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the label horizontally
         northPanel.add(label);
 
-        // Create the month spinner
-        SpinnerDateModel dateModel = new SpinnerDateModel(new Date(), null, null, Calendar.MONTH);
-        monthSpinner = new JSpinner(dateModel);
-        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(monthSpinner, "yyyy-MM");
-        monthSpinner.setEditor(dateEditor);
+        // Create the year and month comboBox
+        statsModel = new MonthlySaleStatsModel();
+        Set<String> dates = statsModel.getDates();
+        yearMonthComboBox = new JComboBox<>(dates.toArray(new String[0]));
 
         // Create the type combo box
-        statsModel = new MonthlySaleStatsModel();
         Set<String> productTypes = statsModel.getProductTypes();
         typeComboBox = new JComboBox<>(productTypes.toArray(new String[0]));
 
@@ -46,11 +41,9 @@ public class MonthlySaleStatsPanel extends JPanel {
         filterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-                Date selectedDate = (Date) monthSpinner.getValue();
-
-                int selectYear = Integer.parseInt(new SimpleDateFormat("yyyy").format(selectedDate));
-                int selectMonthValue = Integer.parseInt(new SimpleDateFormat("MM").format(selectedDate));
+                String selectedDate = (String) yearMonthComboBox.getSelectedItem();
+                int selectYear = Integer.parseInt(selectedDate.split("-")[0]);
+                int selectMonthValue = Integer.parseInt(selectedDate.split("-")[1]);
                 Month selectMonth = Month.of(selectMonthValue);
 
                 String type = (String) typeComboBox.getSelectedItem();
@@ -58,15 +51,15 @@ public class MonthlySaleStatsPanel extends JPanel {
                 try {
                     statsModel.filterByTypeAndMonth(type, selectMonth, selectYear);
                 } catch (ProductException | SaleException ex) {
-                    throw new RuntimeException(ex);
+                    ex.printStackTrace();
                 }
             }
         });
 
         // Panel for filter controls
         JPanel filterPanel = new JPanel(new FlowLayout());
-        filterPanel.add(new JLabel("Mois:"));
-        filterPanel.add(monthSpinner);
+        filterPanel.add(new JLabel("Mois et Année:"));
+        filterPanel.add(yearMonthComboBox);
         filterPanel.add(new JLabel("Type de produit:"));
         filterPanel.add(typeComboBox);
         filterPanel.add(filterButton);

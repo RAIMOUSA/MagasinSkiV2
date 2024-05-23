@@ -83,4 +83,8 @@ public class ListingProductsModel extends AbstractTableModel {
     public void refreshData() throws ProductException {
         loadData();
     }
+
+    public ArrayList<Product> getProducts() {
+        return data;
+    }
 }

@@ -12,7 +12,8 @@ import Exception.SaleException;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ListingClientPurchaseModel extends AbstractTableModel {
     private String[] columnNames = {"Date", "CodeProduit", "TypeProduit", "NomProduit", "Prix", "Quantité", "CodeSale", "UserID"};
@@ -21,11 +22,13 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
     private ProductController productController;
     private SaleDetailController saleDetailController;
     private SaleController saleController;
+    private Set<Integer> userIDs;
 
     public ListingClientPurchaseModel() {
         this.productController = new ProductController();
         this.saleDetailController = new SaleDetailController();
         this.saleController = new SaleController();
+        this.userIDs = new HashSet<>();
         loadPurchases();
     }
 
@@ -36,6 +39,7 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
                 ArrayList<SaleDetail> details = saleDetailController.getSaleDetailsBySale(sale);
                 saleDetails.addAll(details);
                 originalSaleDetails.addAll(details);
+                userIDs.add(sale.getUserID());
             }
         } catch (SaleException | SaleDetailException e) {
             e.printStackTrace();
@@ -88,8 +92,8 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
         return columnNames[column];
     }
 
-    public void filterByUserID(String userID) {
-        if (userID == null || userID.isEmpty()) {
+    public void filterByUserID(Integer userID) {
+        if (userID == null) {
             saleDetails = new ArrayList<>(originalSaleDetails);
         } else {
             ArrayList<SaleDetail> filteredSaleDetails = new ArrayList<>();
@@ -101,7 +105,7 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
                     e.printStackTrace();
                     continue;
                 }
-                if (sale.getUserID() == (Integer.parseInt(userID))) {
+                if (sale.getUserID() == (userID)) {
                     filteredSaleDetails.add(saleDetail);
                 }
             }
@@ -110,10 +114,7 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void refreshData() {
-        saleDetails.clear();
-        originalSaleDetails.clear();
-        loadPurchases();
-        fireTableDataChanged();
+    public Set<Integer> getUserIDs() {
+        return userIDs;
     }
 }

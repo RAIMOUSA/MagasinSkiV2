@@ -7,10 +7,13 @@ import Model.Product;
 import Model.Sale;
 import Model.SaleDetail;
 import Exception.*;
+
 import javax.swing.table.AbstractTableModel;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ListingSaleModel extends AbstractTableModel {
 
@@ -20,18 +23,26 @@ public class ListingSaleModel extends AbstractTableModel {
     private SaleDetailController saleDetailController;
     private SaleController saleController;
     private ProductController productController;
+    private Set<LocalDate> dates;
 
     public ListingSaleModel() {
         this.saleDetailController = new SaleDetailController();
         this.saleController = new SaleController();
         this.productController = new ProductController();
+        this.dates = new HashSet<>();
         loadSaleDetails();
     }
 
     private void loadSaleDetails() {
         try {
             saleDetails = saleDetailController.readAllSaleDetails();
-            originalSaleDetails = new ArrayList<>(saleDetails); // Initialisation de la liste originale
+            originalSaleDetails = new ArrayList<>(saleDetails);
+            // remplir le set de dates
+            for (SaleDetail saleDetail : saleDetails) {
+                Sale sale = saleController.getSaleBySaleDetail(saleDetail);
+                dates.add(sale.getDate());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             saleDetails = new ArrayList<>();
@@ -63,6 +74,10 @@ public class ListingSaleModel extends AbstractTableModel {
             throw new RuntimeException(e);
         }
 
+        if (sale == null || product == null) {
+            return null;
+        }
+
         switch (columnIndex) {
             case 0: return sale.getDate();
             case 1: return product.getCode();
@@ -88,7 +103,7 @@ public class ListingSaleModel extends AbstractTableModel {
             saleDetails = new ArrayList<>(originalSaleDetails);
         } else {
             ArrayList<SaleDetail> filteredSaleDetails = new ArrayList<>();
-            for (SaleDetail saleDetail : originalSaleDetails) { // Utiliser les données originales pour le filtrage
+            for (SaleDetail saleDetail : originalSaleDetails) {
                 Sale sale = null;
                 try {
                     sale = saleController.getSaleBySaleDetail(saleDetail);
@@ -103,5 +118,9 @@ public class ListingSaleModel extends AbstractTableModel {
             saleDetails = filteredSaleDetails;
         }
         fireTableDataChanged();
+    }
+
+    public Set<LocalDate> getDates() {
+        return dates;
     }
 }

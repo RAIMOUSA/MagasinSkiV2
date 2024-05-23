@@ -4,17 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import Exception.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 public class ListingSalePanel extends JPanel {
     private JPanel contentPanel;
     private JTable saleTable;
     private ListingSaleModel saleModel;
-    private JSpinner dateSpinner;
     private JButton filterButton;
+    private JComboBox<String> dateComboBox;
 
     public ListingSalePanel() {
         setLayout(new BorderLayout());
@@ -26,27 +25,28 @@ public class ListingSalePanel extends JPanel {
         label.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the label horizontally
         northPanel.add(label);
 
-        SpinnerDateModel dateModel = new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_MONTH);
-        dateSpinner = new JSpinner(dateModel);
-        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "yyyy-MM-dd");
-        dateSpinner.setEditor(dateEditor);
+        saleModel = new ListingSaleModel();
+        Set<LocalDate> dates = saleModel.getDates();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String[] dateStrings = dates.stream()
+                .map(date -> date.format(formatter))
+                .toArray(String[]::new);
+
+        dateComboBox = new JComboBox<>(dateStrings);
 
         filterButton = new JButton("Choisir la date");
         filterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    filterSalesByDate((Date) dateSpinner.getValue());
-                } catch (SaleException ex) {
-                    throw new RuntimeException(ex);
-                }
+                String selectedDate = (String) dateComboBox.getSelectedItem();
+                saleModel.filterByDate(selectedDate);
             }
         });
 
-        // Panel for date filter controls
+
         JPanel filterPanel = new JPanel(new FlowLayout());
         filterPanel.add(new JLabel("Date:"));
-        filterPanel.add(dateSpinner);
+        filterPanel.add(dateComboBox);
         filterPanel.add(filterButton);
 
         northPanel.add(filterPanel);
@@ -56,17 +56,10 @@ public class ListingSalePanel extends JPanel {
         contentPanel = new JPanel(new BorderLayout());
         add(contentPanel, BorderLayout.CENTER);
 
-        saleModel = new ListingSaleModel();
         saleTable = new JTable(saleModel);
         saleTable.setDefaultEditor(Object.class, null); // Rendre toutes les cellules non éditables
         JScrollPane scrollPane = new JScrollPane(saleTable);
         contentPanel.add(scrollPane, BorderLayout.CENTER);
-    }
-
-    private void filterSalesByDate(Date date) throws SaleException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String selectedDate = sdf.format(date);
-        saleModel.filterByDate(selectedDate);
     }
 
     public static void main(String[] args) {

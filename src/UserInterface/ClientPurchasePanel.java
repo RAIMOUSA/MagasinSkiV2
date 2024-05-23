@@ -4,14 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
+
 import Exception.*;
 
 public class ClientPurchasePanel extends JPanel {
     private JPanel contentPanel;
     private JTable purchaseTable;
     private ListingClientPurchaseModel purchaseModel;
-    private JTextField userIDField;
     private JButton filterButton;
+    private JComboBox<Integer> userIDComboBox;
 
     public ClientPurchasePanel() {
         setLayout(new BorderLayout());
@@ -24,8 +26,9 @@ public class ClientPurchasePanel extends JPanel {
         label.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the label horizontally
         northPanel.add(label);
 
-        // Create the user ID field
-        userIDField = new JTextField(10);
+        purchaseModel = new ListingClientPurchaseModel();
+        Set<Integer> userIDs = purchaseModel.getUserIDs();
+        userIDComboBox = new JComboBox<>(userIDs.toArray(new Integer[0]));
 
         // Create the filter button
         filterButton = new JButton("Filtrer par userID");
@@ -33,9 +36,9 @@ public class ClientPurchasePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    filterPurchasesByUserID(userIDField.getText().trim());
+                    filterPurchasesByUserID((Integer) userIDComboBox.getSelectedItem());
                 } catch (SaleException | SaleDetailException ex) {
-                    throw new RuntimeException(ex);
+                    ex.printStackTrace();
                 }
             }
         });
@@ -43,7 +46,7 @@ public class ClientPurchasePanel extends JPanel {
         // Panel for userID filter controls
         JPanel filterPanel = new JPanel(new FlowLayout());
         filterPanel.add(new JLabel("UserID:"));
-        filterPanel.add(userIDField);
+        filterPanel.add(userIDComboBox);
         filterPanel.add(filterButton);
 
         northPanel.add(filterPanel);
@@ -53,14 +56,13 @@ public class ClientPurchasePanel extends JPanel {
         contentPanel = new JPanel(new BorderLayout());
         add(contentPanel, BorderLayout.CENTER);
 
-        purchaseModel = new ListingClientPurchaseModel();
         purchaseTable = new JTable(purchaseModel);
         purchaseTable.setDefaultEditor(Object.class, null); // Rendre toutes les cellules non éditables
         JScrollPane scrollPane = new JScrollPane(purchaseTable);
         contentPanel.add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void filterPurchasesByUserID(String userID) throws SaleException, SaleDetailException {
+    private void filterPurchasesByUserID(Integer userID) throws SaleException, SaleDetailException {
         purchaseModel.filterByUserID(userID);
     }
 

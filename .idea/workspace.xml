@@ -4,17 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="oleeeeeeeee">
+    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="code finito">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Business/ContactManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Business/ContactManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ContactController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ContactController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ContactDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/CustomerDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/CustomerDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/LocalityDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/LocalityDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InterfaceAccess/ContactDataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InterfaceAccess/ContactDataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingCustomerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingCustomerModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerListPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MagasinSkiV2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MagasinSkiV2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDataBaseAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataAccess/SingletonConnexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SingletonConnexion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingProductsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingProductsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" afterDir="false" />
     </list>
     <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +61,11 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.TestListingProductsModel.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
@@ -76,7 +84,8 @@
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql_aurora_aws&quot;
+      &quot;mysql_aurora_aws&quot;,
+      &quot;mysql&quot;
     ]
   }
 }</component>
@@ -121,7 +130,10 @@
       <workItem from="1716187869508" duration="13334000" />
       <workItem from="1716208046398" duration="17728000" />
       <workItem from="1716273731176" duration="38836000" />
-      <workItem from="1716359013196" duration="21042000" />
+      <workItem from="1716359013196" duration="26439000" />
+      <workItem from="1716412337734" duration="180000" />
+      <workItem from="1716446546983" duration="5646000" />
+      <workItem from="1716458236247" duration="1428000" />
     </task>
     <task id="LOCAL-00001" summary="contact et debut customer">
       <option name="closed" value="true" />
@@ -291,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716379823104</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="code finito">
+      <option name="closed" value="true" />
+      <created>1716386514685</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1716386514686</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,6 +350,7 @@
     <MESSAGE value="zzzzz" />
     <MESSAGE value="finito" />
     <MESSAGE value="oleeeeeeeee" />
-    <option name="LAST_COMMIT_MESSAGE" value="oleeeeeeeee" />
+    <MESSAGE value="code finito" />
+    <option name="LAST_COMMIT_MESSAGE" value="code finito" />
   </component>
 </project>

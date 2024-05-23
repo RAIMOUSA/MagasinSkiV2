@@ -10,17 +10,19 @@ import Model.SaleDetail;
 import Exception.*;
 
 import javax.swing.table.AbstractTableModel;
+import java.time.LocalDate;
 import java.time.Month;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class MonthlySaleStatsModel extends AbstractTableModel {
     private String[] columnNames;
     private ArrayList<SaleDetail> sales;
     private ArrayList<SaleDetail> originalSales;
     private Set<String> productTypes;
+    private Set<String> dates;
     private ProductController productController;
     private SaleController saleController;
     private SaleDetailController saleDetailController;
@@ -28,6 +30,7 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
     public MonthlySaleStatsModel() {
         this.columnNames = new String[]{"Date", "TypeProduit", "Quantité", "Revenu"};
         this.productTypes = new HashSet<>();
+        this.dates = new TreeSet<>();
         this.productController = new ProductController();
         this.saleController = new SaleController();
         this.saleDetailController = new SaleDetailController();
@@ -40,6 +43,9 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
             for (SaleDetail saleDetail : originalSales) {
                 Product product = this.productController.getProductByCode(saleDetail.getProductCode());
                 productTypes.add(product.getType());
+                LocalDate saleDate = this.saleController.getSaleBySaleDetail(saleDetail).getDate();
+                String yearMonth = saleDate.getYear() + "-" + String.format("%02d", saleDate.getMonthValue());
+                dates.add(yearMonth);
             }
             this.sales = new ArrayList<>(originalSales);
         } catch (Exception e) {
@@ -101,7 +107,8 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
         for (SaleDetail saleDetail : originalSales) {
             Sale sale = saleController.getSaleBySaleDetail(saleDetail);
             Product product = productController.getProductByCode(saleDetail.getProductCode());
-            if (product.getType().equals(type) && sale.getDate().getMonth().equals(month) && sale.getDate().getYear() == (year)){
+            LocalDate saleDate = sale.getDate();
+            if (product.getType().equals(type) && saleDate.getMonth().equals(month) && saleDate.getYear() == year) {
                 sales.add(saleDetail);
             }
         }
@@ -110,5 +117,9 @@ public class MonthlySaleStatsModel extends AbstractTableModel {
 
     public Set<String> getProductTypes() {
         return productTypes;
+    }
+
+    public Set<String> getDates() {
+        return dates;
     }
 }

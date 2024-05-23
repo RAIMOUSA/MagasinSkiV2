@@ -13,7 +13,7 @@ public class ProductDataBaseAccess implements ProductDataAccess {
     public ArrayList<Product> readAllProducts() throws ProductException {
 try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM products;";
+            String query = "SELECT * FROM product;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Product> products = new ArrayList<Product>();
@@ -44,7 +44,7 @@ try {
     public ArrayList<Product> getProductInPromotion() throws ProductException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM products WHERE promoIsEnable = 1;";
+            String query = "SELECT * FROM product WHERE promoIsEnable = 1;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Product> products = new ArrayList<Product>();
@@ -78,7 +78,7 @@ try {
     public ArrayList<Product> getProductsWhithoutPromotion() throws ProductException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM products WHERE promoIsEnable = 0;";
+            String query = "SELECT * FROM product WHERE promoIsEnable = 0;";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Product> products = new ArrayList<Product>();
@@ -111,7 +111,7 @@ try {
         try {
             //true promoisenable et percentPromo
             Connection connection = SingletonConnexion.getInstance();
-            String query = "UPDATE products SET promoIsEnable = true, percentPromo = ? WHERE codeID = ?;";
+            String query = "UPDATE product SET promoIsEnable = true, percentPromo = ? WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setInt(1, discount);
@@ -127,18 +127,19 @@ try {
         try {
 
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM products WHERE codeID = ?;";
+            String query = "SELECT * FROM product WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, productCode);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
+                int codeID = resultSet.getInt("codeID");
                 String typeProduct = resultSet.getString("typeProduct");
                 String nameProduct = resultSet.getString("nameProduct");
                 double price = resultSet.getDouble("price");
                 int stockQuantity = resultSet.getInt("stockQuantity");
                 boolean promoIsEnable = resultSet.getBoolean("promoIsEnable");
-                Product product = new Product(typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
+                Product product = new Product(codeID, typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
 
                 int percentPromo = resultSet.getInt("percentPromo");
                 if (!resultSet.wasNull()) {
@@ -156,7 +157,7 @@ try {
     public Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException{
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM products WHERE productCode = ?;";
+            String query = "SELECT * FROM product WHERE productCode = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, saleDetail.getProductCode());
             ResultSet resultSet = statement.executeQuery();
@@ -180,7 +181,7 @@ try {
     public void removePromotion(int productId) throws ProductException {
         try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "UPDATE products SET promoIsEnable = 0, percentPromo = NULL WHERE codeID = ?;";
+            String query = "UPDATE product SET promoIsEnable = 0, percentPromo = NULL WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, productId);
             statement.executeUpdate();
