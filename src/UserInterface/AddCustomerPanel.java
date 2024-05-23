@@ -7,6 +7,8 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -91,6 +93,16 @@ public class AddCustomerPanel extends JPanel {
                 validateForm();
             }
         });
+
+        // Ajouter des KeyListeners pour vérifier les champs numériques
+        addNumberValidationListener(postalCodeField);
+        addNumberValidationListener(houseNumberField);
+
+        addStringValidationListener(firstNameField);
+        addStringValidationListener(lastNameField);
+        addStringValidationListener(descriptionField);
+        addStringValidationListener(streetField);
+
     }
 
     private JPanel createFormPanel() {
@@ -306,5 +318,32 @@ public class AddCustomerPanel extends JPanel {
     private LocalDate getSelectedDate() {
         Date selectedDate = (Date) dobSpinner.getValue();
         return selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    // Méthode pour ajouter un KeyListener aux champs numériques
+    private void addNumberValidationListener(JTextField textField) {
+        textField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    e.consume(); // Empêcher la saisie du caractère non numérique
+                    JOptionPane.showMessageDialog(AddCustomerPanel.this, "Ce champ n'accepte que des chiffres.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    }
+
+    public void addStringValidationListener(JTextField textField) {
+        textField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (Character.isDigit(c)) {
+                    e.consume(); // Empêcher la saisie du caractère numérique
+                    JOptionPane.showMessageDialog(AddCustomerPanel.this, "Ce champ n'accepte que des lettres.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 }

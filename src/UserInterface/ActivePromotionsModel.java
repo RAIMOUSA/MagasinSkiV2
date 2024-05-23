@@ -32,11 +32,6 @@ class ActivePromotionsModel extends AbstractTableModel {
 
     }
 
-    public void setData(List<Object[]> data) {
-        this.productsWithPromotions = productsWithPromotions;
-        fireTableDataChanged();
-    }
-
     public void removeRow(int rowIndex) {
         this.productsWithPromotions.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
@@ -61,8 +56,8 @@ class ActivePromotionsModel extends AbstractTableModel {
             case 0 -> product.getCode();
             case 1 -> product.getName();
             case 2 -> product.getPrice();
-            case 3 -> product.getPercentPromo();
-            case 4 -> product.getPrice() - (product.getPrice() * product.getPercentPromo() / 100);
+            case 3 -> product.getPercentPromo() + "%";
+            case 4 -> getNewPrice(product);
             default -> "";
         };
     }
@@ -70,5 +65,15 @@ class ActivePromotionsModel extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         return columnNames[column];
+    }
+
+    public double getNewPrice(Product product) {
+        double discountedPrice = product.getPrice() - (product.getPrice() * product.getPercentPromo() / 100);
+        return roundToTwoDecimalPlaces(discountedPrice);
+    }
+
+    // Méthode utilitaire pour arrondir un double à deux chiffres après la virgule
+    private double roundToTwoDecimalPlaces(double value) {
+        return Math.round(value * 100.0) / 100.0;
     }
 }

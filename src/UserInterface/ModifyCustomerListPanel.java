@@ -51,7 +51,7 @@ public class ModifyCustomerListPanel extends JPanel implements ActionListener {
                     JFrame modifyClientFrame = new JFrame("Modifier Client");
                     modifyClientFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     try {
-                        modifyClientFrame.getContentPane().add(new ModifyCustomerFormPanel(selectedCustomer, customerController, contactController, localityController,clientTable));
+                        modifyClientFrame.getContentPane().add(new ModifyCustomerFormPanel(selectedCustomer, clientTable));
                     } catch (ContactException ex) {
                         throw new RuntimeException(ex);
                     } catch (LocalityException ex) {
@@ -89,6 +89,4 @@ public class ModifyCustomerListPanel extends JPanel implements ActionListener {
             }
         });
     }
-
-
 }

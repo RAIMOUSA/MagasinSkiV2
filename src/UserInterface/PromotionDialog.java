@@ -5,15 +5,18 @@ import Model.Product;
 
 import javax.swing.*;
 import java.awt.*;
+import Exception.*;
 
 public class PromotionDialog extends JDialog {
     private Product product;
     private ProductController productController;
+    private JTable productTable;
 
-    public PromotionDialog(Frame owner, Product product) {
+    public PromotionDialog(Frame owner, Product product, JTable productTable) {
         super(owner, "Appliquer une promotion", true);
         this.product = product;
         this.productController = new ProductController();
+        this.productTable = productTable;
         initComponents();
     }
 
@@ -40,6 +43,7 @@ public class PromotionDialog extends JDialog {
             try {
                 productController.applyDiscount(product, discount);
                 JOptionPane.showMessageDialog(this, "Promotion appliquée avec succès");
+                refresh();
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Erreur lors de l'application de la promotion: " + ex.getMessage());
@@ -55,5 +59,13 @@ public class PromotionDialog extends JDialog {
 
         pack();
         setLocationRelativeTo(null);
+    }
+
+    public void refresh() {
+        try {
+            productTable.setModel(new ListingProductsModel());
+        } catch (ProductException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

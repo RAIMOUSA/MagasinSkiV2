@@ -44,12 +44,11 @@ public class ModifyCustomerFormPanel extends JPanel {
     private String oldMail;
     private JTable clientTable;
 
-    public ModifyCustomerFormPanel(Customer customer, CustomerController customerController,
-                                   ContactController contactController, LocalityController localityController,JTable clientTable) throws ContactException, LocalityException {
+    public ModifyCustomerFormPanel(Customer customer, JTable clientTable) throws ContactException, LocalityException {
         this.customer = customer;
-        this.customerController = customerController;
-        this.contactController = contactController;
-        this.localityController = localityController;
+        this.customerController = new CustomerController();
+        this.contactController = new ContactController();
+        this.localityController = new LocalityController();
         this.clientTable = clientTable;
         setLayout(new BorderLayout());
 
@@ -116,7 +115,7 @@ public class ModifyCustomerFormPanel extends JPanel {
         });
         formPanel.add(genderCheckBox, gbc);
         gbc.gridx++;
-        genderComboBox = new JComboBox<>(new String[]{"Masculin", "Féminin", "Autre"});
+        genderComboBox = new JComboBox<>(new String[]{"Masculin", "Féminin", "X"});
         genderComboBox.setEnabled(false);
         formPanel.add(genderComboBox, gbc);
 
@@ -207,6 +206,9 @@ public class ModifyCustomerFormPanel extends JPanel {
             customer.setLastName(lastNameField.getText());
             if(genderCheckBox.isSelected())
                 customer.setGender(genderComboBox.getSelectedItem().toString());
+            else{
+                customer.setGender(null);
+            }
             if(dobCheckBox.isSelected())
                 customer.setDateOfBirth(getSelectedDate());
             else

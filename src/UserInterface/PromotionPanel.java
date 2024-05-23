@@ -22,7 +22,7 @@ public class PromotionPanel extends JPanel {
         productController = new ProductController();
 
         // Initialiser le modèle de produit avec le contrôleur
-        productModel = new ListingProductsModel(productController);
+        productModel = new ListingProductsModel();
 
         // Panel pour le champ de recherche
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -81,7 +81,7 @@ public class PromotionPanel extends JPanel {
     }
 
     private void showPromotionDialog(Product product) {
-        PromotionDialog dialog = new PromotionDialog((Frame) SwingUtilities.getWindowAncestor(this), product);
+        PromotionDialog dialog = new PromotionDialog((Frame) SwingUtilities.getWindowAncestor(this), product, productTable);
         dialog.setVisible(true);
     }
 
@@ -89,7 +89,7 @@ public class PromotionPanel extends JPanel {
         // Ouvrir la nouvelle page pour voir les promos actives
         JFrame frame = new JFrame("Promotions Actives");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.add(new ActivePromotionsPanel());
+        frame.add(new ActivePromotionsPanel(productTable));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

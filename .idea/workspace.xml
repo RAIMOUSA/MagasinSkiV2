@@ -5,19 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="code finito">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MagasinSkiV2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MagasinSkiV2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataAccess/SingletonConnexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SingletonConnexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test/TestListingProductsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/TestListingProductsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ActivePromotionsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/AddCustomerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/AddCustomerPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingProductsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingProductsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerFormPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerListPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ModifyCustomerListPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/PromotionDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/PromotionDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserInterface/PromotionPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/PromotionPanel.java" afterDir="false" />
     </list>
     <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,12 +42,12 @@
     &quot;assignee&quot;: &quot;RAIMOUSA&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/RAIMOUSA/MagasinSkiV2.git&quot;,
-    &quot;accountId&quot;: &quot;cdea1321-77d0-4300-95f5-d0bd7921bd80&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/RAIMOUSA/MagasinSkiV2.git",
+    "accountId": "d5036208-2666-4930-80e0-4bee157b263c"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -58,37 +59,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.TestListingProductsModel.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Felix/Documents/mysql-connector-j-8.4.0/mysql-connector-j-8.4.0/mysql-connector-j-8.4.0.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/IntelliJ projects/MagasinSkiV2/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.TestListingProductsModel.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Informatique/mysql-connector-j-8.4.0/mysql-connector-j-8.4.0/mysql-connector-j-8.4.0.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/IntelliJ projects/MagasinSkiV2/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql_aurora_aws&quot;,
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql_aurora_aws",
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\IntelliJ projects\MagasinSkiV2\src" />
@@ -134,6 +136,7 @@
       <workItem from="1716412337734" duration="180000" />
       <workItem from="1716446546983" duration="5646000" />
       <workItem from="1716458236247" duration="1428000" />
+      <workItem from="1716492494863" duration="10403000" />
     </task>
     <task id="LOCAL-00001" summary="contact et debut customer">
       <option name="closed" value="true" />
