@@ -17,11 +17,6 @@ public class ContactManager {
         this.dataAccess = dataAccess;
     }
 
-
-    public ArrayList<Contact> readAllContact() throws ContactException {
-        return this.dataAccess.readAllContact();
-    }
-
     public void updateContactPhone(String oldMail, Contact contact) throws ContactException {
         this.dataAccess.updateContactPhone(oldMail, contact);
     }
@@ -42,4 +37,11 @@ public class ContactManager {
         return this.dataAccess.getContactByMail(mail);
     }
 
+    public boolean emailExists(String email) {
+        return this.dataAccess.emailExists(email);
+    }
+
+    public boolean phoneExists(String phoneNumber) {
+        return this.dataAccess.phoneExists(phoneNumber);
+    }
 }

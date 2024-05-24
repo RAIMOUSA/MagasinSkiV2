@@ -19,24 +19,20 @@ public class MonthlySaleStatsPanel extends JPanel {
     public MonthlySaleStatsPanel() {
         setLayout(new BorderLayout());
 
-        // Create the panel that will hold both the label and the filter controls
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
 
         JLabel label = new JLabel("STATISTIQUES DES VENTES");
-        label.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the label horizontally
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(label);
 
-        // Create the year and month comboBox
         statsModel = new MonthlySaleStatsModel();
         Set<String> dates = statsModel.getDates();
         yearMonthComboBox = new JComboBox<>(dates.toArray(new String[0]));
 
-        // Create the type combo box
         Set<String> productTypes = statsModel.getProductTypes();
         typeComboBox = new JComboBox<>(productTypes.toArray(new String[0]));
 
-        // Create the filter button
         filterButton = new JButton("Filtrer par type et mois");
         filterButton.addActionListener(new ActionListener() {
             @Override
@@ -56,7 +52,7 @@ public class MonthlySaleStatsPanel extends JPanel {
             }
         });
 
-        // Panel for filter controls
+
         JPanel filterPanel = new JPanel(new FlowLayout());
         filterPanel.add(new JLabel("Mois et Année:"));
         filterPanel.add(yearMonthComboBox);
@@ -72,7 +68,7 @@ public class MonthlySaleStatsPanel extends JPanel {
         add(contentPanel, BorderLayout.CENTER);
 
         statsTable = new JTable(statsModel);
-        statsTable.setDefaultEditor(Object.class, null); // Rendre toutes les cellules non éditables
+        statsTable.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane = new JScrollPane(statsTable);
         contentPanel.add(scrollPane, BorderLayout.CENTER);
     }

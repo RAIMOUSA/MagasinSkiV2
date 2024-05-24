@@ -17,10 +17,6 @@ public class Contact {
         return mail;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }

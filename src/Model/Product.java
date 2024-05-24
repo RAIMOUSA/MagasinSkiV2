@@ -58,41 +58,20 @@ public class Product {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public int getStockQuantity() {
         return stockQuantity;
     }
 
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
-
-    public Boolean getPromoIsEnable() {
-        return promoIsEnable;
-    }
-
-    public void setPromoIsEnable(Boolean promoIsEnable) {
-        this.promoIsEnable = promoIsEnable;
-    }
 
     public int getPercentPromo() {
         return percentPromo;

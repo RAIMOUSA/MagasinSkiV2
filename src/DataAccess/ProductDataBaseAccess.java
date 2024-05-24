@@ -9,36 +9,6 @@ import java.util.ArrayList;
 import Exception.*;
 public class ProductDataBaseAccess implements ProductDataAccess {
 
-    @Override
-    public ArrayList<Product> readAllProducts() throws ProductException {
-try {
-            Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM product;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
-            ArrayList<Product> products = new ArrayList<Product>();
-
-            while (resultSet.next()) {
-                int codeID = resultSet.getInt("codeID");
-                String typeProduct = resultSet.getString("typeProduct");
-                String nameProduct = resultSet.getString("nameProduct");
-                double price = resultSet.getDouble("price");
-                int stockQuantity = resultSet.getInt("stockQuantity");
-                boolean promoIsEnable = resultSet.getBoolean("promoIsEnable");
-                Product product = new Product(codeID, typeProduct, nameProduct, price, stockQuantity, promoIsEnable);
-
-                int percentPromo = resultSet.getInt("percentPromo");
-                if (!resultSet.wasNull()) {
-                    product.setPercentPromo(percentPromo);
-                }
-                products.add(product);
-
-            }
-            return products;
-        } catch (Exception exception) {
-            throw new ProductException("Erreur pour trouver tous les produits.", new AllException(), new ReadException());
-        }
-    }
 
     @Override
     public ArrayList<Product> getProductInPromotion() throws ProductException {
@@ -153,29 +123,6 @@ try {
         }
     }
 
-    @Override
-    public Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException{
-        try {
-            Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM product WHERE productCode = ?;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, saleDetail.getProductCode());
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                int productCode = resultSet.getInt("productCode");
-                String typeProduct = resultSet.getString("typeProduct");
-                String nameProduct = resultSet.getString("nameProduct");
-                double price = resultSet.getDouble("price");
-                int stockQuantity = resultSet.getInt("stockQuantity");
-                Product product = new Product(productCode, typeProduct, nameProduct, price, stockQuantity);
-                return product;
-            }
-            return null;
-        }catch (Exception exception) {
-            throw new ProductException("Erreur produit par saleDetail.", new OneException(), new ReadException());
-        }
-    }
 
     @Override
     public void removePromotion(int productId) throws ProductException {

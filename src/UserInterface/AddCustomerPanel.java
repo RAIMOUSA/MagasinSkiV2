@@ -49,7 +49,7 @@ public class AddCustomerPanel extends JPanel {
         add(formPanel, BorderLayout.CENTER);
 
         JLabel label = new JLabel("AJOUTER UN CLIENT ");
-        label.setHorizontalAlignment(SwingConstants.CENTER); // Centrer le texte horizontalement
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         add(label, BorderLayout.NORTH);
 
         addButton = new JButton("Ajouter le client");
@@ -59,10 +59,9 @@ public class AddCustomerPanel extends JPanel {
                 addCustomer();
             }
         });
-        addButton.setEnabled(false); // Le bouton est désactivé par défaut
+        addButton.setEnabled(false);
         add(addButton, BorderLayout.SOUTH);
 
-        // Ajout d'un écouteur de changement pour chaque champ de texte
         DocumentListener documentListener = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -94,7 +93,6 @@ public class AddCustomerPanel extends JPanel {
             }
         });
 
-        // Ajouter des KeyListeners pour vérifier les champs numériques
         addNumberValidationListener(postalCodeField);
         addNumberValidationListener(houseNumberField);
 
@@ -129,7 +127,6 @@ public class AddCustomerPanel extends JPanel {
         lastNameField.setBorder(BorderFactory.createEmptyBorder());
         panel.add(lastNameField, gbc);
 
-        // Checkbox pour date de naissance
         gbc.gridx = 0;
         gbc.gridy++;
         dobCheckBox = new JCheckBox("Voulez-vous remplir la date de naissance?");
@@ -155,7 +152,6 @@ public class AddCustomerPanel extends JPanel {
         professionalCheckBox = new JCheckBox();
         panel.add(professionalCheckBox, gbc);
 
-        // Checkbox pour genre
         gbc.gridx = 0;
         gbc.gridy++;
         genderCheckBox = new JCheckBox("Voulez-vous remplir le genre?");
@@ -232,7 +228,6 @@ public class AddCustomerPanel extends JPanel {
         return panel;
     }
 
-    // Méthode de validation des champs
     private void validateForm() {
         boolean firstNameValid = !firstNameField.getText().trim().isEmpty();
         boolean lastNameValid = !lastNameField.getText().trim().isEmpty();
@@ -242,11 +237,10 @@ public class AddCustomerPanel extends JPanel {
         boolean houseNumberValid = !houseNumberField.getText().trim().isEmpty();
         boolean descriptionValid = !descriptionField.getText().trim().isEmpty();
 
-        // Activer ou désactiver le bouton de soumission en fonction de la validation
         addButton.setEnabled(firstNameValid && lastNameValid && emailValid && postalCodeValid && streetValid && houseNumberValid && descriptionValid);
     }
 
-    // Méthode pour créer un formateur de numéro de téléphone
+
     private MaskFormatter createFormatter(String format) {
         MaskFormatter formatter = null;
         try {
@@ -258,9 +252,8 @@ public class AddCustomerPanel extends JPanel {
         return formatter;
     }
 
-    // Méthode pour ajouter un client
     private void addCustomer() {
-        // Récupérer les valeurs des champs de saisie
+
         String firstName = firstNameField.getText().trim();
         String lastName = lastNameField.getText().trim();
         LocalDate dob = dobCheckBox.isSelected() ? getSelectedDate() : null;
@@ -274,24 +267,34 @@ public class AddCustomerPanel extends JPanel {
         String houseNumber = houseNumberField.getText().trim();
         String letterBox = letterBoxField.getText().trim();
 
-        // Créer un objet Customer avec les données saisies
+        boolean emailExists = contactController.emailExists(email);
+        boolean phoneExists = contactController.phoneExists(phoneNumber);
+
+        if (emailExists || phoneExists) {
+
+            if (emailExists && phoneExists) {
+                JOptionPane.showMessageDialog(this, "L'email et le numéro de téléphone sont déjà enregistrés.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            } else if (emailExists) {
+                JOptionPane.showMessageDialog(this, "L'email est déjà enregistré.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Le numéro de téléphone est déjà enregistré.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+            return;
+        }
+
         Customer customer = new Customer(0, firstName, lastName, dob, isProfessional, gender, 0, email);
         Contact contact = new Contact(email, phoneNumber);
         Locality locality1 = new Locality(0, locality, Integer.parseInt(postalCode), street, Integer.parseInt(houseNumber), letterBox);
 
-        // Appeler la méthode du contrôleur pour ajouter le client
         try {
             contactController.createContact(contact);
             localityController.createLocality(locality1);
             customer.setLocalityID(localityController.getLocalityID(locality1));
             customerController.createCustomer(customer);
 
-            // Afficher un message de réussite
             JOptionPane.showMessageDialog(this, "Le client a été ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
-            // Réinitialiser les champs
             resetFields();
         } catch (Exception ex) {
-            // Afficher un message d'erreur en cas d'exception
             JOptionPane.showMessageDialog(this, "Erreur lors de l'ajout du client: " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -320,14 +323,13 @@ public class AddCustomerPanel extends JPanel {
         return selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
-    // Méthode pour ajouter un KeyListener aux champs numériques
     private void addNumberValidationListener(JTextField textField) {
         textField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (!Character.isDigit(c)) {
-                    e.consume(); // Empêcher la saisie du caractère non numérique
+                    e.consume();
                     JOptionPane.showMessageDialog(AddCustomerPanel.this, "Ce champ n'accepte que des chiffres.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -340,7 +342,7 @@ public class AddCustomerPanel extends JPanel {
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 if (Character.isDigit(c)) {
-                    e.consume(); // Empêcher la saisie du caractère numérique
+                    e.consume();
                     JOptionPane.showMessageDialog(AddCustomerPanel.this, "Ce champ n'accepte que des lettres.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
                 }
             }

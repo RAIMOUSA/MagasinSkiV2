@@ -10,7 +10,7 @@ public class ListingCustomerPanel extends JPanel {
         setLayout(new BorderLayout());
 
         JLabel label = new JLabel("LISTE DES CLIENTS ");
-        label.setHorizontalAlignment(SwingConstants.CENTER); // Centrer le texte horizontalement
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         add(label, BorderLayout.NORTH);
 
         contentPanel = new JPanel(new BorderLayout());

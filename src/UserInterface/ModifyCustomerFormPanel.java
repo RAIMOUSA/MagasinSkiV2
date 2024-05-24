@@ -9,6 +9,7 @@ import Model.Locality;
 import Exception.*;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,8 +39,6 @@ public class ModifyCustomerFormPanel extends JPanel {
     private ContactController contactController;
     private LocalityController localityController;
     private Customer customer;
-    private Locality locality;
-    private Contact contact;
     private Locality localityBeforeChange;
     private String oldMail;
     private JTable clientTable;
@@ -132,7 +131,8 @@ public class ModifyCustomerFormPanel extends JPanel {
         gbc.gridy++;
         formPanel.add(new JLabel("Numéro de téléphone: "), gbc);
         gbc.gridx++;
-        phoneField = new JTextField(15);
+        phoneField = new JFormattedTextField(createFormatter("+## ### ######"));
+        phoneField.setColumns(15);
         phoneField.setText(contactController.getContactByMail(customer.getMail()).getPhoneNumber());
         formPanel.add(phoneField, gbc);
 
@@ -175,7 +175,7 @@ public class ModifyCustomerFormPanel extends JPanel {
         formPanel.add(new JLabel("Nom Localité: *"), gbc);
         gbc.gridx++;
         localityNameField = new JTextField(20);
-        localityNameField.setText(locality.getLocalityName());  // Assuming getName() method exists in Locality class
+        localityNameField.setText(locality.getLocalityName());
         formPanel.add(localityNameField, gbc);
 
 
@@ -193,8 +193,19 @@ public class ModifyCustomerFormPanel extends JPanel {
 
     private void saveCustomer() {
         try {
-            // Mettre à jour le modèle avec les nouvelles données
-            Contact contact = new Contact(emailField.getText(), phoneField.getText());
+            String newEmail = emailField.getText();
+            if (!newEmail.equals(oldMail) && contactController.emailExists(newEmail)) {
+                JOptionPane.showMessageDialog(this, "Cet email est déjà utilisé par un autre client.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String newPhoneNumber = phoneField.getText();
+            if (!newPhoneNumber.equals(contactController.getContactByMail(customer.getMail()).getPhoneNumber()) && contactController.phoneExists(newPhoneNumber)) {
+                JOptionPane.showMessageDialog(this, "Ce numéro de téléphone est déjà utilisé par un autre client.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Contact contact = new Contact(newEmail, newPhoneNumber);
             Locality locality = new Locality(
                     localityNameField.getText(),
                     Integer.parseInt(postalCodeField.getText()),
@@ -216,7 +227,7 @@ public class ModifyCustomerFormPanel extends JPanel {
             customer.setMail(emailField.getText());
             customer.setProfessional(isProfessionalCheckBox.isSelected());
 
-            // Enregistrer les mises à jour dans la base de données
+
             contactController.updateContactPhone(oldMail, contact);
             contactController.updateContactMail(oldMail, contact);
             locality.setLocalityID(localityController.getLocalityID(localityBeforeChange));
@@ -242,5 +253,16 @@ public class ModifyCustomerFormPanel extends JPanel {
 
     public void refresh() {
         clientTable.setModel(new ListingCustomerModel());
+    }
+
+    private MaskFormatter createFormatter(String format) {
+        MaskFormatter formatter = null;
+        try {
+            formatter = new MaskFormatter(format);
+        } catch (java.text.ParseException e) {
+            System.err.println("Format non valide");
+            System.exit(-1);
+        }
+        return formatter;
     }
 }

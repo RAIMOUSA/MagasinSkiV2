@@ -21,16 +21,8 @@ public class LocalityController {
         return this.manager.getLocalityByCode(code);
     }
 
-    public ArrayList<Locality> readAllLocality() throws LocalityException {
-        return this.manager.readAllLocality();
-    }
-
     public void updateLocality(Locality locality) throws LocalityException {
         this.manager.updateLocality(locality);
-    }
-
-    public void deleteLocality(int codeLocality) throws LocalityException {
-        this.manager.deleteLocality(codeLocality);
     }
 
     public void createLocality(Locality locality) throws LocalityException {

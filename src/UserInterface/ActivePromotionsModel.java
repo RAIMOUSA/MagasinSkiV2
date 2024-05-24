@@ -72,7 +72,6 @@ class ActivePromotionsModel extends AbstractTableModel {
         return roundToTwoDecimalPlaces(discountedPrice);
     }
 
-    // Méthode utilitaire pour arrondir un double à deux chiffres après la virgule
     private double roundToTwoDecimalPlaces(double value) {
         return Math.round(value * 100.0) / 100.0;
     }

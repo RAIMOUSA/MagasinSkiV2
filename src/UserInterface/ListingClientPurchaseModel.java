@@ -97,7 +97,7 @@ public class ListingClientPurchaseModel extends AbstractTableModel {
             saleDetails = new ArrayList<>(originalSaleDetails);
         } else {
             ArrayList<SaleDetail> filteredSaleDetails = new ArrayList<>();
-            for (SaleDetail saleDetail : originalSaleDetails) {  // Use original data for filtering
+            for (SaleDetail saleDetail : originalSaleDetails) {
                 Sale sale;
                 try {
                     sale = saleController.getSaleBySaleDetail(saleDetail);

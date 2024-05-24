@@ -19,7 +19,7 @@ public class ListingSaleModel extends AbstractTableModel {
 
     private String[] columnNames = {"Date", "Code", "Type", "Name", "Price", "Quantity", "UserID"};
     private ArrayList<SaleDetail> saleDetails;
-    private ArrayList<SaleDetail> originalSaleDetails; // Liste pour stocker les données originales
+    private ArrayList<SaleDetail> originalSaleDetails;
     private SaleDetailController saleDetailController;
     private SaleController saleController;
     private ProductController productController;
@@ -37,7 +37,7 @@ public class ListingSaleModel extends AbstractTableModel {
         try {
             saleDetails = saleDetailController.readAllSaleDetails();
             originalSaleDetails = new ArrayList<>(saleDetails);
-            // remplir le set de dates
+
             for (SaleDetail saleDetail : saleDetails) {
                 Sale sale = saleController.getSaleBySaleDetail(saleDetail);
                 dates.add(sale.getDate());

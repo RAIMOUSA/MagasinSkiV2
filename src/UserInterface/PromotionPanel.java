@@ -15,16 +15,12 @@ public class PromotionPanel extends JPanel {
     private JButton applyPromotionButton;
     private JButton viewActivePromotionsButton;
 
-    private ProductController productController;
 
     public PromotionPanel() throws ProductException {
         setLayout(new BorderLayout());
-        productController = new ProductController();
 
-        // Initialiser le modèle de produit avec le contrôleur
         productModel = new ListingProductsModel();
 
-        // Panel pour le champ de recherche
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel searchLabel = new JLabel("Rechercher par nom:");
         searchField = new JTextField(20);
@@ -41,7 +37,6 @@ public class PromotionPanel extends JPanel {
         searchPanel.add(searchButton);
         add(searchPanel, BorderLayout.NORTH);
 
-        // Bouton pour voir les promos actives
         viewActivePromotionsButton = new JButton("Voir les promos actives");
         viewActivePromotionsButton.addActionListener(new ActionListener() {
             @Override
@@ -50,12 +45,10 @@ public class PromotionPanel extends JPanel {
             }
         });
 
-        // Tableau pour afficher les produits
         productTable = new JTable(productModel);
         JScrollPane scrollPane = new JScrollPane(productTable);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Bouton pour appliquer la promotion
         applyPromotionButton = new JButton("Appliquer une promotion");
         applyPromotionButton.addActionListener(new ActionListener() {
             @Override
@@ -86,7 +79,6 @@ public class PromotionPanel extends JPanel {
     }
 
     private void showActivePromotions() {
-        // Ouvrir la nouvelle page pour voir les promos actives
         JFrame frame = new JFrame("Promotions Actives");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.add(new ActivePromotionsPanel(productTable));

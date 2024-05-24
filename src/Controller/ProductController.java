@@ -14,13 +14,6 @@ public class ProductController {
         setProductManager(new ProductManager());
     }
 
-    public ArrayList<Product> readAllProducts() throws ProductException {
-        try {
-            return productManager.readAllProducts();
-        } catch (Exception e) {
-            throw new ProductException("Error reading products");
-        }
-    }
 
     public void setProductManager(ProductManager productManager) {
         this.productManager = productManager;

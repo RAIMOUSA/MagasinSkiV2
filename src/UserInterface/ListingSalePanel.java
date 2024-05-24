@@ -22,7 +22,7 @@ public class ListingSalePanel extends JPanel {
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
 
         JLabel label = new JLabel("LISTE DES VENTES ");
-        label.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the label horizontally
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(label);
 
         saleModel = new ListingSaleModel();
@@ -57,7 +57,7 @@ public class ListingSalePanel extends JPanel {
         add(contentPanel, BorderLayout.CENTER);
 
         saleTable = new JTable(saleModel);
-        saleTable.setDefaultEditor(Object.class, null); // Rendre toutes les cellules non éditables
+        saleTable.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane = new JScrollPane(saleTable);
         contentPanel.add(scrollPane, BorderLayout.CENTER);
     }

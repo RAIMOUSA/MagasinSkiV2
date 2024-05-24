@@ -18,16 +18,8 @@ public class LocalityManager {
         this.dataAccess = dataAccess;
     }
 
-    public ArrayList<Locality> readAllLocality() throws LocalityException {
-        return this.dataAccess.readAllLocality();
-    }
-
     public void updateLocality(Locality locality) throws LocalityException {
         this.dataAccess.updateLocality(locality);
-    }
-
-    public void deleteLocality(int codeLocality) throws LocalityException {
-        this.dataAccess.deleteLocality(codeLocality);
     }
 
     public void createLocality(Locality locality) throws LocalityException {

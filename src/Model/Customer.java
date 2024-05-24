@@ -34,33 +34,11 @@ public class Customer {
         this.mail = mail;
     }
 
-    public Customer(int userID, String firstName, String lastName, LocalDate dateOfBirth, boolean isProfessional, int localityID, String mail) {
-        this.userID = userID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.isProfessional = isProfessional;
-        this.localityID = localityID;
-        this.mail = mail;
-    }
-
-    public Customer(int userID, String firstName, String lastName, boolean isProfessional, String gender, int localityID, String mail) {
-        this.userID = userID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.isProfessional = isProfessional;
-        this.gender = gender;
-        this.localityID = localityID;
-        this.mail = mail;
-    }
 
     public int getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
 
     public String getFirstName() {
         return firstName;
