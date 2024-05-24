@@ -19,7 +19,7 @@ public class ContactDataBaseAccess implements ContactDataAccess {
             statement.setString(1, contact.getMail());
 
             String phoneNumber = contact.getPhoneNumber();
-            if (phoneNumber != null) {
+            if (phoneNumber != null && !phoneNumber.isEmpty()) {
                 statement.setString(2, phoneNumber);
             }else {
                 statement.setNull(2, Types.VARCHAR);
@@ -118,7 +118,7 @@ public class ContactDataBaseAccess implements ContactDataAccess {
                 String mail = resultSet.getString("mail");
                 Contact contact = new Contact(mail);
                 String phoneNumber = resultSet.getString("phoneNumber");
-                if (phoneNumber != null) {
+                if (phoneNumber != null && !phoneNumber.isEmpty()) {
                     contact.setPhoneNumber(phoneNumber);
                 }
                 contacts.add(contact);
@@ -145,7 +145,7 @@ public class ContactDataBaseAccess implements ContactDataAccess {
                 String mail = resultSet.getString("mail");
                 Contact contact = new Contact(mail);
                 String phoneNumber = resultSet.getString("phoneNumber");
-                if (phoneNumber != null) {
+                if (phoneNumber != null && !phoneNumber.isEmpty()) {
                     contact.setPhoneNumber(phoneNumber);
                 }
                 contacts.add(contact);
