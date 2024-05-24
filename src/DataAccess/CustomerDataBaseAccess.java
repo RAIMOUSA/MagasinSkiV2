@@ -91,7 +91,6 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
             statement.setBoolean(4, customer.isProfessional());
 
             if (customer.getGender() != null) {
-
                 statement.setString(5, customer.getGender());
             } else {
                 statement.setNull(5, Types.VARCHAR);

@@ -58,12 +58,14 @@ public class ContactDataBaseAccess implements ContactDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "UPDATE contact SET phoneNumber = ? WHERE mail = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             String phoneNumber = contact.getPhoneNumber();
-            if (phoneNumber != null) {
+            if (phoneNumber != null && !phoneNumber.isEmpty()) {
                 statement.setString(1, phoneNumber);
             } else {
                 statement.setNull(1, Types.VARCHAR);
             }
+
             statement.setString(2, oldMail);
             statement.executeUpdate();
         } catch (Exception exception) {

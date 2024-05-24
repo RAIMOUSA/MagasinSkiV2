@@ -204,9 +204,9 @@ public class ModifyCustomerFormPanel extends JPanel {
             );
             customer.setFirstName(firstNameField.getText());
             customer.setLastName(lastNameField.getText());
-            if(genderCheckBox.isSelected())
+            if (genderCheckBox.isSelected()){
                 customer.setGender(genderComboBox.getSelectedItem().toString());
-            else{
+            }  else{
                 customer.setGender(null);
             }
             if(dobCheckBox.isSelected())
@@ -217,13 +217,11 @@ public class ModifyCustomerFormPanel extends JPanel {
             customer.setProfessional(isProfessionalCheckBox.isSelected());
 
             // Enregistrer les mises à jour dans la base de données
-
             contactController.updateContactPhone(oldMail, contact);
             contactController.updateContactMail(oldMail, contact);
             locality.setLocalityID(localityController.getLocalityID(localityBeforeChange));
             localityController.updateLocality(locality);
             customerController.updateCustomer(customer);
-
             JOptionPane.showMessageDialog(this, "Le client a été mis à jour avec succès.");
            refresh();
 
