@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="code finito">
+    <list default="true" id="2b46c5da-ee99-4762-ab43-71b2bb24fe55" name="Changes" comment="presque">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MagasinSkiV2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MagasinSkiV2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/ProductDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SaleDetailDataBaseAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataAccess/SingletonConnexion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataAccess/SingletonConnexion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ClientPurchasePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingClientPurchaseModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingProductsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingProductsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSaleModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/ListingSalePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserInterface/MonthlySaleStatsPanel.java" afterDir="false" />
     </list>
     <list id="09a233ac-ff11-4a2d-a1f8-cf08e0ecea45" name="Changes by justi" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -133,7 +121,8 @@
       <workItem from="1716359013196" duration="26439000" />
       <workItem from="1716412337734" duration="180000" />
       <workItem from="1716446546983" duration="5646000" />
-      <workItem from="1716458236247" duration="1428000" />
+      <workItem from="1716458236247" duration="4914000" />
+      <workItem from="1716494011377" duration="555000" />
     </task>
     <task id="LOCAL-00001" summary="contact et debut customer">
       <option name="closed" value="true" />
@@ -311,7 +300,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716386514686</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="presque">
+      <option name="closed" value="true" />
+      <created>1716465450890</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1716465450890</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,6 +348,7 @@
     <MESSAGE value="finito" />
     <MESSAGE value="oleeeeeeeee" />
     <MESSAGE value="code finito" />
-    <option name="LAST_COMMIT_MESSAGE" value="code finito" />
+    <MESSAGE value="presque" />
+    <option name="LAST_COMMIT_MESSAGE" value="presque" />
   </component>
 </project>
