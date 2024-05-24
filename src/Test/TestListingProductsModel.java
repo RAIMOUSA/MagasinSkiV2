@@ -22,7 +22,7 @@ public class TestListingProductsModel {
         testProducts.add(new Product(1234,"Type1", "Test Product 1", 100, 4, true));
         testProducts.add(new Product(1235,"Type2", "Test Product 2", 200, 5, true));
 
-        listingProductsModel = new ListingProductsModel(productController);
+        listingProductsModel = new ListingProductsModel();
         listingProductsModel.getProducts().addAll(testProducts);
         listingProductsModel.getProducts().addAll(testProducts);
     }

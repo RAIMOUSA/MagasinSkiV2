@@ -10,11 +10,13 @@ public class ActivePromotionsPanel extends JPanel {
     private ActivePromotionsModel promotionsModel;
     private JTable promotionsTable;
     private ProductController productController;
+    private JTable clientTable;
 
-    public ActivePromotionsPanel() {
+    public ActivePromotionsPanel(JTable clientTable) {
         setLayout(new BorderLayout());
         promotionsModel = new ActivePromotionsModel();
         promotionsTable = new JTable(promotionsModel);
+        this.clientTable = clientTable;
 
         JScrollPane scrollPane = new JScrollPane(promotionsTable);
         add(scrollPane, BorderLayout.CENTER);
@@ -42,16 +44,19 @@ public class ActivePromotionsPanel extends JPanel {
             int productId = (int) promotionsModel.getValueAt(selectedRow, 0);
             productController.removePromotion(productId);
             promotionsModel.removeRow(selectedRow);
+
+            JOptionPane.showMessageDialog(this, "Promotion supprimée avec succès.");
+            refreshData();
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une promotion à supprimer.");
         }
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Active Promotions");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.add(new ActivePromotionsPanel());
-        frame.setVisible(true);
+    public void refreshData() {
+        try {
+            clientTable.setModel(new ListingProductsModel());
+        } catch (ProductException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }

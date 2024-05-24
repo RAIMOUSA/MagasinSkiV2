@@ -14,8 +14,8 @@ public class ListingProductsModel extends AbstractTableModel {
     private ArrayList<Product> originalData = new ArrayList<>();
     private ProductController productController;
 
-    public ListingProductsModel(ProductController productController) throws ProductException {
-        this.productController = productController;
+    public ListingProductsModel() throws ProductException {
+        this.productController = new ProductController();
         loadData();
     }
 
