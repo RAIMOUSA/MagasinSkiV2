@@ -8,8 +8,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import Exception.*;
 public class ProductDataBaseAccess implements ProductDataAccess {
-
-
     @Override
     public ArrayList<Product> getProductInPromotion() throws ProductException {
         try {
@@ -79,7 +77,6 @@ public class ProductDataBaseAccess implements ProductDataAccess {
     @Override
     public void applyDiscount(Product product, int discount) throws ProductException {
         try {
-            //true promoisenable et percentPromo
             Connection connection = SingletonConnexion.getInstance();
             String query = "UPDATE product SET promoIsEnable = true, percentPromo = ? WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -95,10 +92,10 @@ public class ProductDataBaseAccess implements ProductDataAccess {
     @Override
     public Product getProductByCode(int productCode) throws ProductException {
         try {
-
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM product WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setInt(1, productCode);
             ResultSet resultSet = statement.executeQuery();
 
@@ -130,6 +127,7 @@ public class ProductDataBaseAccess implements ProductDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "UPDATE product SET promoIsEnable = 0, percentPromo = NULL WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setInt(1, productId);
             statement.executeUpdate();
         } catch (Exception exception) {

@@ -18,6 +18,7 @@ public class SaleDataBaseAccess implements SaleDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM sale;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Sale> sales = new ArrayList<Sale>();
 
@@ -40,8 +41,10 @@ public class SaleDataBaseAccess implements SaleDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM sale WHERE codeID = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setInt(1, saleDetail.getSaleCode());
             ResultSet resultSet = statement.executeQuery();
+
             resultSet.next();
             int codeID = resultSet.getInt("codeID");
             LocalDate dateSale = resultSet.getDate("dateSale").toLocalDate();

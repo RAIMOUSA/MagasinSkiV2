@@ -47,7 +47,6 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
     }
 
     public void updateCustomer(Customer customer) throws CustomerException {
-        // code to update a customer
         try {
             Connection connection = SingletonConnexion.getInstance();
             String query = "UPDATE customer SET firstName = ?, lastName = ?, dateOfBirth = ?, isProfessional = ?," +

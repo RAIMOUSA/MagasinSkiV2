@@ -33,7 +33,6 @@ public class ContactDataBaseAccess implements ContactDataAccess {
 
     @Override
     public Contact getContactByMail(String mail) throws ContactException {
-        // code to get a contact by mail
         try {
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM contact WHERE mail = ?;";
@@ -41,19 +40,18 @@ public class ContactDataBaseAccess implements ContactDataAccess {
             statement.setString(1, mail);
             ResultSet resultSet = statement.executeQuery();
 
+            String phoneNumber = null;
             if (resultSet.next()) {
-                String phoneNumber = resultSet.getString("phoneNumber");
-                return new Contact(mail, phoneNumber);
+                phoneNumber = resultSet.getString("phoneNumber");
             }
+            return new Contact(mail, phoneNumber);
         } catch (Exception exception) {
             throw new ContactException(exception.getMessage(), new OneException(), new ReadException());
         }
-        return null;
     }
 
     @Override
     public void updateContactPhone(String oldMail, Contact contact) throws ContactException {
-        // code to update a contact
         try {
             Connection connection = SingletonConnexion.getInstance();
             String query = "UPDATE contact SET phoneNumber = ? WHERE mail = ?;";
@@ -77,10 +75,10 @@ public class ContactDataBaseAccess implements ContactDataAccess {
     @Override
     public void updateContactMail(String oldMail, Contact contact) throws ContactException {
         try {
-
             Connection connection = SingletonConnexion.getInstance();
             String query = "UPDATE contact SET mail = ? WHERE mail = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setString(1, contact.getMail());
             statement.setString(2, oldMail);
             statement.executeUpdate();
@@ -91,11 +89,11 @@ public class ContactDataBaseAccess implements ContactDataAccess {
 
     @Override
     public void deleteContact(int contactId) throws ContactException {
-        // code to delete a contact
         try {
             Connection connection = SingletonConnexion.getInstance();
             String query = "DELETE FROM contact WHERE mail = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setInt(1, contactId);
             statement.executeUpdate();
         } catch (Exception exception) {
@@ -110,6 +108,7 @@ public class ContactDataBaseAccess implements ContactDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM contact WHERE mail = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
@@ -124,6 +123,7 @@ public class ContactDataBaseAccess implements ContactDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM contact WHERE phoneNumber = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+
             statement.setString(1, phoneNumber);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.next();
