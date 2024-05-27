@@ -16,8 +16,8 @@ public class SaleDetailDataBaseAccess implements SaleDetailDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM sale_detail WHERE productCode = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, product.getCode());
 
+            statement.setInt(1, product.getCode());
             ResultSet resultSet = statement.executeQuery();
 
             resultSet.next();
@@ -37,8 +37,10 @@ public class SaleDetailDataBaseAccess implements SaleDetailDataAccess {
             Connection connection = SingletonConnexion.getInstance();
             String query = "SELECT * FROM sale_detail;";
             PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+
             ArrayList<SaleDetail> saleDetails = new ArrayList<SaleDetail>();
+            ResultSet resultSet = statement.executeQuery();
+
             while (resultSet.next()) {
                 int saleCode = resultSet.getInt("saleCode");
                 int productCode = resultSet.getInt("productCode");

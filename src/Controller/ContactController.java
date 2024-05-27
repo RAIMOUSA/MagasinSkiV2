@@ -28,9 +28,6 @@ public class ContactController {
         this.manager.updateContactMail(oldMail, contact);
     }
 
-    public void deleteContact(int codeContact) throws ContactException {
-        this.manager.deleteContact(codeContact);
-    }
 
     public void createContact(Contact contact) throws ContactException {
         this.manager.createContact(contact);

@@ -25,10 +25,6 @@ public class ContactManager {
         this.dataAccess.updateContactMail(oldMail, contact);
     }
 
-    public void deleteContact(int codeContact) throws ContactException {
-        this.dataAccess.deleteContact(codeContact);
-    }
-
     public void createContact(Contact contact) throws ContactException {
         this.dataAccess.createContact(contact);
     }
