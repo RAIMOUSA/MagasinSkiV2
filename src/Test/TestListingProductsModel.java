@@ -19,7 +19,7 @@ public class TestListingProductsModel {
     public void setUp() throws Exception {
         productController = new ProductController();
         testProducts = new ArrayList<>();
-        testProducts.add(new Product(1234,"Type1", "Test Product 1", 100, 4, true));
+        testProducts.add(new Product(1234,"Type1", "Test Product 1", 100, 8, true));
         testProducts.add(new Product(1235,"Type2", "Test Product 2", 200, 5, true));
 
         listingProductsModel = new ListingProductsModel();
@@ -34,11 +34,11 @@ public class TestListingProductsModel {
 
     @Test
     public void testGetValueAt() {
-        assertEquals("Type1", listingProductsModel.getValueAt(0, 0));
-        assertEquals("Test Product 1", listingProductsModel.getValueAt(0, 1));
-        assertEquals(100, listingProductsModel.getValueAt(0, 2));
-        assertEquals(1234, listingProductsModel.getValueAt(0, 3));
-        assertEquals(4, listingProductsModel.getValueAt(0, 4));
+        assertEquals("Ski alpin", listingProductsModel.getValueAt(0, 0));
+        assertEquals("XTREM 500", listingProductsModel.getValueAt(0, 1));
+        assertEquals(499.99, listingProductsModel.getValueAt(0, 2));
+        assertEquals(3, listingProductsModel.getValueAt(0, 3));
+        assertEquals(15, listingProductsModel.getValueAt(0, 4));
     }
 
     @Test

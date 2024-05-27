@@ -19,9 +19,6 @@ public class ProductManager {
         this.productAccess = productAccess;
     }
 
-    public ArrayList<Product> readAllProducts() throws ProductException {
-        return productAccess.readAllProducts();
-    }
 
     public void applyDiscount(Product product, int discount) throws ProductException {
         this.productAccess.applyDiscount(product, discount);
@@ -39,9 +36,6 @@ public class ProductManager {
         return productAccess.getProductByCode(productCode);
     }
 
-    public Product getProductBySaleDetail(SaleDetail saleDetail) throws ProductException{
-        return productAccess.getProductBySaleDetail(saleDetail);
-    }
 
     public void removePromotion(int productId) throws ProductException{
         productAccess.removePromotion(productId);

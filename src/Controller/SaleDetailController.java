@@ -19,10 +19,6 @@ public class SaleDetailController {
         this.saleDetailManager = saleDetailManager;
     }
 
-    public SaleDetail getSaleDetailByProduct(Product product) throws SaleDetailException {
-        return saleDetailManager.getSaleDetailByProduct(product);
-    }
-
     public ArrayList<SaleDetail> readAllSaleDetails() throws SaleDetailException{
         return saleDetailManager.readAllSaleDetails();
     }

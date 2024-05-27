@@ -45,32 +45,19 @@ public class Locality {
         return localityName;
     }
 
-    public void setLocalityName(String localityName) {
-        this.localityName = localityName;
-    }
 
     public int getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(int postalCode) {
-        this.postalCode = postalCode;
-    }
 
     public String getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
 
     public int getHouseNumber() {
         return houseNumber;
-    }
-
-    public void setHouseNumber(int houseNumber) {
-        this.houseNumber = houseNumber;
     }
 
     public String getLetterBox() {

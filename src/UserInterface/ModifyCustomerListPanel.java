@@ -16,19 +16,16 @@ public class ModifyCustomerListPanel extends JPanel implements ActionListener {
 
     private JTable clientTable;
     private CustomerController customerController;
-    private ContactController contactController;
-    private LocalityController localityController;
+
     private JButton selectButton;
 
     public ModifyCustomerListPanel() {
         setLayout(new BorderLayout());
 
         customerController = new CustomerController();
-        contactController = new ContactController();
-        localityController = new LocalityController();
 
         JLabel label = new JLabel("CHOISIR LE CLIENT A MODIFIER ");
-        label.setHorizontalAlignment(SwingConstants.CENTER); // Centrer le texte horizontalement
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         add(label, BorderLayout.NORTH);
 
         clientTable = new JTable(new ListingCustomerModel());
@@ -45,7 +42,7 @@ public class ModifyCustomerListPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == selectButton) {
             int selectedRow = clientTable.getSelectedRow();
-            if (selectedRow != -1) { // Vérifie si une ligne est sélectionnée
+            if (selectedRow != -1) {
                 Customer selectedCustomer = getSelectedCustomer(selectedRow);
                 if (selectedCustomer != null) {
                     JFrame modifyClientFrame = new JFrame("Modifier Client");

@@ -15,23 +15,13 @@ public class SaleDetail {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public int getProductCode() {
         return productCode;
-    }
-
-    public void setProductCode(int productCode) {
-        this.productCode = productCode;
     }
 
     public int getSaleCode() {
         return saleCode;
     }
 
-    public void setSaleCode(int saleCode) {
-        this.saleCode = saleCode;
-    }
+
 }

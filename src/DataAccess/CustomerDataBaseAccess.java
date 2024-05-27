@@ -46,33 +46,6 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
         }
     }
 
-    @Override
-    public Customer getCustomerById(int customerId) throws CustomerException {
-
-        try {
-            Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM customer WHERE userID = ?;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, customerId);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                int userID = resultSet.getInt("userID");
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                LocalDate dateOfBirth = resultSet.getDate("dateOfBirth").toLocalDate();
-                boolean isProfessional = resultSet.getBoolean("isProfessional");
-            }
-        } catch (Exception exception) {
-            throw new CustomerException(exception.getMessage(), new OneException(), new ReadException());
-        }
-        return null;
-    }
-
-    public Customer readCustomer() throws CustomerException {
-        return null;
-    }
-
     public void updateCustomer(Customer customer) throws CustomerException {
         // code to update a customer
         try {
@@ -154,56 +127,4 @@ public class CustomerDataBaseAccess implements CustomerDataAccess {
             }
     }
 
-    @Override
-    public ArrayList<Customer> searchCustomers(String keyword) throws CustomerException {
-        try {
-            Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM customer WHERE userID = ?;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            //statement.setInt(1, code);
-            ResultSet resultSet = statement.executeQuery();
-
-            ArrayList<Customer> customers = new ArrayList<Customer>();
-            while (resultSet.next()) {
-                int userID = resultSet.getInt("userID");
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                boolean isProfessional = resultSet.getBoolean("isProfessional");
-                int localityID = resultSet.getInt("localityID");
-                String mail = resultSet.getString("mail");
-                Customer customer = new Customer(userID, firstName, lastName, isProfessional, localityID, mail);
-
-                LocalDate dateOfBirth = resultSet.getDate("dateOfBirth").toLocalDate();
-                if (!resultSet.wasNull()) {
-                    customer.setDateOfBirth(dateOfBirth);
-                }
-                String gender = resultSet.getString("gender");
-                if (!resultSet.wasNull()) {
-                    customer.setGender(gender);
-                }
-                customers.add(customer);
-
-            }
-            return customers;
-        }catch (Exception exception) {
-            throw new CustomerException(exception.getMessage(), new AllException(), new ReadException());
-        }
-    }
-
-    public int getNumberCustomer() throws NumberCustomerException {
-        try {
-            Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT COUNT(*) FROM customer;";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            return resultSet.getInt(1);
-        } catch (Exception exception) {
-            throw new NumberCustomerException(exception.getMessage());
-        }
-    }
-
-    public int getNextCode() throws NextCodeCustomerException {
-        return 0;
-    }
 }

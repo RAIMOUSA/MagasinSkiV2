@@ -38,12 +38,12 @@ public class ListingCustomerModel extends AbstractTableModel {
         this.contactController = new ContactController();
         this.localityController = new LocalityController();
 
-        // Charger les données des clients depuis le contrôleur des clients
+
         try {
             this.customers = customerController.readAllCustomers();
         } catch (CustomerException exception) {
             System.err.println("Erreur lors de la lecture des clients: " + exception.getMessage());
-            this.customers = new ArrayList<>(); // Assurez-vous que la liste est initialisée
+            this.customers = new ArrayList<>();
         }
     }
 

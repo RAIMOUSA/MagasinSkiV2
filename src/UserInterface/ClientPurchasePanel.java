@@ -18,19 +18,18 @@ public class ClientPurchasePanel extends JPanel {
     public ClientPurchasePanel() {
         setLayout(new BorderLayout());
 
-        // Create the panel that will hold both the label and the filter controls
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
 
         JLabel label = new JLabel("ACHATS DU CLIENT");
-        label.setAlignmentX(Component.CENTER_ALIGNMENT); // Center the label horizontally
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
         northPanel.add(label);
 
         purchaseModel = new ListingClientPurchaseModel();
         Set<Integer> userIDs = purchaseModel.getUserIDs();
         userIDComboBox = new JComboBox<>(userIDs.toArray(new Integer[0]));
 
-        // Create the filter button
+
         filterButton = new JButton("Filtrer par userID");
         filterButton.addActionListener(new ActionListener() {
             @Override
@@ -43,7 +42,6 @@ public class ClientPurchasePanel extends JPanel {
             }
         });
 
-        // Panel for userID filter controls
         JPanel filterPanel = new JPanel(new FlowLayout());
         filterPanel.add(new JLabel("UserID:"));
         filterPanel.add(userIDComboBox);
@@ -57,7 +55,7 @@ public class ClientPurchasePanel extends JPanel {
         add(contentPanel, BorderLayout.CENTER);
 
         purchaseTable = new JTable(purchaseModel);
-        purchaseTable.setDefaultEditor(Object.class, null); // Rendre toutes les cellules non éditables
+        purchaseTable.setDefaultEditor(Object.class, null);
         JScrollPane scrollPane = new JScrollPane(purchaseTable);
         contentPanel.add(scrollPane, BorderLayout.CENTER);
     }

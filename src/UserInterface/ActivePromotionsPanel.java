@@ -34,7 +34,7 @@ public class ActivePromotionsPanel extends JPanel {
 
         add(buttonPanel, BorderLayout.SOUTH);
 
-        productController = new ProductController(); // Initialize the productController here
+        productController = new ProductController();
     }
 
     private void deleteSelectedPromotion() throws ProductException {

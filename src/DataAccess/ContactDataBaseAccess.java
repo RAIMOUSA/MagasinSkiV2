@@ -103,56 +103,32 @@ public class ContactDataBaseAccess implements ContactDataAccess {
         }
     }
 
+
     @Override
-    public ArrayList<Contact> readAllContact() throws ContactException {
-        // code to read all contacts
+    public boolean emailExists(String email) {
         try {
-
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM contact;";
+            String query = "SELECT * FROM contact WHERE mail = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
-
-            ArrayList<Contact> contacts = new ArrayList<Contact>();
-            while (resultSet.next()) {
-                String mail = resultSet.getString("mail");
-                Contact contact = new Contact(mail);
-                String phoneNumber = resultSet.getString("phoneNumber");
-                if (phoneNumber != null && !phoneNumber.isEmpty()) {
-                    contact.setPhoneNumber(phoneNumber);
-                }
-                contacts.add(contact);
-            }
-            return contacts;
+            return resultSet.next();
         } catch (Exception exception) {
-            throw new ContactException(exception.getMessage(), new AllException(), new ReadException());
+            return false;
         }
     }
 
     @Override
-    public ArrayList<Contact> searchContacts(String keyword) throws ContactException {
-        // code to search contacts
-        try {
+    public boolean phoneExists(String phoneNumber) {
+       try {
             Connection connection = SingletonConnexion.getInstance();
-            String query = "SELECT * FROM contact WHERE mail LIKE ? OR phoneNumber LIKE ?;";
+            String query = "SELECT * FROM contact WHERE phoneNumber = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, "%" + keyword + "%");
-            statement.setString(2, "%" + keyword + "%");
+            statement.setString(1, phoneNumber);
             ResultSet resultSet = statement.executeQuery();
-
-            ArrayList<Contact> contacts = new ArrayList<Contact>();
-            while (resultSet.next()) {
-                String mail = resultSet.getString("mail");
-                Contact contact = new Contact(mail);
-                String phoneNumber = resultSet.getString("phoneNumber");
-                if (phoneNumber != null && !phoneNumber.isEmpty()) {
-                    contact.setPhoneNumber(phoneNumber);
-                }
-                contacts.add(contact);
-            }
-            return contacts;
+            return resultSet.next();
         } catch (Exception exception) {
-            throw new ContactException(exception.getMessage(), new AllException(), new ReadException());
-        }
+            return false;
+       }
     }
 }

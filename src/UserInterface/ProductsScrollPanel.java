@@ -14,16 +14,14 @@ public class ProductsScrollPanel extends JPanel {
         setLayout(new BorderLayout());
 
         backgroundImagePanel = new BackgroundImagePanel();
-        backgroundImagePanel.setLayout(null); // Utiliser un layout null pour placer scrollPanel manuellement
+        backgroundImagePanel.setLayout(null);
 
         scrollPanel = new JPanel();
         scrollPanel.setLayout(new BoxLayout(scrollPanel, BoxLayout.X_AXIS));
-        scrollPanel.setOpaque(false); // Rendre scrollPanel transparent pour voir l'image de fond
+        scrollPanel.setOpaque(false);
 
-        // Ajouter scrollPanel au BackgroundImagePanel
         backgroundImagePanel.add(scrollPanel);
 
-        // Positionner scrollPanel
         scrollPanel.setBounds(0, 0, scrollPanel.getPreferredSize().width, 200);
 
         add(backgroundImagePanel, BorderLayout.CENTER);
@@ -47,7 +45,7 @@ public class ProductsScrollPanel extends JPanel {
                     });
 
                     try {
-                        Thread.sleep(10); // Vitesse du défilement
+                        Thread.sleep(10);
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
@@ -74,7 +72,7 @@ public class ProductsScrollPanel extends JPanel {
                 index = (index + 1) % images.length;
 
                 try {
-                    Thread.sleep(2000); // Changer d'image toutes les 2 secondes
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
